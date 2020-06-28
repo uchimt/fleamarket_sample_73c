@@ -8,8 +8,19 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
+    <%# トップページのログイン、新規会員登録リンク%>
+    <% if user_signed_in? %>
+      <div class="user_nav grid-6">
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+      </div>
+    <% else %>
+      <div class="grid-6">
+        <%= link_to "ログイン", new_user_session_path%>
+        <%= link_to "新規登録", new_user_registration_path%>
+      </div>
+    <% end %>
+  
     <%= yield %>
   </body>
 </html>
