@@ -26,4 +26,5 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+# 投稿画像をGitで管理しないようにする
 public/uploads/*
