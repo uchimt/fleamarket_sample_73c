@@ -47,7 +47,7 @@ task :upload do
 end
 before :starting, 'deploy:upload'
 after :finishing, 'deploy:cleanup'
-end
+
 
 #環境変数をcapistaranoでの自動デプロイで使用
 set :default_env, {
