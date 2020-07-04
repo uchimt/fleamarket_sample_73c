@@ -78,8 +78,8 @@ Things you may want to cover:
 |title|string|null:false|
 |brand|string|
 |description|text|null:false|
-|category|string|null:faise|
-|condition|string|null:false|
+|category|string|null:false|
+|condition|integer|null:false,default:0|
 |postage|integer|null:false|
 |shipping_origin|string|null:false|
 |days_until_shipping|string|null:false|
@@ -90,6 +90,9 @@ Things you may want to cover:
 |image|references|null:false,foreign_key:true|
 |like|references|foreign_key:true|
 |category|references|null:false,foreign_key:true|
+
+### enum
+- enum condition:{新品/未使用:0,未使用に近い:1}
 
 ### Association
 - belongs_to: user
