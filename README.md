@@ -66,7 +66,7 @@ Things you may want to cover:
 |city|string|null:false|
 |address|string|null:false|
 |building|string|
-|phone_number|integer|
+|phone_number|string|
 |user|references|null:false,foreigin_key:true|
 
 ### Association
@@ -76,9 +76,7 @@ Things you may want to cover:
 |Column|Type|Options|
 |------|----|-------|
 |title|string|null:false|
-|brand|string|
 |description|text|null:false|
-|category|string|null:false|
 |condition|integer|null:false,default:0|
 |postage|integer|null:false|
 |shipping_origin|string|null:false|
@@ -87,7 +85,6 @@ Things you may want to cover:
 |user|references|null:false,foreign_key:true|
 |comment|references| null:false,foreign_key:true|
 |brand|references|foreign_key:true|
-|image|references|null:false,foreign_key:true|
 |like|references|foreign_key:true|
 |category|references|null:false,foreign_key:true|
 
