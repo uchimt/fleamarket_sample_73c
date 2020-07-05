@@ -174,3 +174,17 @@ Things you may want to cover:
 
 ### Asociation
 - belongs_to :user
+
+## prefecturesテーブル
+|Column|Type|Options|
+|------|----|-------|
+|name|string|null:false|
+- has_many :products
+
+## shippingdaysテーブル
+|Column|Type|Options|
+|------|----|-------|
+|day|string|null:false|
+
+### Asociation
+- has_many :products
