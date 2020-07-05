@@ -75,6 +75,14 @@ gem 'mini_magick'
 
 gem 'fog-aws'
 
+=======
+gem 'haml-rails'
+
+gem 'font-awesome-sass'
+
+gem 'jquery-rails'
+>>>>>>> 529c31bae7ef232e1cb15124d9c63f5821459b66
+
 # モデル関連
 gem 'active_hash'
 gem 'ancestry'
