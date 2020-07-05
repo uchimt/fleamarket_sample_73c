@@ -74,3 +74,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 
 gem 'fog-aws'
+
+# モデル関連
+gem 'active_hash'
+gem 'ancestry'
