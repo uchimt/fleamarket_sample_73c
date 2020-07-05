@@ -1,0 +1,84 @@
+= form_with model: @product do |form|
+  .post-image-list
+    .post-image-list__title
+      = form.label :images, '出品画像' 
+      %span 必須
+    .post-image-list__explanation
+      最大×枚までアップロードできます
+    #image-box.post-image-list__images
+      = form.fields_for :images do |image|
+        %div{data: {index: "<%= image.index %>" }, class: "js-file_group"}
+        = image.label :images, class: "image_input_btn" do
+          = image_tag('icon_camera.png', class: "image_input_btn__camera")
+          = image.file_field :url, class: 'js-file'
+          -#   = image.hidden_field :id, value: image.object.id #編集時用にidを付与
+          .image_input_btn__text
+            クリックしてファイルをアップロード
+          -# %span.js-remove
+            編集
+  .product-information
+    商品の詳細
+    .product-information__title
+      = form.label :title, '商品名' 
+      %span 必須
+      = form.text_field :title, { class: "text-form", maxlength: 40, placeholder: "40文字まで" }
+    .product-information__description
+      = form.label :description, '商品の説明' 
+      %span 必須
+      = form.text_area :description, { class: "text_area-form", placeholder: "" }
+    .product-information__category
+      = form.label :category, 'カテゴリー' 
+      %span 必須
+      = form.select :category, [:レディース, :メンズ, :ベビー、キッズ],{ prompt: "選択してください" }, { class: "select-form" }  #仮置き
+      -#   = f.select :category, options_for_select(Products.category)
+      -#   = form.collection_select(:category, @product, :id, :name, { class: "product-information__category-tag", prompt: "選択してください" } )
+      -# .product-information__category--size
+      -#   = form.label :category, 'サイズ' 
+      -#   %span 必須
+      -#   = form.select :category, [:S, :M, :L, :XL],{ prompt: "選択してください" }, { class: "select-form" } 
+    .product-information__brand
+      = form.label :brand, 'ブランド' 
+      %span 任意
+      = form.text_field :brand, { class: "text-form", placeholder: "例：グッチ" }
+    .product-information__condition
+      = form.label :condition, '商品の状態' 
+      %span 必須
+      = form.select :condition, [:新品・未使用, :未使用に近い, :目立った汚れなし, :やや傷や汚れあり, :傷や汚れなし],{ prompt: "選択してください" }, { class: "select-form" } #仮置き
+      -#   = f.select :condition, options_for_select(Products.conditon), class: "product-information__condition-form"
+          -# = form.collection_select(:status, @product, :id, :name, { prompt: "選択してください", class: "product-information__status-form" } )
+    .delivery-information
+      配送について
+      .delivery-information__postage
+        = form.label :postage, '配送料の負担' 
+        %span 必須
+        = form.select :postage, [:送料込み（出品者負担）, :着払い（購入者負担）],{ prompt: "選択してください" }, { class: "select-form" }  #仮置き 
+        -#   = f.select :postage, options_for_select(Products.postage), class: "delivery-information__postage-form"
+        -# = form.collection_select(:category, @product, :id, :name, { prompt: "選択してください", class: "delivery-information__postage-form" } )
+      .delivery-information__shipping_origin
+        = form.label :shipping_origin, '発送元の地域' 
+        %span 必須
+        = form.select :shipping_origin, [:北海道, :青森県, :岩手県], { prompt: "選択してください" }, { class: "select-form" } #仮置き
+        -#   = form.select :shipping_origin, options_for_select(Products.shipping_origin)
+        -# = form.collection_select(:category, @product, :id, :name, { prompt: "選択してください", class: "delivery-information__shipping_origin-form" } )
+      .delivery-information__delivery_until_shipping
+        = form.label :shipping_origin, '発送までの日数' 
+        %span 必須
+        = form.select :delivery_until_shipping, [:１日から２日で発送, :２日から３日で発送, :３日から７日で発送], { prompt: "選択してください" }, { class: "select-form" } #仮置き
+      -#   = f.select :delivery_until_shipping, options_for_select(Products.delivery_until_shipping), class: "delivery-information__delivery_until_shipping-form"
+        -# = form.collection_select(:category, @product, :id, :name, { prompt: "選択してください", class: "delivery-information__delivery_until_shipping-form" } )
+    .price-information
+      価格
+      .price-information__price
+        = form.label :price, '販売価格' 
+        %span 必須
+        %span.en ￥
+        = form.number_field :price, class: "price-form", min: 300, max:9999999, placeholder: "0"
+    .post-form
+      = form.submit "出品する", class: "submit_btn"
+      = link_to "もどる", top_index_path, class: "return_btn"
+    %p.important-points
+      禁止されている
+      %span> 行為
+      及び
+      %span> 出品物
+      を必ずご確認ください。
