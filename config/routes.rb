@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :products, only: :new
+  root 'products#index'
+  resources :products, except: :show
   get 'top/index'
-  root "top#index"
 end

@@ -1,5 +1,12 @@
 .wrapper
   .header
+    = render partial: 'header'
+  .new-product
+    = render partial: 'form'
+  .footer
+    = render partial: 'footer'
+-# .wrapper
+  .header
     .header-icon
       = link_to image_tag('logo.png', class: "header-icon__image"), top_index_path     
   .new-product
@@ -16,9 +23,9 @@
             = image.label :images, class: "image_input_btn" do
               = image_tag('icon_camera.png', class: "image_input_btn__camera")
               = image.file_field :url, class: 'js-file'
-              -#   = image.hidden_field :id, value: image.object.id #編集時用にidを付与
-              .image_input_btn__text
-                クリックしてファイルをアップロード
+              = image.hidden_field :id, value: image.object.id  #編集時用にidを付与
+            .image_input_btn__text
+              クリックしてファイルをアップロード
             -# %span.js-remove
               編集
       .product-information

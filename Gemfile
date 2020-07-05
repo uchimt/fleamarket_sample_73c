@@ -80,3 +80,7 @@ gem 'haml-rails'
 gem 'font-awesome-sass'
 
 gem 'jquery-rails'
+
+# モデル関連
+gem 'active_hash'
+gem 'ancestry'
