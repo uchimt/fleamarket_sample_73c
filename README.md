@@ -102,9 +102,11 @@ Things you may want to cover:
 ## credit_cardsテーブル
 |Column|Type|Options|
 |------|----|-------|
+|card_number|integer|null:false,unique:true|
+|expiration_year|integer|null:false|
+|expiration_month|integer|null:false|
+|security_code|integer|null:false|
 |user|references|null:false,foreign_key:true|
-|costomer_id|integer|null:false|
-|card_id|integer|null:false|
 
 ### Association
 - belongs_to:user
