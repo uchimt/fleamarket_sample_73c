@@ -86,7 +86,7 @@ Things you may want to cover:
 |image|references|null:false,foreign_key:true|
 |like|references|foreign_key:true|
 |category|references|null:false,foreign_key:true|
-|prefecture|references|null:false,foreign_key:true|
+|prefecture_id(active_hash)|integer|null:false|
 |shipping_day|references|null:false,foreign_key:true|
 
 ### enum
@@ -99,7 +99,6 @@ Things you may want to cover:
 - has_many: images
 - has_many: commemts
 - has_many: likes
-- belongs_to:preficture
 - belongs_to:shipping_day
 
 ## prefecturesテーブル
@@ -122,8 +121,8 @@ has_many:products
 |Column|Type|Options|
 |------|----|-------|
 |user|references|null:false,foreign_key:true|
-|card-id|integer|null:false|
-|costomer_id|integer|null:false|
+|card_id|integer|null:false|
+|customer_id|integer|null:false|
 
 ### Association
 - belongs_to:user
