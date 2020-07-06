@@ -101,13 +101,7 @@ Things you may want to cover:
 - has_many: likes
 - belongs_to:shipping_day
 
-## prefecturesテーブル
-|Column|Type|Options|
-|------|----|-------|
-|name|string|null:false|
 
-### Association
-has_many:products
 
 ## shipping_daysテーブル
 |Column|Type|Options|
