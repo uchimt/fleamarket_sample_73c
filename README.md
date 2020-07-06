@@ -160,7 +160,7 @@ Things you may want to cover:
 ## imagesテーブル
 |Column|Type|Options|
 |------|----|-------|
-|url|string|null:false|
+|src|string|null:false|
 |product|references|null:false, foreign_key: true|
 
 ### Asociation

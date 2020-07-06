@@ -19,6 +19,11 @@
   = f.label :title, '商品名' 
   %span 必須
   = f.text_field :title
+
+  = f.label :condition, '商品の状態' 
+  %span 必須
+  = f.select :condition, options_for_select(Product.conditions.map { |k, _v| [t("activerecord.attributes.product.conditions.#{k}"), k] }), { prompt: "選択してください" } ,{ class: "select_form"} 
+
   = f.label :price, '価格' 
   %span 必須
   = f.number_field :price 
