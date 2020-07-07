@@ -4,12 +4,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
-  # GET /resource/sign_up
+#1
   def new
     @user = User.new
   end
 
-  # POST /resource
+#2
   def create
     @user = User.new(sign_up_params)
     unless @user.valid?
@@ -22,6 +22,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     render :new_profile
   end
 
+#3
   def create_profile
     @user = User.new(session["devise.regist_data"]["user"])
     @profile = Profile.new(profile_params)
@@ -29,9 +30,26 @@ class Users::RegistrationsController < Devise::RegistrationsController
       flash.now[:alert] = @profile.errors.full_messages
       render :new_profile and return
     end
+#----------------------------ここまでカリキュラム通り-------------------------------------------
+    session["devise.regist_data"]["profile"] = (@profile.attributes)
+    @destination = @user.build_destination
+    render :new_destination
+  end
+
+#4
+  def create_destination
+    @user = User.new(session["devise.regist_data"]["user"])
+    @profile = Profile.new(session["devise.regist_data"]["profile"])
+    @destination = Destination.new(destination_params)
+    unless @destination.valid?
+      flash.now[:alert] = @destination.errors.full_messages
+      render :new_destination and return
+    end
     @user.build_profile(@profile.attributes)
+    @user.build_destination(@destination.attributes)
     @user.save
     session["devise.regist_data"]["user"].clear
+    # session["devise.regist_data"]["profile"].clear
     sign_in(:user, @user)
   end
 
@@ -39,6 +57,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def profile_params
     params.require(:profile).permit(:first_name, :family_name, :first_name_kana, :family_name_kana, :birth_year, :birth_month, :birth_day)
+  end
+
+  def destination_params
+    params.require(:destination).permit(:destination_first_name, :destination_family_name, :destination_first_name_kana, :destination_family_name_kana, :postal_code, :prefecture, :city, :address, :building, :phone_number)
   end
   
   # GET /resource/edit
@@ -87,3 +109,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 end
+# session["devise.regist_data"][:user]["profile"] = params[:first_name][:family_name][:first_name_kana][:family_name_kana][:birth_year][:birth_month][:birth_day]
