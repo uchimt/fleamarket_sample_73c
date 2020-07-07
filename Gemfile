@@ -84,3 +84,5 @@ gem 'jquery-rails'
 # モデル関連
 gem 'active_hash'
 gem 'ancestry'
+
+gem 'enum_help'

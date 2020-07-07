@@ -1,8 +1,7 @@
 .content
-  %p
-  = product.title
-  %p
-  = product.price   
+  %p= product.title
+  %p= product.condition_i18n #enum_helpを用いた記述
+  %p= product.price
   円
   %p
   - product.images.each do |image|
