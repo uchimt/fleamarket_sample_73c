@@ -96,10 +96,10 @@ Things you may want to cover:
 - belongs_to: user
 - belongs_to: brand
 - belongs_to: category
-- has_many: images
-- has_many: commemts
-- has_many: likes
-- belongs_to:shipping_day
+- has_many: images,dependent::destroy
+- has_many: comments,dependent::destroy
+- has_many: likes,dependent::destroy
+- belongs_to: shipping_day
 
 
 
