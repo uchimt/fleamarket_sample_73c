@@ -1,4 +1,5 @@
-= form_for @product do |f|
+= form_with model: @product do |f|
+  .post-image-list 
   #image-box
     #previews
       -if @product.persisted?
@@ -16,14 +17,42 @@
         = file_field_tag :src, title: "product[images_attributes][#{@product.images.count}][src]", class: 'js-file'
         .js-remove
           削除
+
   = f.label :title, '商品名' 
   %span 必須
-  = f.text_field :title
+  = f.text_field :title, { class: "text-form", maxlength: 40, placeholder: "40文字まで" }
 
+  = f.label :description, '商品の説明'
+  %span 必須
+  = f.text_area :description, { class: "text_area-form", placeholder: "" }
+
+  = f.label :category, 'カテゴリー'
+  %span 必須
+  = f.select :category, @category_parent_array, { prompt: "選択してください" }, { class: "select_form"}
+
+  = f.fields_for :brands do |brand|
+    = brand.label :brand, 'ブランド' 
+    %span 任意
+    = brand.text_field :brand_name, { class: "text-form", placeholder: "例：グッチ" }
+  
   = f.label :condition, '商品の状態' 
   %span 必須
   = f.select :condition, Product.conditions_i18n.invert, { prompt: "選択してください" }, { class: "select_form"}
+
+  = f.label :postage, '配送料の負担' 
+  %span 必須
+  = f.select :postage, Product.postages_i18n.invert, { prompt: "選択してください" }, { class: "select_form"}
+
+  = f.label :postage, '発送元の地域' 
+  %span 必須
+  = f.collection_select :prefecture_id, Prefecture.all, :id, :name , prompt: "選択してください" , class: "select_form"
+
+  = f.label :postage, '発送までの日数' 
+  %span 必須
+  = f.collection_select :shipping_day_id, ShippingDay.all, :id, :name , prompt: "選択してください" , class: "select_form"
+
   = f.label :price, '価格' 
   %span 必須
   = f.number_field :price 
+
   = f.submit "出品する", class: "submit_btn"

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root 'products#index'
+  devise_for :users
   resources :products, except: :show
-  get 'top/index'
+  root 'products#index'
+  root to: "top#index"
 end

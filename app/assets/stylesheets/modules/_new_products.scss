@@ -1,44 +1,46 @@
-.wrapper { 
+.header {
   background-color: rgb(245, 245, 245);
-  .header {
-    padding: 30px;
-    .header-icon {
-     text-align: center;
-      &__image {
-        max-width: 200px;
-        min-width: 100px;
-      }
+  padding: 30px;
+  .header-icon {
+   text-align: center;
+    &__image {
+      max-width: 200px;
+      min-width: 100px;
     }
   }
+}
+.new-body {
+  background-color: rgb(245, 245, 245);
+  width: 100%;
   .new-product {
     background-color: white;
-    width: 100%;
+    width: 80%;
     margin: 0 auto;
     max-width: 800px;
 
-    %basicSection {
-      font-size: 14px;
-      padding: 30px 50px 30px 50px;
-      color: rgb(168, 168, 168);
-      border-top: solid 1px rgb(168, 168, 168);
+  %basicSection {
+    font-size: 14px;
+    padding: 30px 50px 30px 50px;
+    color: rgb(168, 168, 168);
+    border-top: solid 1px rgb(168, 168, 168);
+  }
+  %inputName {
+    padding-top: 15px;
+    padding-bottom: 10px;
+    font-size: 15px;
+    color: #333;
+    span {
+      margin: 2px 5px;
+      align-items: center;
+      text-align: center;
+      width: 40px;
+      height: 13px;
+      font-size: 10px;
+      border-radius: 5px;
+      border: solid  red;
+      background-color: red;
+      color: white;   
     }
-    %inputName {
-      padding-top: 15px;
-      padding-bottom: 10px;
-      font-size: 15px;
-      color: #333;
-      span {
-        margin: 2px 5px;
-        align-items: center;
-        text-align: center;
-        width: 40px;
-        height: 13px;
-        font-size: 10px;
-        border-radius: 5px;
-        border: solid  red;
-        background-color: red;
-        color: white;   
-      }
     } 
     %inputForm {
       width: 100%;
@@ -227,31 +229,33 @@
       }
     }
   }
-  .footer {
-    padding: 30px 0;
-    .sitemap {
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      a {
-        margin: 0 10px;
-        padding: 10px;
-        text-decoration: none;
-        color: #333;
-        font-size: 13px;
-      }
+}
+.footer {
+  background-color: rgb(245, 245, 245);
+  padding: 30px 0;
+  .sitemap {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    a {
+      margin: 0 10px;
+      padding: 10px;
+      text-decoration: none;
+      color: #333;
+      font-size: 13px;
     }
-    .footer-icon {
-      text-align: center;
-      &__image {
-        max-width: 200px;
-        min-width: 100px;
-      }
-      p {
-        display: block;
-        margin: 0;
-        color: #fff;
-      }
+  }
+  .footer-icon {
+    background-color: rgb(245, 245, 245);
+    text-align: center;
+    &__image {
+      max-width: 200px;
+      min-width: 100px;
+    }
+    p {
+      display: block;
+      margin: 0;
+      color: #fff;
     }
   }
 }

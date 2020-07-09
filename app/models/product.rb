@@ -1,8 +1,14 @@
 class Product < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
-
   has_many :images, dependent: :destroy
+  belongs_to :brand, dependent: :destroy
+  belongs_to :category 
+  belongs_to :user, foreign_key: 'user_id'
+  belongs_to_active_hash :prefecture
+  belongs_to_active_hash :shipping_day
   accepts_nested_attributes_for :images, allow_destroy: true
+  accepts_nested_attributes_for :brand
+
   
   enum condition: { 
     brand_new: 1,               # "新品・未使用"
@@ -12,6 +18,10 @@ class Product < ApplicationRecord
     noticeable_scratches: 5,    #"傷や汚れあり"
     bad_condition: 6            #"全体的に状態が悪い"
   }
-
-  belongs_to_active_hash :prefecture
+  
+  enum postage: {
+    including_shipping_fee: 1,  # "送料込み（出品者負担）"
+    cash_on_delivery: 2         # "着払い（購入者負担）"
+  }
+  
 end
