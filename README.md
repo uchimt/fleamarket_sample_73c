@@ -78,7 +78,7 @@ Things you may want to cover:
 |title|string|null:false|
 |description|text|null:false|
 |condition|integer|null:false,default:0|
-|postage|integer|null:false|
+|postage|string|null:false|
 |price|integer|null:false|
 |user|references|null:false,foreign_key:true|
 |comment|references| null:false,foreign_key:true|
