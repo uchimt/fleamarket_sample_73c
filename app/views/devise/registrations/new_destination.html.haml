@@ -1,0 +1,50 @@
+%h2 住所情報登録
+= form_for @destination do |f|
+  = render "devise/shared/error_messages", resource: @destination
+  .field
+    = f.label :お名前
+    %span.required 【必須】
+    %br/
+    = f.text_field :destination_family_name, placeholder: "例）古山"
+    = f.text_field :destination_first_name, placeholder: "例）二郎"
+  .field
+    = f.label :お名前（かな）
+    %span.required 【必須】
+    %br/
+    = f.text_field :destination_family_name_kana, pattern: "[\u3041-\u3096]*", placeholder: "例）ふるやま"
+    = f.text_field :destination_first_name_kana, pattern: "[\u3041-\u3096]*", placeholder: "例）じろう"
+  .field
+    = f.label :郵便番号
+    %span.required 【必須】
+    %br/
+    = f.text_field :postal_code, pattern: "^([0-9]{7})$", placeholder: "XXXXXXX"
+  .field
+    = f.label :都道府県
+    %span.required 【必須】
+    %br/
+    = f.text_field :prefecture
+  .field
+    = f.label :市区町村
+    %span.required 【必須】
+    %br/
+    = f.text_field :city
+  .field
+    = f.label :番地
+    %span.required 【必須】
+    %br/
+    = f.text_field :address
+  .field
+    = f.label :建物
+    %span.required 【任意】
+    %br/
+    = f.text_field :building
+  .field
+    = f.label :電話番号
+    %span.required 【必須】
+    %br/
+    = f.text_field :phone_number, pattern: "^([0-9]{10,11})$"
+  %br/
+  .actions
+    = f.submit "登録"
+  %br/
+= render "devise/shared/links"

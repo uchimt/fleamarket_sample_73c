@@ -78,3 +78,5 @@ gem 'devise'
 
 
 gem 'pry-rails'
+
+gem 'haml-rails'
