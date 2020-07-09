@@ -61,7 +61,7 @@ Things you may want to cover:
 |destination_family_name|string|null:false|
 |destination_first_name_kana|string|null:false|
 |destination_family_name_kana|string|null:false|
-|postal_code|integer(7)|null:false|
+|postal_code|string(7)|null:false|
 |prefecture|string|null:false|
 |city|string|null:false|
 |address|string|null:false|
@@ -78,7 +78,7 @@ Things you may want to cover:
 |title|string|null:false|
 |description|text|null:false|
 |condition|integer|null:false,default:0|
-|postage|string|null:false|
+|postage|integer|null:false|
 |price|integer|null:false|
 |user|references|null:false,foreign_key:true|
 |comment|references| null:false,foreign_key:true|
