@@ -1,0 +1,35 @@
+.showProduct
+  -# 商品詳細欄
+  .productBox
+    .productBox__title 
+    %h1 タイトル
+    .productBox__images
+
+    -# 商品詳細
+    .productBox__details
+
+    -# 表
+    %tdoby.productBox__table
+      
+
+
+
+  -# コメント欄
+  .commentBox
+    = form_with model: @product do |form|
+      = form.text_field :comment
+      %p.commentBox__note
+        相手のことを考え丁寧なコメントを心がけましょう。
+        %br
+        不快な言葉遣いなどは利用制限や退会処分となることがあります。
+
+      = form.submit "コメントする"
+
+  
+  
+  
+  
+  
+  -# 関連商品欄
+  .relatedProbucts
+    .reratedProducts__lists
