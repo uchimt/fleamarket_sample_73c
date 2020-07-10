@@ -11,6 +11,4 @@ class Destination < ApplicationRecord
 
   validates :postal_code, presence: true,
                           length: { minimum: 7,maximum: 7 }
-  validates :phone_number, presence: true,
-                          length: { minimum: 10,maximum: 11 }
 end

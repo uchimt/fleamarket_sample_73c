@@ -12,7 +12,7 @@ class CreateDestinations < ActiveRecord::Migration[5.2]
       t.string :city,                          null:false
       t.string :address,                       null:false
       t.string :building
-      t.string :phone_number,                  null:false
+      t.string :phone_number
 
       t.references :user,                      null:false, foreign_key: true
       t.timestamps
