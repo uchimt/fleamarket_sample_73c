@@ -2,17 +2,17 @@
 = form_for @destination do |f|
   = render "devise/shared/error_messages", resource: @destination
   .field
-    = f.label :お名前
+    = f.label :送付先氏名（全角）
     %span.required 【必須】
     %br/
-    = f.text_field :destination_family_name, placeholder: "例）古山"
-    = f.text_field :destination_first_name, placeholder: "例）二郎"
+    = f.text_field :destination_family_name, pattern: "[^\x20-\x7E]*", placeholder: "例）振村"
+    = f.text_field :destination_first_name, pattern: "[^\x20-\x7E]*", placeholder: "例）二郎"
   .field
-    = f.label :お名前（かな）
+    = f.label :送付先氏名カナ（全角）
     %span.required 【必須】
     %br/
-    = f.text_field :destination_family_name_kana, pattern: "[\u3041-\u3096]*", placeholder: "例）ふるやま"
-    = f.text_field :destination_first_name_kana, pattern: "[\u3041-\u3096]*", placeholder: "例）じろう"
+    = f.text_field :destination_family_name_kana, pattern: "[\u30A1-\u30F6]*", placeholder: "例）フリムラ"
+    = f.text_field :destination_first_name_kana, pattern: "[\u30A1-\u30F6]*", placeholder: "例）ジロウ"
   .field
     = f.label :郵便番号
     %span.required 【必須】
@@ -22,27 +22,27 @@
     = f.label :都道府県
     %span.required 【必須】
     %br/
-    = f.text_field :prefecture
+    = f.text_field :prefecture, pattern: "[^\x20-\x7E]*"
   .field
     = f.label :市区町村
     %span.required 【必須】
     %br/
-    = f.text_field :city
+    = f.text_field :city, pattern: "[^\x20-\x7E]*", placeholder: "フリマ区"
   .field
     = f.label :番地
     %span.required 【必須】
     %br/
     = f.text_field :address
   .field
-    = f.label :建物
+    = f.label :建物、部屋番号
     %span.required 【任意】
     %br/
     = f.text_field :building
   .field
     = f.label :電話番号
-    %span.required 【必須】
+    %span.required 【任意】
     %br/
-    = f.text_field :phone_number, pattern: "^([0-9]{10,11})$"
+    = f.text_field :phone_number, pattern: "^([0-9]{10,11})$", placeholder: "10〜11桁の数字"
   %br/
   .actions
     = f.submit "登録"

@@ -29,18 +29,18 @@ ja:
         
     # フリマ用追加分
       profile:
-        family_name: 姓
-        first_name: 名
-        family_name_kana: 姓（かな）
-        first_name_kana: 名（かな）
+        family_name: 姓（全角）
+        first_name: 名（全角）
+        family_name_kana: 姓カナ（全角）
+        first_name_kana: 名カナ（全角）
         birth_year: 年
         birth_month: 月
         birth_day: 日
       destination:
-        destination_family_name: 姓
-        destination_first_name: 名
-        destination_family_name_kana: 姓（かな）
-        destination_first_name_kana: 名（かな）
+        destination_family_name: 姓（全角）
+        destination_first_name: 名（全角）
+        destination_family_name_kana: 姓カナ（全角）
+        destination_first_name_kana: 名カナ（全角）
         postal_code: 郵便番号
         prefecture: 都道府県
         city: 市区町村
