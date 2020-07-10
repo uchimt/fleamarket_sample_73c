@@ -4,12 +4,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
-#1
   def new
     @user = User.new
   end
 
-#2
   def create
     @user = User.new(sign_up_params)
     unless @user.valid?
@@ -22,7 +20,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     render :new_profile
   end
 
-#3
   def create_profile
     @user = User.new(session["devise.regist_data"]["user"])
     @profile = Profile.new(profile_params)
@@ -30,13 +27,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
       flash.now[:alert] = @profile.errors.full_messages
       render :new_profile and return
     end
-#----------------------------ここまでカリキュラム通り-------------------------------------------
+
     session["devise.regist_data"]["profile"] = (@profile.attributes)
     @destination = @user.build_destination
     render :new_destination
   end
 
-#4
   def create_destination
     @user = User.new(session["devise.regist_data"]["user"])
     @profile = Profile.new(session["devise.regist_data"]["profile"])
@@ -47,10 +43,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
     @user.build_profile(@profile.attributes)
     @user.build_destination(@destination.attributes)
-    @user.save
-    session["devise.regist_data"]["user"].clear
-    # session["devise.regist_data"]["profile"].clear
-    sign_in(:user, @user)
+    if @user.save
+      session["devise.regist_data"]["user"].clear
+      sign_in(:user, @user)
+    else
+      render :new and return
   end
 
   protected
