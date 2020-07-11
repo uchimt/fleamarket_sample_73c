@@ -48,6 +48,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       sign_in(:user, @user)
     else
       render :new and return
+    end
   end
 
   protected
@@ -106,4 +107,3 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 end
-# session["devise.regist_data"][:user]["profile"] = params[:first_name][:family_name][:first_name_kana][:family_name_kana][:birth_year][:birth_month][:birth_day]
