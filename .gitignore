@@ -28,5 +28,4 @@
 
 # 投稿画像をGitで管理しないようにする
 public/uploads/*
-
 .DS_Store

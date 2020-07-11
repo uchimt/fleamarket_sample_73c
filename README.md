@@ -61,7 +61,7 @@ Things you may want to cover:
 |destination_family_name|string|null:false|
 |destination_first_name_kana|string|null:false|
 |destination_family_name_kana|string|null:false|
-|postal_code|integer(7)|null:false|
+|postal_code|string(7)|null:false|
 |prefecture|string|null:false|
 |city|string|null:false|
 |address|string|null:false|
@@ -76,7 +76,9 @@ Things you may want to cover:
 |Column|Type|Options|
 |------|----|-------|
 |title|string|null:false|
+|brand|string|
 |description|text|null:false|
+|category|string|null:false|
 |condition|integer|null:false,default:0|
 |postage|integer|null:false|
 |shipping_origin|string|null:false|
@@ -85,6 +87,7 @@ Things you may want to cover:
 |user|references|null:false,foreign_key:true|
 |comment|references| null:false,foreign_key:true|
 |brand|references|foreign_key:true|
+|image|references|null:false,foreign_key:true|
 |like|references|foreign_key:true|
 |category|references|null:false,foreign_key:true|
 
