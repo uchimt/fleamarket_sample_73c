@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :products, only: :new
-  get 'top/index'
-  root "top#index"
+  resources :products, only: [:new, :index]
+  root to: "top#index"
 end
