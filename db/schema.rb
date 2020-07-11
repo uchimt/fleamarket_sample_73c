@@ -10,20 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_08_141920) do
+ActiveRecord::Schema.define(version: 2020_07_10_132559) do
 
   create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "product_id"
     t.string "brand_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "ancestry"
-    t.index ["ancestry"], name: "index_categories_on_ancestry"
+    t.index ["product_id"], name: "index_brands_on_product_id"
   end
 
   create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -37,6 +31,7 @@ ActiveRecord::Schema.define(version: 2020_07_08_141920) do
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
+    t.integer "brand_id"
     t.integer "condition", null: false
     t.integer "prefecture_id", null: false
     t.integer "postage", null: false
@@ -44,10 +39,6 @@ ActiveRecord::Schema.define(version: 2020_07_08_141920) do
     t.integer "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "brands_id"
-    t.bigint "categories_id"
-    t.index ["brands_id"], name: "index_products_on_brands_id"
-    t.index ["categories_id"], name: "index_products_on_categories_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -62,7 +53,6 @@ ActiveRecord::Schema.define(version: 2020_07_08_141920) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "brands", "products"
   add_foreign_key "images", "products"
-  add_foreign_key "products", "brands", column: "brands_id"
-  add_foreign_key "products", "categories", column: "categories_id"
 end
