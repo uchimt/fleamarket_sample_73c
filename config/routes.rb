@@ -8,8 +8,6 @@ Rails.application.routes.draw do
     get 'destinations', to: 'users/registrations#new_destination'
     post 'destinations', to: 'users/registrations#create_destination'
   end
-  resources :products, only: [:new, :index]
-  root to: "top#index"
   resources :products, except: :show
-  root 'products#index'
+  root to: "top#index"
 end

@@ -20,30 +20,6 @@ ActiveRecord::Schema.define(version: 2020_07_10_132559) do
     t.index ["product_id"], name: "index_brands_on_product_id"
   end
 
-  create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "src", null: false
-    t.bigint "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_images_on_product_id"
-  end
-
-  create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "title", null: false
-    t.text "description", null: false
-    t.integer "brand_id"
-    t.integer "condition", null: false
-    t.integer "prefecture_id", null: false
-    t.integer "postage", null: false
-    t.integer "shipping_day_id", null: false
-    t.integer "price", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-ActiveRecord::Schema.define(version: 2020_07_03_181357) do
-
   create_table "destinations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "destination_family_name", null: false
     t.string "destination_first_name", null: false
@@ -59,6 +35,26 @@ ActiveRecord::Schema.define(version: 2020_07_03_181357) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_destinations_on_user_id"
+  end
+
+  create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "src", null: false
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_images_on_product_id"
+  end
+
+  create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description", null: false
+    t.integer "condition", null: false
+    t.integer "prefecture_id", null: false
+    t.integer "postage", null: false
+    t.integer "shipping_day_id", null: false
+    t.integer "price", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -89,7 +85,7 @@ ActiveRecord::Schema.define(version: 2020_07_03_181357) do
   end
 
   add_foreign_key "brands", "products"
-  add_foreign_key "images", "products"
   add_foreign_key "destinations", "users"
+  add_foreign_key "images", "products"
   add_foreign_key "profiles", "users"
 end

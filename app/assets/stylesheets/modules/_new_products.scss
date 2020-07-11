@@ -12,12 +12,12 @@
 .new-body {
   background-color: rgb(245, 245, 245);
   width: 100%;
+  padding-bottom: 30px;
   .product_form {
     background-color: white;
     width: 80%;
     margin: 0 auto;
     max-width: 800px;
-
   %basicSection {
     font-size: 14px;
     padding: 30px 50px 30px 50px;
@@ -93,7 +93,6 @@
         }
         .js-file {
           // display: none;
-        
         }
        
       }
@@ -102,25 +101,25 @@
       @extend %basicSection; 
       &__title {
         @extend %inputName;
-        .text-form {
+        &--text_form {
           @extend %inputForm;
         }
       }
       &__description {
         @extend %inputName;
-        .text_area-form {
+        &--text_area_form {
           @extend %inputForm;
           height: 200px;
         }
       }
       &__category {
         @extend %inputName;
-        .select-form {
+        .select_form {
           @extend %inputForm;
         }
         &--size {
         @extend %inputName;
-        .select-form {
+        &--select_form {
           @extend %inputForm;
           }
         }
@@ -132,13 +131,13 @@
           border: solid  lightgrey;
           background-color: lightgrey;
         }
-        .text-form {
+        &--text_form {
           @extend %inputForm;
         }
       }
       &__condition {
         @extend %inputName;
-        .select-form {
+        &--select_form {
           @extend %inputForm;  
         }
       }
@@ -147,19 +146,19 @@
       @extend %basicSection; 
       &__postage {
         @extend %inputName;
-        .select-form {
+        &--select_form {
           @extend %inputForm;
         }
       }
-      &__shipping_origin {
+      &__prefecture {
         @extend %inputName;
-        .select-form {
+        &--select_form {
           @extend %inputForm;
         }
       }
-      &__delivery_until_shipping {
+      &__shipping_day {
         @extend %inputName;
-        .select-form {
+        &--select_form {
           @extend %inputForm;
         }
       }
@@ -177,7 +176,7 @@
           color: #333;
           font-size: 15px;
         }
-        .price-form {
+        .price_form {
           @extend %inputForm;
           width: 40%;
           position: absolute;
@@ -232,7 +231,7 @@
 }
 .footer {
   background-color: rgb(245, 245, 245);
-  padding: 30px 0;
+  padding: 30px;
   .sitemap {
     margin: 0;
     display: flex;
@@ -254,7 +253,7 @@
     }
     p {
       display: block;
-      margin: 0;
+      margin: 0 auto;
       color: #fff;
     }
   }
