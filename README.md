@@ -76,20 +76,17 @@ Things you may want to cover:
 |Column|Type|Options|
 |------|----|-------|
 |title|string|null:false|
-|brand|string|
 |description|text|null:false|
-|category|string|null:false|
 |condition|integer|null:false,default:0|
 |postage|integer|null:false|
-|shipping_origin|string|null:false|
-|days_until_shipping|string|null:false|
 |price|integer|null:false|
 |user|references|null:false,foreign_key:true|
 |comment|references| null:false,foreign_key:true|
 |brand|references|foreign_key:true|
-|image|references|null:false,foreign_key:true|
 |like|references|foreign_key:true|
 |category|references|null:false,foreign_key:true|
+|prefecture_id(active_hash)|integer|null:false|
+|shipping_day|references|null:false,foreign_key:true|
 
 ### enum
 - enum condition:{新品/未使用:0,未使用に近い:1}
@@ -98,18 +95,27 @@ Things you may want to cover:
 - belongs_to: user
 - belongs_to: brand
 - belongs_to: category
-- has_many: images
-- has_many: commemts
-- has_many: likes
+- has_many: images,dependent::destroy
+- has_many: comments,dependent::destroy
+- has_many: likes,dependent::destroy
+- belongs_to: shipping_day
+
+
+
+## shipping_daysテーブル
+|Column|Type|Options|
+|------|----|-------|
+|day|string|null:false|
+
+### Association
+has_many:products
 
 ## credit_cardsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|card_number|integer|null:false,unique:true|
-|expiration_year|integer|null:false|
-|expiration_month|integer|null:false|
-|security_code|integer|null:false|
 |user|references|null:false,foreign_key:true|
+|card_id|integer|null:false|
+|customer_id|integer|null:false|
 
 ### Association
 - belongs_to:user
@@ -163,7 +169,7 @@ Things you may want to cover:
 ## imagesテーブル
 |Column|Type|Options|
 |------|----|-------|
-|url|string|null:false|
+|src|string|null:false|
 |product|references|null:false, foreign_key: true|
 
 ### Asociation
@@ -177,3 +183,19 @@ Things you may want to cover:
 
 ### Asociation
 - belongs_to :user
+
+## prefecturesテーブル
+|Column|Type|Options|
+|------|----|-------|
+|name|string|null:false|
+
+### Asociation
+- has_many :products
+
+## shippingdaysテーブル
+|Column|Type|Options|
+|------|----|-------|
+|day|string|null:false|
+
+### Asociation
+- has_many :products
