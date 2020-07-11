@@ -74,13 +74,9 @@ gem 'carrierwave'
 gem 'mini_magick'
 
 gem 'fog-aws'
+gem 'devise'
+
+
+gem 'pry-rails'
 
 gem 'haml-rails'
-
-gem 'font-awesome-sass'
-
-gem 'jquery-rails'
-
-# モデル関連
-gem 'active_hash'
-gem 'ancestry'
