@@ -74,12 +74,10 @@ gem 'carrierwave'
 gem 'mini_magick'
 
 gem 'fog-aws'
+gem 'devise'
 
-gem 'haml-rails'
 
-gem 'font-awesome-sass'
-
-gem 'jquery-rails'
+gem 'pry-rails'
 
 # モデル関連
 gem 'active_hash'
@@ -87,3 +85,4 @@ gem 'ancestry'
 
 # payjp関連
 gem 'payjp'
+gem 'haml-rails'
