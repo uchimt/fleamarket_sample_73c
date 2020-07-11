@@ -74,6 +74,7 @@
   }
   &__others ul {
     padding: 0px;
+    margin-bottom: 50px;
   }
   &__toBuy {
     text-align: center;
@@ -85,6 +86,18 @@
     font-size: 18px;
     border-radius: 100px;
     margin: 0 auto;
+    text-decoration: none;
+    &--buy {
+      line-height: 40px;
+      background: #3CCACE;
+      border: 1px solid #3CCACE;
+      color: #fff;
+      width: 60%;
+      font-size: 18px;
+      border-radius: 100px;
+      margin: 0 auto;
+      text-decoration: none;
+    }
   }
 }
 
