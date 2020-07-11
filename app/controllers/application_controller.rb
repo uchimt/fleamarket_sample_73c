@@ -2,14 +2,6 @@ class ApplicationController < ActionController::Base
   before_action :basic_auth, if: :production? #本番環境のみにBasic認証を適応
   protect_from_forgery with: :exception
 
-  before_action :configure_permitted_parameters, if: :devise_controller?
-
-  protected
-
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname])
-  end
-
   private
 #本番環境かどうか確認するメソッド 本番環境ならtrueを返す
   def production?
