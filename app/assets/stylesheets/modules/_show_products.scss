@@ -31,6 +31,9 @@
     font-size: 18px;
     margin-bottom: 30px
   }
+  &__table--content {
+    text-decoration: none;
+  }
   &__table table {
     width: 100%;
     height: 375px;
@@ -86,6 +89,16 @@
   &__others ul {
     padding: 0px;
     margin-bottom: 50px;
+  }
+  &__others a {
+    text-decoration: none;
+    padding: 6px 10px;
+    display: inline-block;
+    border-radius: 4px;
+    color: #333;
+    border: 1px solid #333;
+    height: 25px;
+    margin-top: 15px;
   }
   &__toBuy {
     text-align: center;
@@ -145,17 +158,6 @@ ul {
   }
 }
 
-// 通報部分
-a {
-  text-decoration: none;
-  padding: 6px 10px;
-  display: inline-block;
-  border-radius: 4px;
-  color: #333;
-  border: 1px solid #333;
-  height: 25px;
-  margin-top: 15px;
-}
 
 .option {
   margin: 0px 0px 0px 0px;
@@ -170,8 +172,43 @@ a {
   text-align: center;
   width: 730px;
   &__area {
-    width: 100%;
+    display: inline-block;
+    width: 95%;
     min-height: 104px;
     padding: 10px;
+    margin: 0 auto;
+  }
+  &__note {
+    padding: 8px;
+    font-size: 14px;
+    background-color: #f8f8f8;
+    margin: 10px 0;
+    text-align: left;
+  }
+  &__btn {
+    line-height: 48px;
+    background: #3CCACE;
+    border: 1px solid #3CCACE;
+    color: #fff;
+    width: 60%;
+    font-size: 18px;
+    border-radius: 100px;
+  }
+}
+
+// 前の賞品、後ろの商品
+.sameContent {
+  width: 780px;
+  margin: auto;
+  &__link {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 0px;
+    &--left {
+      text-decoration: none;
+    }
+    &--right {
+      text-decoration: none;
+    }
   }
 }
