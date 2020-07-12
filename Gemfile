@@ -82,3 +82,4 @@ gem 'pry-rails'
 gem 'haml-rails'
 
 gem 'font-awesome-sass'
+gem 'jquery-rails'
