@@ -32,10 +32,16 @@
               %td hoge
             %tr
               %th カテゴリー
-              %td hoge
+              %td 
+                = link_to "hoge", product_path, class:"productBox__table--content"
+                %br
+                = link_to "hoge", product_path, class:"productBox__table--content"
+                %br
+                = link_to "hoge", product_path, class:"productBox__table--content"
             %tr
               %th ブランド
-              %td hoge
+              %td 
+                = link_to "hoge", product_path, class:"productBox__table--content"
             %tr
               %th 商品のサイズ
               %td hoge
@@ -47,14 +53,15 @@
               %td hoge
             %tr
               %th 発送元の地域
-              %td hoge
+              %td 
+                = link_to "hoge", product_path, class:"productBox__table--content"
             %tr
               %th 発送日の目安
               %td hoge
       .productBox__others
         %ul
           %li.productBox__others--like
-            = icon('fa', 'star')  
+            = icon('fa', 'star') 
             お気に入り 0
         = link_to product_path, {class: "roductBox__others--report"} do
           %i{class: "fa fa-flag"}
@@ -67,17 +74,25 @@
     -# コメント欄
     .commentBox
       = form_with model: @product do |form|
-        = form.text_area :comment, :class => "commentBox__area"
+        = form.text_area :comment, class:"commentBox__area"
         %p.commentBox__note
           相手のことを考え丁寧なコメントを心がけましょう。
           %br
           不快な言葉遣いなどは利用制限や退会処分となることがあります。
 
-        = form.submit "コメントする"
+        = form.submit "コメントする", class:"commentBox__btn"
+        = icon('fa', 'comment')
 
-    
-    
-    
+    .sameContent
+      %ul.sameContent__link
+        %li
+          = link_to  product_path, {class: "sameContent__link--left"} do
+            %i{class: "fa fa-angle-left"}
+            前の商品
+        %li
+          = link_to  product_path, {class: "sameContent__link--right"} do
+            %i{class: "fa fa-angle-right"}
+            後ろの商品
     
     
     -# 関連商品欄
