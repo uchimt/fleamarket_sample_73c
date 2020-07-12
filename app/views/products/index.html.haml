@@ -6,8 +6,11 @@
         新規投稿商品
     .productLists
       .productList
-        = link_to
+        = link_to "https://www.facebook.com/", class: "product--img" do
           .product--img
+            = render @products
           .product--body
             .name
+            ワイシャツ
             .detail
+            ビジネス用の柄なし白ワイシャツです。

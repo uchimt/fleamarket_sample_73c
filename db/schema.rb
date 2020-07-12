@@ -10,7 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_05_134725) do
+ActiveRecord::Schema.define(version: 2020_07_11_061737) do
+
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "destinations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "destination_family_name", null: false
+    t.string "destination_first_name", null: false
+    t.string "destination_family_name_kana", null: false
+    t.string "destination_first_name_kana", null: false
+    t.string "postal_code", null: false
+    t.string "prefecture", null: false
+    t.string "city", null: false
+    t.string "address", null: false
+    t.string "building"
+    t.string "phone_number"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_destinations_on_user_id"
+  end
+
+  create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "url"
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_images_on_product_id"
+  end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
@@ -33,24 +64,6 @@ ActiveRecord::Schema.define(version: 2020_07_05_134725) do
     t.index ["like_id"], name: "index_products_on_like_id"
     t.index ["shipping_day_id"], name: "index_products_on_shipping_day_id"
     t.index ["user_id"], name: "index_products_on_user_id"
-  end
-ActiveRecord::Schema.define(version: 2020_07_03_181357) do
-
-  create_table "destinations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "destination_family_name", null: false
-    t.string "destination_first_name", null: false
-    t.string "destination_family_name_kana", null: false
-    t.string "destination_first_name_kana", null: false
-    t.string "postal_code", null: false
-    t.string "prefecture", null: false
-    t.string "city", null: false
-    t.string "address", null: false
-    t.string "building"
-    t.string "phone_number"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_destinations_on_user_id"
   end
 
   create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
