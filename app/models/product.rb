@@ -2,13 +2,25 @@ class Product < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   has_many :images, dependent: :destroy
   has_one :brand, dependent: :destroy
-#   belongs_to :category 
-#   belongs_to :user
+  belongs_to :category 
+  belongs_to :user
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :shipping_day
   accepts_nested_attributes_for :images, allow_destroy: true
   accepts_nested_attributes_for :brand, allow_destroy: true
   
+  validates_associated :images
+  validates :images, presence: true
+  validates :title, 
+            :description, 
+            :condition, 
+            :prefecture_id, 
+            :postage, 
+            :shipping_day_id, 
+            :price, 
+            :user_id, 
+             presence: true
+
   enum condition: { 
     brand_new: 1,               # "新品・未使用"
     look_brand_new: 2,          # "未使用に近い"

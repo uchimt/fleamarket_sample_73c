@@ -8,6 +8,14 @@ Rails.application.routes.draw do
     get 'destinations', to: 'users/registrations#new_destination'
     post 'destinations', to: 'users/registrations#create_destination'
   end
-  resources :products, except: :show
+
+  resources :products, only: [:index, :show, :new, :edit, :destroy] do
+    #Ajaxで動くアクションルート作成
+    collection do
+      get 'get_category_children', defaults: { format: 'json' }
+      get 'get_category_grandchildren', defaults: { format: 'json' }
+    end
+  end
+
   root to: "top#index"
 end

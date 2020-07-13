@@ -2,7 +2,8 @@
   = form_with model: @product do |f|
     .post-image-list
       .post-image-list__title
-        出品画像 
+        = f.label  '出品画像' 
+        %span.require_label 必須
         %p 最大10枚までアップロードできます
         #image-box.post-image-list__images
           #previews
@@ -14,7 +15,7 @@
               %div{ data: {index: "<%= image.index %>" }, class: "js-file_group" }  
               = image_tag('icon_camera.png', class: "image_input_btn__camera")
               = image.file_field :src, class: 'js-file'
-              %span.js-remove
+              .js-remove
                 削除
             - if @product.persisted?
               = image.check_box :_destroy, data:{ index: image.index }, class: 'hidden-destroy'
@@ -27,44 +28,46 @@
       商品の詳細
       .product-information__title
         = f.label :title, '商品名' 
-        %span 必須
+        %span.require_label 必須
         = f.text_field :title, { class: "product-information__title--text_form", maxlength: 40, placeholder: "40文字まで" }
       .product-information__description
         = f.label :description, '商品の説明'
-        %span 必須
+        %span.require_label 必須
         = f.text_area :description, { class: "product-information__description--text_area_form", placeholder: "" }
       .product-information__category
-        = f.label :category, 'カテゴリー'
-        %span 必須
-        -# = f.select :category, @category_parent_array, { prompt: "選択してください" }, { class: "product-information__category--select_form"}
+        = f.label :category_id, 'カテゴリー', class: "production-information__category-label"
+        %span.require_label 必須
+        .product-information__category--form
+          = f.select :category_id, @category_parent_array, {}, { class: "product-information__category--select_form", id: "parent_category"}
+          %i.fas.fa-chevron-down.product-information__category--arrow-down
       .product-information__brand
         = f.fields_for :brand, @product.build_brand do |b|
           = b.label :brand, 'ブランド' 
-          %span 任意
+          %span.optional_label 任意
           = b.text_field :brand_name, { class: "product-information__brand--text_form", placeholder: "例：グッチ" }
       .product-information__condition
         = f.label :condition, '商品の状態' 
-        %span 必須
+        %span.require_label 必須
         = f.select :condition, Product.conditions_i18n.invert, { prompt: "選択してください" }, { class: "product-information__condition--select_form"}
     .delivery-information 
       配送について
       .delivery-information__postage
         = f.label :postage, '配送料の負担' 
-        %span 必須
+        %span.require_label 必須
         = f.select :postage, Product.postages_i18n.invert, { prompt: "選択してください" }, { class: "delivery-information__postage--select_form"}
       .delivery-information__prefecture
         = f.label :prefecture_id, '発送元の地域' 
-        %span 必須
+        %span.require_label 必須
         = f.collection_select :prefecture_id, Prefecture.all, :id, :name, { prompt: "選択してください" }, { class: "delivery-information__prefecture--select_form" }
       .delivery-information__shipping_day
         = f.label :shipping_day_id, '発送までの日数' 
-        %span 必須
+        %span.require_label 必須
         = f.collection_select :shipping_day_id, ShippingDay.all, :id, :name, { prompt: "選択してください" }, {class: "delivery-information__shipping_day--select_form" }
     .price-information
       価格
       .price-information__price
         = f.label :price, '販売価格' 
-        %span 必須
+        %span.require_label 必須
         %span.en ￥
         = f.number_field :price, class: "price_form", min: 300, max:9999999, placeholder: "0"
     .post-form
