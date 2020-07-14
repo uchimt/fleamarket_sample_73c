@@ -1,17 +1,16 @@
 $(function(){
   // カテゴリーセレクトボックスのオプションを作成
   function appendOption(category){
-    var html =  `<option value="${category.name}" data-category="${category.id}">
-                  ${category.name}
-                 </option>`;
+    var html =  
+      `<option value="${category.id}" data-category="${category.id}">${category.name}</option>`;
     return html;
   }
   //子カテゴリーの表示作成
   function appendChildrenBox(insertHTML){
     var childSelectHtml =  '';
     childSelectHtml = `<div class="product-information__category--form" id= "children_form">
-                         <select class="product-information__category--select_form" id="child_category" name="category_id">
-                           <option value="選択してください" data-category="選択してください" >選択してください</option>
+                         <select class="product-information__category--select_form" id="child_category">
+                           <option value="" data-category="" >選択してください</option>
                            ${insertHTML}
                          </select>
                          <i class="fas fa-chevron-down product-information__category--arrow-down"></i>
@@ -22,8 +21,8 @@ $(function(){
   function appendGrandchildrenBox(insertHTML){
     var grandchildSelectHtml = '';
     grandchildSelectHtml = `<div class="product-information__category--form" id= "grandchildren_form">
-                             <select class="product-information__category--select_form" id="grandchild_category" name="category_id">
-                               <option value="選択してください" data-category="選択してください">選択してください</option>
+                             <select class="product-information__category--select_form" id="grandchild_category" name="product[category_id]">
+                               <option value="" data-category="">選択してください</option>
                                ${insertHTML}
                              </select>
                              <i class="fas fa-chevron-down product-information__category--arrow-down"></i>
@@ -33,7 +32,7 @@ $(function(){
   //親カテゴリー選択後のイベント
   $('#parent_category').on('change', function(){
     var parentCateogry = document.getElementById('parent_category').value; //選択された親カテゴリーの名前を取得
-    if (parentCateogry != "選択してください") { //親カテゴリーが初期値でないことを確認
+    if (parentCateogry != "") { //親カテゴリーが初期値でないことを確認
       $.ajax({
         url: 'get_category_children',
         type: 'GET',
@@ -60,7 +59,7 @@ $(function(){
   //子カテゴリー選択ごのイベント
   $('.product-information__category').on('change','#child_category', function(){
     var childId = $('#child_category option:selected').data('category'); //選択された子カテゴリーのidを取得
-    if (childId != "選択してください") { //子カテゴリーが初期値でないことを確認
+    if (childId != "") { //子カテゴリーが初期値でないことを確認
       $.ajax({
         url: 'get_category_grandchildren',
         type: 'GET',
