@@ -7,6 +7,9 @@ class ProductsController < ApplicationController
     # @parents = Category.all.order("id ASC").limit(2) #１層目が2個なのでlimit(2)
   end
 
+  def show
+  end
+  
   def new
     @product = Product.new
     @product.images.build
