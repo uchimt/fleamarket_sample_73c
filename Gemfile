@@ -86,3 +86,4 @@ gem 'ancestry'
 # payjp関連
 gem 'payjp'
 gem 'haml-rails'
+gem 'jquery-rails'
