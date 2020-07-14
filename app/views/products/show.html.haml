@@ -71,7 +71,7 @@
         = link_to "購入する", product_path, class:"productBox__toBuy--buy"
 
 
-    コメント欄
+    -# コメント欄
     .commentBox
       = form_with model: @product do |form|
         = form.text_area :comment, class:"commentBox__area"
@@ -80,8 +80,9 @@
           %br
           不快な言葉遣いなどは利用制限や退会処分となることがあります。
         
-        = form.submit "コメントする", class: "commentBox__btn"
-          = icon('fa', 'comment')
+        %button{type: "submit", class: "commentBox__btn"}
+          %i.fa.fa-comment
+            コメントする
 
     .sameContent
       %ul.sameContent__link
@@ -96,19 +97,19 @@
             
     
     
-    -# -# 関連商品欄
-    -# .relatedProbucts
-    -#   = link_to "もっと見る", product_path
-    -#   .reratedProducts__lists
-    -#     -# 個々の関連商品
-    -#     = link_to product_path, {class: "productList"} do
-    -#       %figure.productList__image
-    -#         %img{src: "https://s3-ap-northeast-1.amazonaws.com/mercarimaster/uploads/captured_image/content/13/a007.png"}
-    -#           %h3.productList__content テスト
-    -#           .productList__content__detail
-    -#             %ul 
-    -#               %li 30,000円
-    -#               %li 
-    -#                 = icon('fa', 'star')
-    -#                   %p 0
-                      
+    -# 関連商品欄
+    .relatedProbucts
+      = link_to "もっと見る", product_path, {class: "relatedLink"}
+      .relatedProbucts__lists
+        -# 個々の関連商品
+        = link_to product_path, {class: "productList"} do
+          %figure.productList__image
+            %img{src: "https://s3-ap-northeast-1.amazonaws.com/mercarimaster/uploads/captured_image/content/13/a007.png"}
+              .productList__content
+                %h3.name テスト
+                .productList__content--detail
+                  %ul 
+                    %li 30,000円
+                    %li 
+                      = icon('fa', 'star')
+                      0
