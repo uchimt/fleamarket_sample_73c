@@ -20,4 +20,10 @@ class ProductsController < ApplicationController
       
     ).merge(user_id: current_user.id)
   end
+  def new
+  end
+
+  def show
+  end
+  
 end
