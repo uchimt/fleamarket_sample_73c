@@ -258,11 +258,16 @@ ul {
     background-color: #fff;
     color: #333;
     padding: 16px;
+    &--detail {
+      height:25px
+    }
     &--detail ul {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0px;
+      font-size: 18px;
+      height: 20px;
     }
   }
 }
