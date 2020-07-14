@@ -22,7 +22,7 @@
     = f.label :都道府県
     %span.required 【必須】
     %br/
-    = f.text_field :prefecture, pattern: "[^\x20-\x7E]*"
+    = f.select :prefecture_id, Prefecture.all.map { |pre| [pre.name, pre.id] }, {include_blank: "選択する"}
   .field
     = f.label :市区町村
     %span.required 【必須】
