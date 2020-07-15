@@ -13,7 +13,6 @@ $(function(){
                            <option value="" data-category="" >選択してください</option>
                            ${insertHTML}
                          </select>
-                         <i class="fas fa-chevron-down product-information__category--arrow-down"></i>
                        </div>`;
     $('.product-information__category').append(childSelectHtml);
   }
@@ -25,7 +24,6 @@ $(function(){
                                <option value="" data-category="">選択してください</option>
                                ${insertHTML}
                              </select>
-                             <i class="fas fa-chevron-down product-information__category--arrow-down"></i>
                             </div>`;
     $('.product-information__category').append(grandchildSelectHtml);
   }

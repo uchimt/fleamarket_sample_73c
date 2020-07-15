@@ -17,7 +17,7 @@ class Product < ApplicationRecord
             :prefecture_id, 
             :postage, 
             :shipping_day_id, 
-            :price, 
+            :price,
             :user_id, 
              presence: true
 
