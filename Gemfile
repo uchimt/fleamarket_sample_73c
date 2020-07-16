@@ -88,3 +88,4 @@ gem 'jquery-rails'
 gem 'active_hash'
 gem 'ancestry'
 
+gem 'enum_help'
