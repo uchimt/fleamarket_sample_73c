@@ -1,16 +1,7 @@
-.head
-  ピックアップカテゴリー
-  .productBox
-    .productHead
-      .title
-        新規投稿商品
-    .productLists
-      .productList
-        = link_to "https://www.facebook.com/", class: "product--img" do
-          .product--img
-            = render @products
-          .product--body
-            .name
-            ワイシャツ
-            .detail
-            ビジネス用の柄なし白ワイシャツです。
+.header
+  = render partial: 'header'
+  = link_to '出品', new_product_path
+.contents
+  = render @products
+.footer
+  = render partial: 'footer'

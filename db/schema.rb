@@ -10,12 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_11_061737) do
+ActiveRecord::Schema.define(version: 2020_07_12_022357) do
 
-  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
+  create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "product_id"
+    t.string "brand_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_brands_on_product_id"
+  end
+
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_categories_on_ancestry"
   end
 
   create_table "destinations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -36,33 +46,25 @@ ActiveRecord::Schema.define(version: 2020_07_11_061737) do
   end
 
   create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "url"
-    t.bigint "product_id"
+    t.string "src", null: false
+    t.bigint "product_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_images_on_product_id"
   end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.integer "condition"
-    t.integer "postage"
-    t.integer "price"
-    t.bigint "user_id"
-    t.bigint "comment_id"
-    t.bigint "brand_id"
-    t.bigint "like_id"
-    t.bigint "category_id"
-    t.integer "prefecture_id"
-    t.bigint "shipping_day_id"
+    t.string "title", null: false
+    t.text "description", null: false
+    t.integer "category_id", null: false
+    t.integer "condition", null: false
+    t.integer "prefecture_id", null: false
+    t.integer "postage", null: false
+    t.integer "shipping_day_id", null: false
+    t.integer "price", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["brand_id"], name: "index_products_on_brand_id"
-    t.index ["category_id"], name: "index_products_on_category_id"
-    t.index ["comment_id"], name: "index_products_on_comment_id"
-    t.index ["like_id"], name: "index_products_on_like_id"
-    t.index ["shipping_day_id"], name: "index_products_on_shipping_day_id"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
@@ -93,6 +95,9 @@ ActiveRecord::Schema.define(version: 2020_07_11_061737) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "brands", "products"
   add_foreign_key "destinations", "users"
+  add_foreign_key "images", "products"
+  add_foreign_key "products", "users"
   add_foreign_key "profiles", "users"
 end

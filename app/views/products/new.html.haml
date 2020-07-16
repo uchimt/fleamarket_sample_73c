@@ -1,0 +1,30 @@
+.header
+  = render partial: 'header'
+.new-body
+  = render partial: 'form'
+.footer
+  = render partial: 'footer'
+  
+-# .wrapper
+  .header
+    .header-icon
+      = link_to image_tag('logo.png', class: "header-icon__image"), top_index_path     
+  .new-product
+    = form_with model: @product do |form|
+      .post-image-list
+        .post-image-list__title
+          = form.label :images, '出品画像' 
+          %span 必須
+        .post-image-list__explanation
+          最大×枚までアップロードできます
+        #image-box.post-image-list__images
+          = form.fields_for :images do |image|
+            %div{data: {index: "<%= image.index %>" }, class: "js-file_group"}
+            = image.label :images, class: "image_input_btn" do
+              = image_tag('icon_camera.png', class: "image_input_btn__camera")
+              = image.file_field :url, class: 'js-file'
+              = image.hidden_field :id, value: image.object.id  #編集時用にidを付与
+            .image_input_btn__text
+              クリックしてファイルをアップロード
+            -# %span.js-remove
+              編集
