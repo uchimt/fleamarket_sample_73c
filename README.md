@@ -79,11 +79,12 @@ Things you may want to cover:
 |brand|string|
 |description|text|null:false|
 |category|string|null:false|
-|condition|integer|null:false,default:0|
+|condition_id(active_hash)|integer|null:false,default:0|
 |postage|integer|null:false|
-|shipping_origin|string|null:false|
-|days_until_shipping|string|null:false|
+|prefecture_id(active_hash)|string|null:false|
+|shipping_day_id(active_hash)|string|null:false|
 |price|integer|null:false|
+|status|integer|null:false,default:0|
 |user|references|null:false,foreign_key:true|
 |comment|references| null:false,foreign_key:true|
 |brand|references|foreign_key:true|
@@ -92,8 +93,8 @@ Things you may want to cover:
 |category|references|null:false,foreign_key:true|
 
 ### enum
-- enum condition:{新品/未使用:0,未使用に近い:1}
-
+- enum postage: {including_shipping_fee: 1,cash_on_delivery: 2   }
+- enum status: {on_display: 0, sold: 1}
 ### Association
 - belongs_to: user
 - belongs_to: brand
