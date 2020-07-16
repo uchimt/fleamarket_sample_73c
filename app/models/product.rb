@@ -35,4 +35,8 @@ class Product < ApplicationRecord
     cash_on_delivery: 2         # "着払い（購入者負担）"
   }
   
+  enum status: {
+    on_display: 0,              # "出品中"
+    sold: 1                     # "売却済"
+  }
 end
