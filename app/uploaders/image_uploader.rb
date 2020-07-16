@@ -2,7 +2,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
-  process resize_to_fit: [300, 300] #縦横比を維持したまま[]のpxサイズ以内にリサイズする
+  process resize_to_fit: [100, 100] #縦横比を維持したまま[]のpxサイズ以内にリサイズする
 
   # Choose what kind of storage to use for this uploader:
   if Rails.env.development? || Rails.env.test? 
