@@ -17,12 +17,14 @@
                 %img.subImages__list--sub{src: "https://s3-ap-northeast-1.amazonaws.com/mercarimaster/uploads/captured_image/content/15/a003.png"}
       -# 値段
       .productBox__price
-        %span.productBox__price--price ¥100,000
+        %span.productBox__price--price 
+          = "¥#{pproduct.price.to_s(:delimited)}"
         .productBox__price--detailed
           %span (税込)
-          %span送料込み
+          %span 送料込み
       -# 商品詳細
-      .productBox__details テスト 
+      .productBox__details 
+        = @product.description
 
       -# 表
       .productBox__table
@@ -30,19 +32,23 @@
           %tbody
             %tr
               %th 出品者
-              %td hoge
+              %td 
+                = @product.user.nickname
             %tr
               %th カテゴリー
               %td 
-                = link_to "hoge", product_path, class:"productBox__table--content"
+                = link_to @product.categry.name., product_path, class:"productBox__table--content"
                 %br
                 = link_to "hoge", product_path, class:"productBox__table--content"
                 %br
                 = link_to "hoge", product_path, class:"productBox__table--content"
             %tr
               %th ブランド
-              %td 
-                = link_to "hoge", product_path, class:"productBox__table--content"
+              - if @product.brand ==! nil
+                %td= @product.brand.name
+                  -# = link_to "hoge", product_path, class:"productBox__table--content"
+              -else
+                %td=""
             %tr
               %th 商品のサイズ
               %td hoge
