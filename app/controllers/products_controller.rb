@@ -71,7 +71,7 @@ class ProductsController < ApplicationController
                    .permit(:title, 
                            :description, 
                            :category_id,
-                           :condition_id, 
+                           :condition, 
                            :postage, 
                            :prefecture_id, 
                            :shipping_day_id, 

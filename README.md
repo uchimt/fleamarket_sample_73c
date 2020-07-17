@@ -93,7 +93,7 @@ Things you may want to cover:
 |category|references|null:false,foreign_key:true|
 
 ### enum
-- enum postage: {including_shipping_fee: 1,cash_on_delivery: 2   }
+- enum postage: {including_shipping_fee: 1,cash_on_delivery: 2}
 - enum status: {on_display: 0, sold: 1}
 ### Association
 - belongs_to: user

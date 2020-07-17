@@ -4,7 +4,6 @@ class Product < ApplicationRecord
   has_one :brand, dependent: :destroy
   belongs_to :category 
   belongs_to :user
-  belongs_to_active_hash :condition
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :shipping_day
   accepts_nested_attributes_for :images, allow_destroy: true
@@ -15,7 +14,7 @@ class Product < ApplicationRecord
   validates :title, 
             :description, 
             :category_id,
-            :condition_id, 
+            :condition, 
             :postage, 
             :prefecture_id, 
             :shipping_day_id, 
