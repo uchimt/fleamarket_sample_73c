@@ -76,13 +76,13 @@ Things you may want to cover:
 |Column|Type|Options|
 |------|----|-------|
 |title|string|null:false|
-|brand|string|
 |description|text|null:false|
 |category|string|null:false|
 |condition_id(active_hash)|integer|null:false,default:0|
 |postage|integer|null:false|
 |prefecture_id(active_hash)|string|null:false|
 |shipping_day_id(active_hash)|string|null:false|
+|condition|integer|null:false,default:0|
 |price|integer|null:false|
 |status|integer|null:false,default:0|
 |user|references|null:false,foreign_key:true|
@@ -92,6 +92,7 @@ Things you may want to cover:
 |like|references|foreign_key:true|
 |category|references|null:false,foreign_key:true|
 
+
 ### enum
 - enum condition:{brand_new: 1, look_brand_new: 2, no_noticeable_scratches: 3, some_scratches: 4, noticeable_scratches: 5, bad_condition: 6}
 - enum postage: {including_shipping_fee: 1, cash_on_delivery: 2}
@@ -100,18 +101,18 @@ Things you may want to cover:
 - belongs_to: user
 - belongs_to: brand
 - belongs_to: category
-- has_many: images
-- has_many: commemts
-- has_many: likes
+- has_many: images,dependent::destroy
+- has_many: commemts,dependent::destroy
+- has_many: likes,dependent::destroy
+- belongs_to: active_hash: shipping_day
+- belongs_to:active_hash: prefecture
 
 ## credit_cardsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|card_number|integer|null:false,unique:true|
-|expiration_year|integer|null:false|
-|expiration_month|integer|null:false|
-|security_code|integer|null:false|
 |user|references|null:false,foreign_key:true|
+|card_id|integer|null:false|
+|customer_id|integer|null:false|
 
 ### Association
 - belongs_to:user
