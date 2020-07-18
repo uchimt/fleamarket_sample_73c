@@ -13,9 +13,10 @@ class Product < ApplicationRecord
   validates :images, presence: true
   validates :title, 
             :description, 
+            :category_id,
             :condition, 
-            :prefecture_id, 
             :postage, 
+            :prefecture_id, 
             :shipping_day_id, 
             :price,
             :user_id, 
@@ -35,4 +36,8 @@ class Product < ApplicationRecord
     cash_on_delivery: 2         # "着払い（購入者負担）"
   }
   
+  enum status: {
+    on_display: 0,              # "出品中"
+    sold: 1                     # "売却済"
+  }
 end

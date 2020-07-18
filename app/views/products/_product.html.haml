@@ -3,15 +3,16 @@
     = image_tag image.src.url
   %p= product.title
   %p= product.description
-  %p= product.condition_i18n   #enum_helpを用いた記述
+  %p= product.condition_i18n  
   %p= product.category.name
   %p= product.brand.brand_name
-  %p= product.postage_i18n 
+  %p= product.postage_i18n      #enum_helpを用いた記述
   %p= product.prefecture.name
   %p= product.shipping_day.name
   %p= product.price
   円
   %p
+  %p= product.status_i18n        #enum_helpを用いた記述
 
   = link_to '編集', edit_product_path(product)
   = link_to '削除', product_path(product), method: :delete
