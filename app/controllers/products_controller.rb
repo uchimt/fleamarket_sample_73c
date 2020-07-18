@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.includes(:images).order('created_at DESC')
-    # @parents = Category.all.order("id ASC").limit(2) #１層目が2個なのでlimit(2)
+    @parents = Category.all.order("id ASC").limit(2) #１層目が2個なのでlimit(2)
   end
 
   def show

@@ -5,13 +5,16 @@ $(document).on('turbolinks:load', ()=> {
                       <input class="js-file" type="file"
                       name="product[images_attributes][${num}][src]"
                       id="product_images_attributes_${num}_src"><br>
-                      <div class="js-remove">削除</div>
+                      <div class="js-remove">削除</div>    
                     </div>`;
       return html;
     }
     // プレビュー用のimgタグを生成する関数
     const buildImg = (index, url)=> {
-      const html = `<img data-index="${index}" src="${url}" width="100px" height="100px">`;
+      const html = `<div data-index="${index}" class="preview_image">
+                      <img data-index="${index}" src="${url}" width="100px" height="100px">
+                      
+                    </div>`;
       return html;
     }
   
