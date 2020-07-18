@@ -5,27 +5,29 @@
         = f.label  '出品画像' 
         %span.require_label 必須
       %p.post-image-list__explanation 最大10枚までアップロードできます
-      #image-box
-        #previews
-          .preview_image
+      #image-box.post-image-list__box
+        #previews.preview_list
           -if @product.persisted?
             -@product.images.each_with_index do |image, i|
-              =image_tag image.src.url, data: { index: i }, width: "100", height: '100'
-        .post_form
+              =image_tag image.src.url, data: { index: i }, width: "100", height: '100', class: "preview_image"
+        #posts.post_form
           =f.fields_for :images do |image|
             -# 画像がビルドされた際に振られるidを取得
             %div{ data: {index: "<%= image.index %>" }, class: "js-file_group" }
               =image.label :image, for: "file-input", class: "image_input_btn" do
+                =image_tag('icon_camera.png', class: "image_input_btn_camera")
                 =image.file_field :src, id: "file-input", class: 'js-file'
-            %span.js-remove
-              削除
+              .image_input_btn_text
+                クリックしてファイルをアップロード
+              %span.js-remove 削除
             -if @product.persisted?
+              -# 保存済みの画像レコードを削除するためのチェックボックス
               =image.check_box :_destroy, data:{ index: image.index }, class: 'hidden-destroy'
-            -if @product.persisted?
-              %div{ data: {index: "<%= @product.images.count %>" }, class: "js-file_group" }
-                =file_field_tag :src, name: "product[images_attributes][#{@product.images.count}][src]", class: 'js-file'
-                %span.js-remove
-                  削除
+          -if @product.persisted?
+            -# 新規画像追加のためのボタン
+            %div{ data: {index: "<%= @product.images.count %>" }, class: "js-file_group" }
+              =file_field_tag :src, name: "product[images_attributes][#{@product.images.count}][src]", class: 'js-file'
+              %span.js-remove 削除
       -# マークアップ途中までの 直すときの参考
       -# #image-box.post-image-list__form
       -#   #previews.preview_list
