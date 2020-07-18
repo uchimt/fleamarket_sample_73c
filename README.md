@@ -77,9 +77,10 @@ Things you may want to cover:
 |------|----|-------|
 |title|string|null:false|
 |description|text|null:false|
-|condition|integer|null:false,default:0|
 |postage|integer|null:false|
+|condition|integer|null:false,default:0|
 |price|integer|null:false|
+|status|integer|null:false,default:0|
 |user|references|null:false,foreign_key:true|
 |comment|references| null:false,foreign_key:true|
 |brand|references|foreign_key:true|
@@ -90,8 +91,9 @@ Things you may want to cover:
 |sipping_day_id|references|null:false,foreign_key:true|
 
 ### enum
-- enum condition:{新品/未使用:0,未使用に近い:1}
-
+- enum condition:{brand_new: 1, look_brand_new: 2, no_noticeable_scratches: 3, some_scratches: 4, noticeable_scratches: 5, bad_condition: 6}
+- enum postage: {including_shipping_fee: 1, cash_on_delivery: 2}
+- enum status: {on_display: 0, sold: 1}
 ### Association
 - belongs_to: user
 - belongs_to: brand
