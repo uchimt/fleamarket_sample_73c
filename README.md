@@ -77,11 +77,7 @@ Things you may want to cover:
 |------|----|-------|
 |title|string|null:false|
 |description|text|null:false|
-|category|string|null:false|
-|condition_id(active_hash)|integer|null:false,default:0|
 |postage|integer|null:false|
-|prefecture_id(active_hash)|string|null:false|
-|shipping_day_id(active_hash)|string|null:false|
 |condition|integer|null:false,default:0|
 |price|integer|null:false|
 |status|integer|null:false,default:0|
@@ -91,7 +87,8 @@ Things you may want to cover:
 |image|references|null:false,foreign_key:true|
 |like|references|foreign_key:true|
 |category|references|null:false,foreign_key:true|
-
+|prefecture_id|references|null:false,foreign_key:true|
+|sipping_day_id|references|null:false,foreign_key:true|
 
 ### enum
 - enum condition:{brand_new: 1, look_brand_new: 2, no_noticeable_scratches: 3, some_scratches: 4, noticeable_scratches: 5, bad_condition: 6}
