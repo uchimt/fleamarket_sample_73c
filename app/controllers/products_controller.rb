@@ -7,9 +7,7 @@ class ProductsController < ApplicationController
     # @parents = Category.all.order("id ASC").limit(2) #１層目が2個なのでlimit(2)
   end
 
-  def show
-    @product = Product.find(params[:id])
-  end
+  
   
   def new
     @product = Product.new
@@ -56,6 +54,10 @@ class ProductsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def show
+    @product = Product.find(params[:id])
   end
 
   def destroy
