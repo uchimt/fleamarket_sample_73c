@@ -127,10 +127,11 @@ Things you may want to cover:
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null:false|
+|ancestry|string|
 
 ### Asociation
 - has_many :products
-
+- has_ancestry
 ## brandsテーブル
 |Column|Type|Options|
 |------|----|-------|
@@ -154,7 +155,7 @@ Things you may want to cover:
 |Column|Type|Options|
 |------|----|-------|
 |user|references|null:false,foreign_key: true|
-|products|references|null:false, foreign_key: true|
+|product|references|null:false, foreign_key: true|
 
 ### Asociation
 - belongs_to :user
