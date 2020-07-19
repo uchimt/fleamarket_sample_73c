@@ -9,12 +9,11 @@
       .productBox__images
         %ul.images
           %li.images__list
-            %img.images__list--main{src: "https://s3-ap-northeast-1.amazonaws.com/mercarimaster/uploads/captured_image/content/13/a007.png"}
+            = image_tag @images[0].src.url, class: "images__list--main"
             %ul.subImages
-              %li.subImages__list
-                %img.subImages__list--sub{src: "https://s3-ap-northeast-1.amazonaws.com/mercarimaster/uploads/captured_image/content/13/a007.png"}
-                %img.subImages__list--sub{src: "https://s3-ap-northeast-1.amazonaws.com/mercarimaster/uploads/captured_image/content/14/a001.png"}
-                %img.subImages__list--sub{src: "https://s3-ap-northeast-1.amazonaws.com/mercarimaster/uploads/captured_image/content/15/a003.png"}
+              - @images.drop(1).each do |image|
+                %li.subImages__list
+                  = image_tag image.src.url, size: "140x140", class:"subImages__list--sub"
       -# 値段
       .productBox__price
         %span.productBox__price--price 
@@ -50,10 +49,10 @@
               %td hoge
             %tr
               %th 商品の状態
-              %td hoge
+              %td= @product.condition_i18n 
             %tr
               %th 配送料の負担
-              %td= @product.postage
+              %td= @product.postage_i18n
             %tr
               %th 発送元の地域
               %td 
