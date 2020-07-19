@@ -13,7 +13,6 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
     @product.images.build
-    @product.build_brand
     #データベースから、親カテゴリーのみ抽出し、配列化
     @category_parent_array = Category.where(ancestry: nil)
   end
@@ -72,12 +71,12 @@ class ProductsController < ApplicationController
                            :description, 
                            :category_id,
                            :condition, 
+                           :brand_id,
                            :postage, 
                            :prefecture_id, 
                            :shipping_day_id, 
                            :price, 
-                           images_attributes: [:src, :_destroy, :id],
-                           brand_attributes: [:brand_name, :_destroy, :id])
+                           images_attributes: [:src, :_destroy, :id],)
                            .merge(user_id: current_user.id)
   end
 
