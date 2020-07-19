@@ -80,11 +80,15 @@
         padding-bottom: 10px;
       }
       &__box {
-
+        width: 100%;
+        height: 300px;
+        display: block;
         display: flex;
-        flex-wrap: wrap；
+        justify-content: wrap;
         .preview_list {
-          display: flex;
+          // display: flex;
+          .preview_image {
+          }
         }
         .post_form {
           text-align: center;

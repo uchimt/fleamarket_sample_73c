@@ -28,12 +28,14 @@ class ProductsController < ApplicationController
     @category_grandchildren = Category.find("#{params[:child_id]}").children
   end
   
+  def new_product_create
+  end
 
   def create
     @category_parent_array = Category.where(ancestry: nil)
     @product = Product.new(product_params)
     if @product.save
-      redirect_to products_path
+      redirect_to new_product_create_products
     else
       render :new
     end
