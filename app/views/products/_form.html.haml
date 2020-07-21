@@ -9,7 +9,7 @@
         #previews.preview_list
           -# 編集機能時に画像を表示
           -# -if @product.persisted?
-          -#   .preview_image_group
+          -#   .preview_image_box
           -#     -@product.images.each_with_index do |image, i|
           -#       =image_tag image.src.url, data: { index: i }, width: "120", height: '120', class: "preview_image"
           -#       .edit_box
@@ -51,9 +51,7 @@
       .product-information__brand
         = f.label :brand, 'ブランド' 
         %span.optional_label 任意
-        = f.select :brand_id,options_for_select(@brands.map{|c| [c[:brand_name], c[:id]]}), {include_blank: "選択してください"}, { class: "product-information__brand--select_form"}
-        -# = f.collection_select :brand_id, @brands, :id, :brand_name, { include_blank: "選択してください" }, { class: "product-information__brand--select_form" }
-        -# = b.text_field :brand_name, { class: "product-information__brand--text_form", placeholder: "例：グッチ" }
+        = f.select :brand_id,options_for_select(@brands.map{|c| [c[:brand_name], c[:id]]}), {include_blank: "例：グッチ"}, { class: "product-information__brand--select_form"}
       .product-information__condition
         = f.label :condition, '商品の状態' 
         %span.require_label 必須

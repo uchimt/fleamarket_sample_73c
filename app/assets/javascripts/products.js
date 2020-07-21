@@ -1,6 +1,8 @@
 $(document).on('turbolinks:load', ()=> {
+  $(function() { 
+    //プレビューのthmlを定義
     function buildHTML(count) {
-      var html = `<div class="preview_image_box" id="preview_image_box_${count}">
+      var html = `<div class="preview_image_box" id="preview_image_box__${count}">
                     <div class="upper-box">
                       <img src="" alt="preview" width="120px" height="120px" class=""preview_image>
                     </div>
@@ -37,15 +39,15 @@ $(document).on('turbolinks:load', ()=> {
       reader.onload = function() {
         var image = this.result;
         //プレビューがもともと無かった場合はhtmlを追加
-        if ($(`#preview_image_box_${id}`).length == 0) {
+        if ($(`#preview_image_box__${id}`).length == 0) {
           var count = $('.preview_image_box').length;
-          var html = buildHTML(id), url;
+          var html = buildHTML(id);
           //ラベルの直前のプレビュー群にプレビューを追加
           var prevContent = $('.image_input_btn').prev();
           $(prevContent).append(html);
         }
         //イメージを追加
-        $(`#preview_image_box_${id} img`).attr('src', `${image}`);
+        $(`#preview_image_box__${id} img`).attr('src', `${image}`);
         var count = $('.preview_image_box').length;
         //プレビューが5こあったらラベルを隠す
         if (count == 5) {
@@ -64,12 +66,12 @@ $(document).on('turbolinks:load', ()=> {
   
     //画像の削除
     $('#image-box').on('click', '.js-remove', function() {
-      var count = $('.preview_image_group').length;
+      var count = $('.preview_image_box').length;
       setLabel(count);
       //product_images_attributes_${id}_srcのidの数値のみ取得
       var id = $(this).attr('id').replace(/[^0-9]/g, '');
       // 取得したidの該当するプレビューを削除
-      $(`#preview_image_box_${id}`).remove();
+      $(`#preview_image_box__${id}`).remove();
       console.log("new")
       // フォームの中身を削除
       $(`#product_images_attributes_${id}_src`).val("");
@@ -86,7 +88,6 @@ $(document).on('turbolinks:load', ()=> {
         // 削除された際に、空っぽになったfile_fieldをもう一度入力可能にする。
         $('.image_input_btn').attr({id: `image_input_btn--${id}`, for: `product_images_attributes_${id}_src`});
       }
-      // 画像入力欄が0個にならないようにしておく
-      // if ($('.js-file').length == 0) $('#image-box').append(buildFileField(fileIndex[0]));
     });
+  });
 });
