@@ -92,7 +92,7 @@
           display: flex;
           justify-content: start;
           flex-wrap: wrap;
-          .preview_image_group {
+          .preview_image_box {
             margin-right: 5px;
             .preview_image {
             }
@@ -139,11 +139,8 @@
             }
           }
         }
-        .js-file_group {
-          display: none;
-        }
         .hidden_post_form {
-          .js-file {
+          .hidden-field {
             // display: none;
           } 
         }

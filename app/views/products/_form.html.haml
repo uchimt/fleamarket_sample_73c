@@ -22,15 +22,17 @@
         .hidden_post_form
           =f.fields_for :images do |image|
             -# 画像がビルドされた際に振られるidを取得
-            %div{ data: {index:  0  }, class: "js-file_group" }
-              =image.file_field :src, name: "product[images_attributes][0][src]", id: "product_images_attributes_0_src", class: 'js-file'
+            =image.file_field :src, class:"hidden-field"
+            %input{class:"hidden-field", type: "file", name: "product[images_attributes][1][src]", id: "product_images_attributes_1_src" }
+            %input{class:"hidden-field", type: "file", name: "product[images_attributes][2][src]", id: "product_images_attributes_2_src" }
+            %input{class:"hidden-field", type: "file", name: "product[images_attributes][3][src]", id: "product_images_attributes_3_src" }
+            %input{class:"hidden-field", type: "file", name: "product[images_attributes][4][src]", id: "product_images_attributes_4_src" }
             -# 編集機能時修正
-            -if @product.persisted?
-              =image.check_box :_destroy, data:{ index: image.index }, class: 'hidden-destroy'
-          -if @product.persisted?
-            %div{ data: {index: "<%= @product.images.count %>" }, class: "js-file_group" }
-              =file_field_tag :src, name: "product[images_attributes][#{@product.images.count}][src]", class: 'js-file'
-              %span.js-remove 削除
+          -#   -if @product.persisted?
+          -#     =image.check_box :_destroy, data:{ index: image.index }, class: 'hidden-destroy'
+          -# -if @product.persisted?
+          -#   %div{ data: {index: "<%= @product.images.count %>" }, class: "hidden_post_form_#{@product.images.count}" }
+          -#     =file_field_tag :src, name: "product[images_attributes][#{@product.images.count}][src]", class: 'hidden_field'
     .product-information
       商品の詳細
       .product-information__title
@@ -49,7 +51,8 @@
       .product-information__brand
         = f.label :brand, 'ブランド' 
         %span.optional_label 任意
-        = f.collection_select :brand_id, Brand.all, :id, :brand_name, { prompt: "選択してください" }, { class: "product-information__brand--select_form" }
+        = f.select :brand_id,options_for_select(@brands.map{|c| [c[:brand_name], c[:id]]}), {include_blank: "選択してください"}, { class: "product-information__brand--select_form"}
+        -# = f.collection_select :brand_id, @brands, :id, :brand_name, { include_blank: "選択してください" }, { class: "product-information__brand--select_form" }
         -# = b.text_field :brand_name, { class: "product-information__brand--text_form", placeholder: "例：グッチ" }
       .product-information__condition
         = f.label :condition, '商品の状態' 

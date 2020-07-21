@@ -5,7 +5,6 @@ class CreateProducts < ActiveRecord::Migration[5.2]
       t.text :description,         null: false
       t.integer :category_id,      null: false
       t.integer :condition,        null: false
-      t.integer :brand_id
       t.integer :prefecture_id,    null: false
       t.integer :postage,          null: false
       t.integer :shipping_day_id,  null: false

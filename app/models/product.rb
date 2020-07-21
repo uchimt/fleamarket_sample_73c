@@ -1,7 +1,6 @@
 class Product < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   has_many :images, dependent: :destroy
-  has_one :brand, dependent: :destroy
   belongs_to :category 
   belongs_to :brand
   belongs_to :user
