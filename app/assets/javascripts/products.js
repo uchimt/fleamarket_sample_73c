@@ -72,7 +72,6 @@ $(document).on('turbolinks:load', ()=> {
       var id = $(this).attr('id').replace(/[^0-9]/g, '');
       // 取得したidの該当するプレビューを削除
       $(`#preview_image_box__${id}`).remove();
-      console.log("new")
       // フォームの中身を削除
       $(`#product_images_attributes_${id}_src`).val("");
 
