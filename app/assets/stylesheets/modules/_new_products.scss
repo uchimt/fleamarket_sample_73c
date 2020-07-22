@@ -21,7 +21,7 @@
     background-color: white;
     width: 80%;
     margin: 0 auto;
-    max-width: 800px;
+    max-width: 740px;
     
   %basicSection {
     font-size: 14px;
@@ -29,6 +29,7 @@
     color: rgb(168, 168, 168);
     border-top: solid 1px rgb(168, 168, 168);
   }
+
   %inputName {
     padding-top: 15px;
     padding-bottom: 10px;
@@ -58,7 +59,8 @@
       border: solid  lightgrey;
       background-color: lightgrey;
     }
-    } 
+  } 
+
     %inputForm {
       width: 100%;
       height: 50px;
@@ -79,38 +81,68 @@
         color: #333;
         padding-bottom: 10px;
       }
-      &__form {
+      &__box {
+        
         width: 100%;
-        height: 200px;
         display: flex;
-        justify-content: start;
+        flex-wrap: wrap;
         .preview_list {
-          
+          max-width: 640px;
+          margin-bottom: 10px;
+          display: flex;
+          justify-content: start;
+          flex-wrap: wrap;
+          .preview_image_box {
+            margin-right: 5px;
+            .preview_image {
+            }
+            .update_box {
+              background-color:  #eee;
+              display: flex;
+              text-align: center;
+              width: 120px;
+              .js-remove {
+                background-color: #eee;
+                color: #3CCACE;
+                width: 100%;
+                height: 30px;
+                line-height: 30px;
+                border: 1px solid white;
+                cursor: pointer;
+              }
+            }
+            
+          }
         }
-        .post_form {
-          text-align: center;
-          position: relative;
-          width: 100%;
-          height: 100%;
-          background-color: #eee;
-          .image_input_btn {
+        .image_input_btn {
+          margin-bottom: 10px;
+          width: 640px;
+          .post_form {
+            width: 100%;
+            height: 150px;
             margin: 0 auto;
-            color: black;
-            position: relative;
+            background-color: #eee;
+            border: 1px dashed #ccc;
             cursor: pointer;
             .image_input_btn_camera {
+              display: block;
+              margin: 40px auto 10px auto;
+
               width: 30px;
-              margin-top: 50px;
             }
-            .js-file {
-              display: none;
-            } 
             .image_input_btn_text {
+              text-align: center;
               color: #333;
               font-weight: 300px;
               font-size: 13px;
+              
             }
           }
+        }
+        .hidden_post_form {
+          .hidden-field {
+            // display: none;
+          } 
         }
       }
     }
@@ -148,7 +180,7 @@
           border: solid  lightgrey;
           background-color: lightgrey;
         }
-        &--text_form {
+        &--select_form {
           @extend %inputForm;
         }
       }

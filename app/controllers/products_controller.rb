@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.includes(:images).order('created_at DESC')
-    # @parents = Category.all.order("id ASC").limit(2) #１層目が2個なのでlimit(2)
+    @parents = Category.all.order("id ASC").limit(2) #１層目が2個なのでlimit(2)
   end
 
   
@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
     @product.images.build
-    @product.build_brand
+    @brands = Brand.all
     #データベースから、親カテゴリーのみ抽出し、配列化
     @category_parent_array = Category.where(ancestry: nil)
   end
@@ -29,12 +29,14 @@ class ProductsController < ApplicationController
     @category_grandchildren = Category.find("#{params[:child_id]}").children
   end
   
+  def new_product_create
+  end
 
   def create
     @category_parent_array = Category.where(ancestry: nil)
     @product = Product.new(product_params)
     if @product.save
-      redirect_to products_path
+      redirect_to new_product_create_products_path
     else
       render :new
     end
@@ -77,12 +79,12 @@ class ProductsController < ApplicationController
                            :description, 
                            :category_id,
                            :condition, 
+                           :brand_id,
                            :postage, 
                            :prefecture_id, 
                            :shipping_day_id, 
                            :price, 
-                           images_attributes: [:src, :_destroy, :id],
-                           brand_attributes: [:brand_name, :_destroy, :id])
+                           images_attributes: [:src, :_destroy, :id])
                            .merge(user_id: current_user.id)
   end
 
