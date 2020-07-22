@@ -19,8 +19,8 @@
         %span.productBox__price--price 
           ="¥#{@product.price.to_s(:delimited)}"
         .productBox__price--detailed
-          %span (税込)
-          %span 送料込み
+          %span （税込））
+          %span= @product.postage_i18n
       -# 商品詳細
       .productBox__details 
         =@product.description
@@ -65,12 +65,25 @@
           %li.productBox__others--like
             = icon('fa', 'star') 
             お気に入り 0
-        = link_to product_path, {class: "roductBox__others--report"} do
+        = link_to product_path, {class: "productBox__others--report"} do
           %i{class: "fa fa-flag"}
           不適切な商品の通報
-          
-      .productBox__toBuy
-        = link_to "購入する", product_path, class:"productBox__toBuy--buy"
+
+      
+      - if user_signed_in? == false
+        .productBox__login
+          = link_to "ログインしてください", root_path, class:"productBox__login--btn"
+      - elsif current_user.id == @product.user_id
+        .productBox__edit
+          = link_to product_path,{class: "productBox__edit--btn"} do
+            %i{class: "fa fa-cog"}
+            編集する
+          = link_to product_path,{class: "productBox__edit--btn"} do
+            %i{class: "fa fa-trash"}
+            削除する
+      - else
+        .productBox__toBuy
+          = link_to "購入する", product_path, class:"productBox__toBuy--buy"
 
 
     -# コメント欄
