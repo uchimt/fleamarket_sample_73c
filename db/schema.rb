@@ -10,14 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_12_022357) do
+ActiveRecord::Schema.define(version: 2020_07_19_152035) do
 
   create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "product_id"
     t.string "brand_name"
+    t.string "japanese_brand_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_brands_on_product_id"
   end
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -65,6 +64,8 @@ ActiveRecord::Schema.define(version: 2020_07_12_022357) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "brand_id"
+    t.index ["brand_id"], name: "index_products_on_brand_id"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
@@ -95,9 +96,9 @@ ActiveRecord::Schema.define(version: 2020_07_12_022357) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "brands", "products"
   add_foreign_key "destinations", "users"
   add_foreign_key "images", "products"
+  add_foreign_key "products", "brands"
   add_foreign_key "products", "users"
   add_foreign_key "profiles", "users"
 end

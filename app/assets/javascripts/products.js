@@ -1,58 +1,92 @@
 $(document).on('turbolinks:load', ()=> {
-    // 画像用のinputを生成する関数
-    const buildFileField = (num)=> {
-      const html = `<div data-index="${num}" class="js-file_group">
-                      <input class="js-file" type="file"
-                      name="product[images_attributes][${num}][src]"
-                      id="product_images_attributes_${num}_src"><br>
-                      <div class="js-remove">削除</div>
-                    </div>`;
+  $(function() { 
+    //プレビューのthmlを定義
+    function buildHTML(count) {
+      var html = `<div class="preview_image_box" id="preview_image_box__${count}">
+                    <div class="upper-box">
+                      <img src="" alt="preview" width="120px" height="120px" class=""preview_image>
+                    </div>
+                    <div class="update_box">
+                      <div class="js-remove" id="delete_btn_${count}">
+                        <span>削除</span>
+                      </div>
+                    </div>
+                  </div>`;
       return html;
     }
-    // プレビュー用のimgタグを生成する関数
-    const buildImg = (index, url)=> {
-      const html = `<img data-index="${index}" src="${url}" width="100px" height="100px">`;
-      return html;
+
+    // image_input_btnのwidth操作
+    function setLabel() {
+      // プレビューボックスのwidthを取得し、maxから引くことでimage_input_btnのwidthを決定
+      var prevContent = $('.image_input_btn').prev();
+      labelWidth = (640 - $(prevContent).css('width').replace(/[^0-9]/g, ''));
+      $('.image_input_btn').css('width', labelWidth);
     }
   
-    // file_fieldのnameに動的なindexをつける為の配列
-    let fileIndex = [1,2,3,4,5,6,7,8,9,10];
-    // 既に使われているindexを除外
-    lastIndex = $('.js-file_group:last').data('index');
-    fileIndex.splice(0, lastIndex);
-  
-    $('.hidden-destroy').hide();
-  
-    $('#image-box').on('change', '.js-file', function(e) {
-      const targetIndex = $(this).parent().data('index');
-      // ファイルのブラウザ上でのURLを取得する
-      const file = e.target.files[0];
-      const blobUrl = window.URL.createObjectURL(file);
-  
-      // 該当indexを持つimgがあれば取得して変数imgに入れる(画像変更の処理)
-      if (img = $(`img[data-index="${targetIndex}"]`)[0]) {
-        img.setAttribute('src', blobUrl);
-      } else {  // 新規画像追加の処理
-        $('#previews').append(buildImg(targetIndex, blobUrl));
-        // fileIndexの先頭の数字を使ってinputを作る
-        $('#image-box').append(buildFileField(fileIndex[0]));
-        fileIndex.shift();
-        // 末尾の数に1足した数を追加する
-        fileIndex.push(fileIndex[fileIndex.length - 1] + 1);
+    // プレビューの追加
+    $('#image-box').on('change', '.hidden-field', function() {
+      setLabel();
+      // hidden-fieldのidの数値のみ取得
+      var id = $(this).attr('id').replace(/[^0-9]/g, '');
+      // image_input_btnのidとforを更新
+      $('.image_input_btn').attr({id: `image_input_btn--${id}`, for: `product_images_attributes_${id}_src`});
+      // 選択したfileのオブジェクトを取得
+      var file = this.files[0];
+      var reader = new FileReader();
+      //readAsDataURLで指定したFileオブジェクトを読み込む
+      reader.readAsDataURL(file);
+      //読み込み時に発火するイベント
+      reader.onload = function() {
+        var image = this.result;
+        //プレビューがもともと無かった場合はhtmlを追加
+        if ($(`#preview_image_box__${id}`).length == 0) {
+          var count = $('.preview_image_box').length;
+          var html = buildHTML(id);
+          //ラベルの直前のプレビュー群にプレビューを追加
+          var prevContent = $('.image_input_btn').prev();
+          $(prevContent).append(html);
+        }
+        //イメージを追加
+        $(`#preview_image_box__${id} img`).attr('src', `${image}`);
+        var count = $('.preview_image_box').length;
+        //プレビューが5こあったらラベルを隠す
+        if (count == 5) {
+          $('.image_input_btn').hide();
+        }
+
+        //image_input_btnのwidth操作
+        setLabel();
+        //image_input_btnのidとforの値を変更
+        if (count < 5) {
+          //プレビューの数でラベルのオプションを更新する
+          $('.image_input_btn').attr({id: `image_input_btn--${count}`, for:`product_images_attributes_${count}_src`});
+        }
       }
     });
   
+    //画像の削除
     $('#image-box').on('click', '.js-remove', function() {
-      const targetIndex = $(this).parent().data('index');
-      // 該当indexを振られているチェックボックスを取得する
-      const hiddenCheck = $(`input[data-index="${targetIndex}"].hidden-destroy`);
-      // もしチェックボックスが存在すればチェックを入れる
-      if (hiddenCheck) hiddenCheck.prop('checked', true);
-  
-      $(this).parent().remove();
-      $(`img[data-index="${targetIndex}"]`).remove();
-  
-      // 画像入力欄が0個にならないようにしておく
-      if ($('.js-file').length == 0) $('#image-box').append(buildFileField(fileIndex[0]));
+      var count = $('.preview_image_box').length;
+      setLabel(count);
+      //product_images_attributes_${id}_srcのidの数値のみ取得
+      var id = $(this).attr('id').replace(/[^0-9]/g, '');
+      // 取得したidの該当するプレビューを削除
+      $(`#preview_image_box__${id}`).remove();
+      // フォームの中身を削除
+      $(`#product_images_attributes_${id}_src`).val("");
+
+      // 削除時のラベル操作
+      var count = $('.preview_image_box').length;
+      // 5個目が消されたらラベルを表示
+      if (count == 4) {
+        $('.image_input_btn').show();
+      }
+      setLabel(count);
+
+      if(id < 5) {
+        // 削除された際に、空っぽになったfile_fieldをもう一度入力可能にする。
+        $('.image_input_btn').attr({id: `image_input_btn--${id}`, for: `product_images_attributes_${id}_src`});
+      }
     });
   });
+});
