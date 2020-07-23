@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       get 'new_product_create'
     end
   end
-
+  resources :top, only: [:index]
   root to: "top#index"
 
   root 'products#index'
