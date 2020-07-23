@@ -266,11 +266,11 @@
           right: 0;
           transform: translateY(-70%);
           text-align: right;
-        } 
-        .alert {
-          @extend %alert;
-        } 
+        }     
       }
+      .alert {
+        @extend %alert;
+      } 
     }
     .post-form {
       margin: 0 auto;
