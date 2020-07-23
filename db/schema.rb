@@ -13,10 +13,11 @@
 ActiveRecord::Schema.define(version: 2020_07_19_152035) do
 
   create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "product_id"
     t.string "brand_name"
-    t.string "japanese_brand_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_brands_on_product_id"
   end
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -96,6 +97,7 @@ ActiveRecord::Schema.define(version: 2020_07_19_152035) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "brands", "products"
   add_foreign_key "destinations", "users"
   add_foreign_key "images", "products"
   add_foreign_key "products", "brands"
