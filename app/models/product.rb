@@ -1,8 +1,8 @@
 class Product < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   has_many :images, dependent: :destroy
-  has_one :brand, dependent: :destroy
   belongs_to :category 
+  belongs_to :brand, optional: true
   belongs_to :user
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :shipping_day
@@ -20,7 +20,7 @@ class Product < ApplicationRecord
             :shipping_day_id, 
             :price,
             :user_id, 
-             presence: true
+            presence: true
 
   enum condition: { 
     brand_new: 1,               # "新品・未使用"
