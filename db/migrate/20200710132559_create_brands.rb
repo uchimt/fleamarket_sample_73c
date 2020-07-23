@@ -4,6 +4,7 @@ class CreateBrands < ActiveRecord::Migration[5.2]
       t.string :brand_name
       t.string :japanese_brand_name
       t.timestamps
+    
     end
     
   end

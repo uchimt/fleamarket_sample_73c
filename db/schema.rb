@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2020_07_19_152035) do
     t.string "destination_family_name_kana", null: false
     t.string "destination_first_name_kana", null: false
     t.string "postal_code", null: false
-    t.string "prefecture", null: false
+    t.string "prefecture_id", null: false
     t.string "city", null: false
     t.string "address", null: false
     t.string "building"
@@ -64,7 +64,6 @@ ActiveRecord::Schema.define(version: 2020_07_19_152035) do
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
-    t.integer "category_id", null: false
     t.integer "condition", null: false
     t.integer "prefecture_id", null: false
     t.integer "postage", null: false
@@ -75,7 +74,9 @@ ActiveRecord::Schema.define(version: 2020_07_19_152035) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "brand_id"
+    t.bigint "category_id", null: false
     t.index ["brand_id"], name: "index_products_on_brand_id"
+    t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
@@ -106,7 +107,6 @@ ActiveRecord::Schema.define(version: 2020_07_19_152035) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "brands", "products"
   add_foreign_key "credit_cards", "users"
   add_foreign_key "destinations", "users"
   add_foreign_key "images", "products"
