@@ -54,6 +54,7 @@ mens_child_array.each_with_index do |child, i|
     child.children.create(name: grandchild)
   end
 end
+
 # ベビー・キッズ
 kids_child_array = ['ベビー服（女の子用）〜95cm','ベビー服（男の子用）〜95cm','ベビー服（男女兼用）〜95cm','ベビー服（女の子用）100cm〜','ベビー服（男の子用）100cm〜','ベビー服（男女兼用）100cm〜','キッズ靴','子供用ファッション小物','おむつ/トイレ/バス','外出/移動用品','授乳/食事','ベビー家具/寝具/室内用品','おもちゃ','行事/記念品','その他']
 kids_grandchild_array = [
@@ -105,6 +106,7 @@ interiors_child_array.each_with_index do |child, i|
     child.children.create(name: grandchild)
   end
 end
+
 # 本・音楽・ゲーム
 books_child_array = ['本','漫画','雑誌','CD','DVD/ブルーレイ','レコード','テレビゲーム']
 books_grandchild_array = [
@@ -123,6 +125,7 @@ books_child_array.each_with_index do |child, i|
     child.children.create(name: grandchild)
   end
 end
+
 # おもちゃ・ホビー・グッズ
 toys_child_array = ['おもちゃ','タレントグッズ','コミック/アニメグッズ','トレーディングカード','フィギア','楽器/機材','コレクション','ミリタリー','美術品','アート用品','その他']
 toys_grandchild_array = [
@@ -145,6 +148,7 @@ toys_child_array.each_with_index do |child, i|
     child.children.create(name: grandchild)
   end
 end
+
 # コスメ・香水・美容
 beauty_child_array = ['ベースメイク','メイクアップ','ネイルケア','香水','スキンケア/基礎化粧品','ヘアケア','ボディケア','オーラルケア','リラクゼーション','ダイエット','その他']
 beauty_grandchild_array = [
@@ -167,6 +171,7 @@ beauty_child_array.each_with_index do |child, i|
     child.children.create(name: grandchild)
   end
 end
+
 # 家電・スマホ・カメラ
 homeappliances_child_array = ['スマートフォン/携帯電話','スマホアクセサリー','PC/タブレット','カメラ','テレビ/映像機器','オーディオ機器','美容/健康','冷暖房/空調','生活家電','その他']
 homeappliances_grandchild_array = [
@@ -188,6 +193,7 @@ homeappliances_child_array.each_with_index do |child, i|
     child.children.create(name: grandchild)
   end
 end
+
 # スポーツ・レジャー
 sports_child_array = ['ゴルフ','フィッシング','自転車','トレーニング/エクササイズ','野球','サッカー/フットサル','テニス','スノーボード','スキー','その他スポーツ','アウトドア','その他']
 sports_grandchild_array = [
@@ -211,6 +217,7 @@ sports_child_array.each_with_index do |child, i|
     child.children.create(name: grandchild)
   end
 end
+
 # ハンドメイド
 handmades_child_array = ['アクセサリー（女性用）','ファッション（小物）','アクセサリー/小物','日用品/インテリア','趣味/おもちゃ','キッズ/ベビー','素材/材料','二次創作物','その他']
 handmades_grandchild_array =[
@@ -250,6 +257,7 @@ tickets_child_array.each_with_index do |child, i|
     child.children.create(name: grandchild)
   end
 end
+
 # 自転車・オートバイ
 cars_child_array = ['自動車本体','自動車タイヤ/ホイール','自動車パーツ','自動車アクセサリー','オートバイ車体','オートバイパーツ','オートバイアクセサリー']
 cars_grandchild_array = [
@@ -268,6 +276,7 @@ cars_child_array.each_with_index do |child, i|
     child.children.create(name: grandchild)
   end
 end
+
 # その他
 others_child_array = ['まとめ売り','ペット用品','食品','飲料/酒','日用品/生活雑貨/旅行','アンティーク/コレクション','文房具/事務用品','事務/店舗用品','その他']
 others_grandchild_array = [

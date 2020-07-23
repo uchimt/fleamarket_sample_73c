@@ -4,5 +4,6 @@ class CreateProductsSizes < ActiveRecord::Migration[5.2]
       t.string :size, null: false
       t.timestamps
     end
+    add_reference :products, :products_size, foreign_key: true, null: false
   end
 end

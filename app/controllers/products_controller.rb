@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.includes(:images).order('created_at DESC')
-    @parents = Category.all.order("id ASC").limit(2) #１層目が2個なのでlimit(2)
+    @parents = Category.all.order("id ASC").limit(13) #１層目が13個なのでlimit(2)
   end
 
   def show
@@ -28,6 +28,19 @@ class ProductsController < ApplicationController
   def get_category_grandchildren
     #選択された子カテゴリーに紐付く孫カテゴリーの配列を取得
     @category_grandchildren = Category.find("#{params[:child_id]}").children
+  end
+
+  # 孫カテゴリーが選択された後に動くアクション
+  def get_size
+    selected_grandchild = Category.find("#{params[:grandchild_id]}") #孫カテゴリーを取得
+    if related_size_parent = selected_grandchild.products_sizes[0] #孫カテゴリーと紐付くサイズ（親）があれば取得
+      @sizes = related_size_parent.children #紐付いたサイズ（親）の子供の配列を取得
+    else
+      selected_child = Category.find("#{params[:grandchild_id]}").parent #孫カテゴリーの親を取得
+      if related_size_parent = selected_child.products_sizes[0] #孫カテゴリーの親と紐付くサイズ（親）があれば取得
+        @sizes = related_size_parent.children #紐づいたサイズ（親）の子供の配列を取得
+      end
+    end
   end
 
   def create

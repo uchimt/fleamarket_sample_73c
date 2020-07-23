@@ -186,14 +186,15 @@
         }
         .alert {
           @extend %alert;
-        }
-        &--size {
+        } 
+      }
+      &__size {
         @extend %inputName;
         &--select_form {
           @extend %inputForm;
-          }
         }
       }
+
         
       &__brand {
         @extend %inputName;
