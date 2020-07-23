@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
 
-  # before_action :set_category, only: [:new, :edit, :create, :update, :destroy]
-  before_action :move_to_root, except: :show
+  before_action :set_category, only: [:new, :edit, :create, :update, :destroy]
 
   def index
     @products = Product.includes(:images).order('created_at DESC')
@@ -23,23 +22,25 @@ class ProductsController < ApplicationController
     #選択された親カテゴリーに紐付く子カテゴリーの配列を取得
     @category_children = Category.find(params[:parent_name]).children
   end
+
   #子カテゴリーが選択された後に動くアクション
   def get_category_grandchildren
     #選択された子カテゴリーに紐付く孫カテゴリーの配列を取得
     @category_grandchildren = Category.find("#{params[:child_id]}").children
   end
-  
-  def new_product_create
-  end
 
   def create
+    @brands = Brand.all
     @category_parent_array = Category.where(ancestry: nil)
     @product = Product.new(product_params)
     if @product.save
       redirect_to new_product_create_products_path
     else
-      render :new
+      render :new and return
     end
+  end
+
+  def new_product_create
   end
 
   def edit

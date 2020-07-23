@@ -2,19 +2,18 @@
   = form_with model: @product do |f|
     .post-image-list
       .post-image-list__title
-        = f.label  '出品画像' 
+        %label 出品画像
         %span.require_label 必須
       %p.post-image-list__explanation 最大5枚までアップロードできます
       #image-box.post-image-list__box  
         #previews.preview_list
-          -# 編集機能時に画像を表示
-          -# -if @product.persisted?
-          -#   .preview_image_box
-          -#     -@product.images.each_with_index do |image, i|
-          -#       =image_tag image.src.url, data: { index: i }, width: "120", height: '120', class: "preview_image"
-          -#       .edit_box
-          -#         %label.edit_btn 編集
-          -#         %span#delete_btn.js-remove 削除 
+        -#   -if @product.persisted?
+        -#     .preview_image_box
+        -#       -@product.images.each_with_index do |image, i|
+        -#         =image_tag image.src.url, data: { index: i }, width: "120", height: '120', class: "preview_image"
+        -#         .edit_box
+        -#           %label.edit_btn 編集
+        -#           %span#delete_btn.js-remove 削除 
         %label{for: "product_images_attributes_0_src", class: "image_input_btn", id: "image_input_btn--0"} 
           #posts.post_form
             =image_tag('icon_camera.png', class: "image_input_btn_camera")
@@ -33,50 +32,95 @@
           -# -if @product.persisted?
           -#   %div{ data: {index: "<%= @product.images.count %>" }, class: "hidden_post_form_#{@product.images.count}" }
           -#     =file_field_tag :src, name: "product[images_attributes][#{@product.images.count}][src]", class: 'hidden_field'
+        -if @product.errors.any? 
+          .alert
+            %ul
+              -@product.errors.full_messages_for(:images).each do |error| 
+                %li= error
     .product-information
       商品の詳細
       .product-information__title
-        = f.label :title, '商品名' 
+        %label 商品名 
         %span.require_label 必須
         = f.text_field :title, { class: "product-information__title--text_form", maxlength: 40, placeholder: "40文字まで" }
+        -if @product.errors.any? 
+          .alert
+            %ul
+              -@product.errors.full_messages_for(:title).each do |error| 
+                %li= error
       .product-information__description
-        = f.label :description, '商品の説明'
+        %label 商品の説明
         %span.require_label 必須
         = f.text_area :description, { class: "product-information__description--text_area_form", placeholder: "" }
+        -if @product.errors.any? 
+          .alert
+            %ul
+              -@product.errors.full_messages_for(:description).each do |error| 
+                %li= error
       .product-information__category
-        = f.label :category_id, 'カテゴリー', class: "production-information__category-label"
+        %label カテゴリー
         %span.require_label 必須
         .product-information__category--form
           = f.select :category_id, options_for_select(@category_parent_array.map{|c| [c[:name], c[:id]]}), {include_blank: "選択してください"}, { class: "product-information__category--select_form", id: "parent_category"}
+        -if @product.errors.any? 
+          .alert
+            %ul
+              -@product.errors.full_messages_for(:category_id).each do |error| 
+                %li= error
       .product-information__brand
-        = f.label :brand, 'ブランド' 
+        %label ブランド 
         %span.optional_label 任意
-        = f.select :brand_id,options_for_select(@brands.map{|c| [c[:brand_name], c[:id]]}), {include_blank: "例：グッチ"}, { class: "product-information__brand--select_form"}
+        = f.collection_select :brand_id, Brand.all, :id, :brand_name, {include_blank: "例：グッチ"}, { class: "product-information__brand--select_form"}
       .product-information__condition
-        = f.label :condition, '商品の状態' 
+        %label 商品の状態 
         %span.require_label 必須
         = f.select :condition, Product.conditions_i18n.invert, { prompt: "選択してください" }, { class: "product-information__condition--select_form"}
+        -if @product.errors.any? 
+          .alert
+            %ul
+              -@product.errors.full_messages_for(:condition).each do |error| 
+                %li= error
     .delivery-information 
       配送について
       .delivery-information__postage
-        = f.label :postage, '配送料の負担' 
+        %label 配送料の負担
         %span.require_label 必須
         = f.select :postage, Product.postages_i18n.invert, { prompt: "選択してください" }, { class: "delivery-information__postage--select_form"}
+        -if @product.errors.any? 
+          .alert
+            %ul
+              -@product.errors.full_messages_for(:postage).each do |error| 
+                %li= error
       .delivery-information__prefecture
-        = f.label :prefecture_id, '発送元の地域' 
+        %label 発送元の地域
         %span.require_label 必須
         = f.collection_select :prefecture_id, Prefecture.all, :id, :name, { prompt: "選択してください" }, { class: "delivery-information__prefecture--select_form" }
+        -if @product.errors.any? 
+          .alert
+            %ul
+              -@product.errors.full_messages_for(:prefecture_id).each do |error| 
+                %li= error
       .delivery-information__shipping_day
-        = f.label :shipping_day_id, '発送までの日数' 
+        %shipping_day_id 発送までの日数 
         %span.require_label 必須
         = f.collection_select :shipping_day_id, ShippingDay.all, :id, :name, { prompt: "選択してください" }, {class: "delivery-information__shipping_day--select_form" }
+        -if @product.errors.any? 
+          .alert
+            %ul
+              -@product.errors.full_messages_for(:shipping_day_id).each do |error| 
+                %li= error
     .price-information
       価格
       .price-information__price
-        = f.label :price, '販売価格' 
+        %label 販売価格
         %span.require_label 必須
         %span.en ￥
         = f.number_field :price, class: "price_form", min: 300, max:9999999, placeholder: "0"
+      -if @product.errors.any? 
+        .alert
+          %ul
+            -@product.errors.full_messages_for(:price).each do |error| 
+              %li= error
     .post-form
       = f.submit "出品する", class: "submit_btn"
       = link_to "もどる", root_path, class: "return_btn"
