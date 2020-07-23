@@ -87,8 +87,8 @@ Things you may want to cover:
 |image|references|null:false,foreign_key:true|
 |like|references|foreign_key:true|
 |category|references|null:false,foreign_key:true|
-|prefecture_id|references|null:false,foreign_key:true|
-|sipping_day_id|references|null:false,foreign_key:true|
+|prefecture_id|integer|null:false|
+|sipping_day_id|integer|null:false|
 
 ### enum
 - enum condition:{brand_new: 1, look_brand_new: 2, no_noticeable_scratches: 3, some_scratches: 4, noticeable_scratches: 5, bad_condition: 6}
