@@ -1,8 +1,8 @@
 class Product < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   has_many :images, dependent: :destroy
-  has_one :brand, dependent: :destroy
   belongs_to :category 
+  belongs_to :brand, optional: true
   belongs_to :user
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :shipping_day
@@ -13,13 +13,14 @@ class Product < ApplicationRecord
   validates :images, presence: true
   validates :title, 
             :description, 
+            :category_id,
             :condition, 
-            :prefecture_id, 
             :postage, 
+            :prefecture_id, 
             :shipping_day_id, 
             :price,
             :user_id, 
-             presence: true
+            presence: true
 
   enum condition: { 
     brand_new: 1,               # "新品・未使用"
@@ -35,4 +36,8 @@ class Product < ApplicationRecord
     cash_on_delivery: 2         # "着払い（購入者負担）"
   }
   
+  enum status: {
+    on_display: 0,              # "出品中"
+    sold: 1                     # "売却済"
+  }
 end
