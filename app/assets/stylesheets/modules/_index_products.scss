@@ -1,3 +1,11 @@
-.contents{
+.body{
   display: flex;
+  .content{
+    width: 220px;
+  }
+  .discription{
+    padding: 16px;
+    .products-index-title{
+    }
+  }
 }
