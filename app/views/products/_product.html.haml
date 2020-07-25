@@ -1,8 +1,8 @@
 .contents
   .content
     = image_tag product.images[0].src.url, class: "_products-index-image"
-    %p.title= product.title
-    %p.price= product.price
+    %p.products-index-title= product.title
+    %p.products-index-price= product.price
     円
 
     -# - product.images.each do |image|
