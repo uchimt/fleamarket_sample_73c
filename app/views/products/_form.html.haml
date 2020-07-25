@@ -7,13 +7,15 @@
       %p.post-image-list__explanation 最大5枚までアップロードできます
       #image-box.post-image-list__box  
         #previews.preview_list
-        -#   -if @product.persisted?
-        -#     .preview_image_box
-        -#       -@product.images.each_with_index do |image, i|
-        -#         =image_tag image.src.url, data: { index: i }, width: "120", height: '120', class: "preview_image"
-        -#         .edit_box
-        -#           %label.edit_btn 編集
-        -#           %span#delete_btn.js-remove 削除 
+        -# 編集機能
+        -if @product.persisted?
+          .preview_image_box
+            -@product.images.each_with_index do |image, i|
+              =image_tag image.src.url, data: { index: i }, width: "120", height: '120', class: "preview_image"
+              .edit_box
+                %label.edit_btn 編集
+                %span#delete_btn.js-remove 削除 
+        -# 編集機能ここまで
         %label{for: "product_images_attributes_0_src", class: "image_input_btn", id: "image_input_btn--0"} 
           #posts.post_form
             =image_tag('icon_camera.png', class: "image_input_btn_camera")
@@ -27,11 +29,12 @@
             %input{class:"hidden-field", type: "file", name: "product[images_attributes][3][src]", id: "product_images_attributes_3_src" }
             %input{class:"hidden-field", type: "file", name: "product[images_attributes][4][src]", id: "product_images_attributes_4_src" }
             -# 編集機能時修正
-          -#   -if @product.persisted?
-          -#     =image.check_box :_destroy, data:{ index: image.index }, class: 'hidden-destroy'
-          -# -if @product.persisted?
-          -#   %div{ data: {index: "<%= @product.images.count %>" }, class: "hidden_post_form_#{@product.images.count}" }
-          -#     =file_field_tag :src, name: "product[images_attributes][#{@product.images.count}][src]", class: 'hidden_field'
+            -if @product.persisted?
+              =image.check_box :_destroy, data:{ index: image.index }, class: 'hidden-destroy'
+          -if @product.persisted?
+            %div{ data: {index: "<%= @product.images.count %>" }, class: "hidden_post_form_#{@product.images.count}" }
+              =file_field_tag :src, name: "product[images_attributes][#{@product.images.count}][src]", class: 'hidden_field'
+            -# 編集機能ここまで
         -if @product.errors.any? 
           .alert
             %ul
