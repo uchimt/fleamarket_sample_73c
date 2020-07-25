@@ -1,6 +1,21 @@
+:css
+  ul li:nth-child(3){ 
+    color: #3ccace;
+  }
+  .topic-path-wrapper 
+  .topic-path:nth-child(-n+3) 
+  .topic-path__point{
+    background-color: #3ccace;
+  }
+  .topic-path-wrapper 
+  .topic-path:nth-child(-n+3) 
+  .topic-path__border{
+    border-bottom: 2px solid #3ccace;
+  }
+
 = render partial: "devise-header"
 .main-contents
-  %h2 住所情報登録
+  %h2 住所登録
   = form_for @destination do |f|
     = render "devise/shared/error_messages", resource: @destination
     .field-wapper
@@ -8,42 +23,58 @@
         = f.label :送付先氏名（全角）
         %p.required 必須
         %ul
-          %li= f.text_field :destination_family_name, class: "input__small", pattern: "[^\x20-\x7E]*", placeholder: "例）振村"
-          %li= f.text_field :destination_first_name, class: "input__small", pattern: "[^\x20-\x7E]*", placeholder: "例）二郎"
+          %li= f.text_field :destination_family_name, class: "input__small", pattern: "[^\x20-\x7E]*", placeholder: "例）古居間"
+          %li= f.text_field :destination_first_name, class: "input__small", pattern: "[^\x20-\x7E]*", placeholder: "例）ぷりお"
+        - if @destination.errors.include?(:destination_family_name)
+          %p.error_message= @destination.errors.full_messages_for(:destination_family_name).first
+        - if @destination.errors.include?(:destination_first_name)
+          %p.error_message= @destination.errors.full_messages_for(:destination_first_name).first
       .field
         = f.label :送付先氏名カナ（全角）
         %p.required 必須
         %ul
-          %li= f.text_field :destination_family_name_kana, class: "input__small", pattern: "[\u30A1-\u30F6]*", placeholder: "例）フリムラ"
-          %li= f.text_field :destination_first_name_kana, class: "input__small", pattern: "[\u30A1-\u30F6]*", placeholder: "例）ジロウ"
+          %li= f.text_field :destination_family_name_kana, class: "input__small", pattern: "[\u30A1-\u30F6]*", placeholder: "例）フルイマ"
+          %li= f.text_field :destination_first_name_kana, class: "input__small", pattern: "[\u30A1-\u30F6]*", placeholder: "例）プリオ"
+        - if @destination.errors.include?(:destination_family_name_kana)
+          %p.error_message= @destination.errors.full_messages_for(:destination_family_name_kana).first
+        - if @destination.errors.include?(:destination_first_name_kana)
+          %p.error_message= @destination.errors.full_messages_for(:destination_first_name_kana).first
       .field
         = f.label :郵便番号
         %p.required 必須
         = f.text_field :postal_code, class: "input", pattern: "^([0-9]{7})", placeholder: "XXXXXXX"
+        - if @destination.errors.include?(:destination_family_name_kana)
+          %p.error_message= @destination.errors.full_messages_for(:postal_code).first
       .field
         = f.label :都道府県
         %p.required 必須
         = f.select :prefecture_id, Prefecture.all.map { |pre| [pre.name, pre.id] }, {include_blank: "選択する"}, class: "input"
+        - if @destination.errors.include?(:prefecture_id)
+          %p.error_message= @destination.errors.full_messages_for(:prefecture_id).first
       .field
         = f.label :市区町村
         %p.required 必須
-        = f.text_field :city, class: "input", pattern: "[^\x20-\x7E]*", placeholder: "フリマ区"
+        = f.text_field :city, class: "input", pattern: "[^\x20-\x7E]*", placeholder: "自由市"
+        - if @destination.errors.include?(:city)
+          %p.error_message= @destination.errors.full_messages_for(:city).first
       .field
         = f.label :番地
         %p.required 必須
-        = f.text_field :address, class: "input"
+        = f.text_field :address, class: "input", placeholder: "古居間X-XX-XX"
+        - if @destination.errors.include?(:address)
+          %p.error_message= @destination.errors.full_messages_for(:address).first
       .field
         = f.label :建物、部屋番号
-        %p.required 必須
+        %p.optional 任意
         = f.text_field :building, class: "input"
       .field
         = f.label :電話番号
-        %p.required 必須
+        %p.optional 任意
         = f.text_field :phone_number, class: "input", pattern: "^([0-9]{10,11})$", placeholder: "10〜11桁の数字"
       %br/
       .actions
         = f.submit "登録", class: "button__next"
     %br/
-  .button_login
+  .button__sign
     = render "devise/shared/links"
-= render partial: "footer"
+= render partial: "devise-footer"

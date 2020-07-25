@@ -1,3 +1,18 @@
+:css
+  ul li:nth-child(2){ 
+    color: #3ccace;
+  }
+  .topic-path-wrapper 
+  .topic-path:nth-child(-n+2) 
+  .topic-path__point{
+    background-color: #3ccace;
+  }
+  .topic-path-wrapper 
+  .topic-path:nth-child(-n+2) 
+  .topic-path__border{
+    border-bottom: 2px solid #3ccace;
+  }
+  
 = render partial: "devise-header"
 .main-contents
   %h2 プロフィール登録
@@ -8,14 +23,22 @@
         = f.label :お名前（全角）
         %p.required 必須
         %ul
-          %li= f.text_field :family_name, class: "input__small", pattern: "[^\x20-\x7E]*", placeholder: "例）古山"
-          %li= f.text_field :first_name, class: "input__small", pattern: "[^\x20-\x7E]*", placeholder: "例）二郎"
+          %li= f.text_field :family_name, class: "input__small", pattern: "[^\x20-\x7E]*", placeholder: "例）古居間"
+          %li= f.text_field :first_name, class: "input__small", pattern: "[^\x20-\x7E]*", placeholder: "例）ぷりお"
+        - if @profile.errors.include?(:family_name)
+          %p.error_message= @profile.errors.full_messages_for(:family_name).first
+        - if @profile.errors.include?(:first_name)
+          %p.error_message= @profile.errors.full_messages_for(:first_name).first
       .field
         = f.label :お名前カナ（全角）
         %p.required 必須
         %ul
-          %li= f.text_field :family_name_kana, class: "input__small", pattern: "[\u30A1-\u30F6]*", placeholder: "例）フルヤマ"
-          %li= f.text_field :first_name_kana, class: "input__small", pattern: "[\u30A1-\u30F6]*", placeholder: "例）ジロウ"
+          %li= f.text_field :family_name_kana, class: "input__small", pattern: "[\u30A1-\u30F6]*", placeholder: "例）フルイマ"
+          %li= f.text_field :first_name_kana, class: "input__small", pattern: "[\u30A1-\u30F6]*", placeholder: "例）プリオ"
+        - if @profile.errors.include?(:family_name_kana)
+          %p.error_message= @profile.errors.full_messages_for(:family_name_kana).first
+        - if @profile.errors.include?(:first_name_kana)
+          %p.error_message= @profile.errors.full_messages_for(:first_name_kana).first
       .field.field_date
         = f.label :生年月日
         %p.required 必須
@@ -55,10 +78,16 @@
                 ["29","29"],["30","30"],["31","31"]                                                  |
               ], {include_blank: "--  "} |
           %p.birth_date 日
+        - if @profile.errors.include?(:birth_year)
+          %p.error_message= @profile.errors.full_messages_for(:birth_year).first
+        - if @profile.errors.include?(:birth_month)
+          %p.error_message= @profile.errors.full_messages_for(:birth_month).first
+        - if @profile.errors.include?(:birth_day)
+          %p.error_message= @profile.errors.full_messages_for(:birth_day).first
       %br/
     .actions
       = f.submit "次へ進む", class: "button__next"
     %br/
-  .button_login
+  .button__sign
     = render "devise/shared/links"
-= render partial: "footer"
+= render partial: "devise-footer"

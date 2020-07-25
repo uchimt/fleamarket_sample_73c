@@ -1,0 +1,17 @@
+.button__top{
+  margin: 0 auto;
+  box-sizing: border-box;
+  height: 48px;
+  & a{
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    width: 100%;
+  }
+  & a:active{
+    position: relative;
+    bottom: 2px;
+    border: 2px solid  rgb(0, 90, 200);
+    border-radius: 4px;
+  }
+}
