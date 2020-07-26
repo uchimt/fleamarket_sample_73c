@@ -1,10 +1,11 @@
 class ProductsController < ApplicationController
-
   before_action :set_category, only: [:new, :edit, :create, :update, :destroy]
 
   def index
     @products = Product.includes(:images).order('created_at DESC')
     @parents = Category.all.order("id ASC").limit(13) #１層目が13個なのでlimit(2)
+    @sizes = Size.all.order("id ASC").limit(7)
+    @brand = Brand.all
   end
 
   def show
@@ -33,11 +34,11 @@ class ProductsController < ApplicationController
   # 孫カテゴリーが選択された後に動くアクション
   def get_size
     selected_grandchild = Category.find("#{params[:grandchild_id]}") #孫カテゴリーを取得
-    if related_size_parent = selected_grandchild.products_sizes[0] #孫カテゴリーと紐付くサイズ（親）があれば取得
+    if related_size_parent = selected_grandchild.sizes[0] #孫カテゴリーと紐付くサイズ（親）があれば取得
       @sizes = related_size_parent.children #紐付いたサイズ（親）の子供の配列を取得
     else
       selected_child = Category.find("#{params[:grandchild_id]}").parent #孫カテゴリーの親を取得
-      if related_size_parent = selected_child.products_sizes[0] #孫カテゴリーの親と紐付くサイズ（親）があれば取得
+      if related_size_parent = selected_child.sizes[0] #孫カテゴリーの親と紐付くサイズ（親）があれば取得
         @sizes = related_size_parent.children #紐づいたサイズ（親）の子供の配列を取得
       end
     end
@@ -46,6 +47,7 @@ class ProductsController < ApplicationController
   def create
     @brands = Brand.all
     @category_parent_array = Category.where(ancestry: nil)
+    @sizes = Size.where(ancestry: nil)
     @product = Product.new(product_params)
     if @product.save
       redirect_to new_product_create_products_path
@@ -88,6 +90,7 @@ class ProductsController < ApplicationController
                    .permit(:title, 
                            :description, 
                            :category_id,
+                           :size_id,
                            :condition, 
                            :brand_id,
                            :postage, 
