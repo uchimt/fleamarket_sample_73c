@@ -4,8 +4,8 @@ class ProductsController < ApplicationController
   def index
     @products = Product.includes(:images).order('created_at DESC')
     @parents = Category.all.order("id ASC").limit(13) #１層目が13個なのでlimit(2)
-    @sizes = Size.all.order("id ASC").limit(7)
-    @brand = Brand.all
+    # @sizes = Size.all.order("id ASC").limit(7)
+    # @brand = Brand.all
   end
 
   def show
