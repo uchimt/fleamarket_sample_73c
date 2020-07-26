@@ -1,14 +1,13 @@
 class ProductsController < ApplicationController
   before_action :set_category, only: [:new, :edit, :create, :update, :destroy]
-  before_action :move_to_root, except: :show
-  before_action :set_product, only: [:edit, :update, :show, :destroy]
 
   def index
     @products = Product.includes(:images).order('created_at DESC')
     @parents = Category.all.order("id ASC").limit(13) #１層目が13個なのでlimit(2)
   end
 
-  
+  def show
+  end
   
   def new
     @product = Product.new
@@ -59,6 +58,7 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    @product = Product.find(params[:id])
     @category_parent_array = Category.where(ancestry: nil)
     @category_children = @product.category.parent.children
     @category_grandchildren = @product.category.parent.children
@@ -66,7 +66,7 @@ class ProductsController < ApplicationController
 
   def update
     @category_parent_array = Category.where(ancestry: nil)
-    
+    @product = Product.find(params[:id])
     if @product.update(product_params)
       redirect_to products_path
     else
@@ -74,13 +74,9 @@ class ProductsController < ApplicationController
     end
   end
 
-  def show
-    @images = @product.images
-  end
-
   def destroy
     @category_parent_array = Category.where(ancestry: nil)
-    
+    @product = Product.find(params[:id])
     @product.destroy
     redirect_to products_path
   end
@@ -110,11 +106,6 @@ class ProductsController < ApplicationController
 
   def set_product
     @product = Product.find(params[:id])
-  end
-
-  # ログアウト状態でも商品詳細ページを見ることができるようにした
-  def move_to_root
-    redirect_to root_path unless user_signed_in?
   end
 
 end
