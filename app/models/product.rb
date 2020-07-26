@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   has_many :images, dependent: :destroy
   belongs_to :category 
+  belongs_to :size, optional: true
   belongs_to :brand, optional: true
   belongs_to :user
   belongs_to_active_hash :prefecture
@@ -21,6 +22,21 @@ class Product < ApplicationRecord
             :price,
             :user_id, 
             presence: true
+  validates :size_id, presence:true, if: :size_exist #サイズの選択肢が表示されたときだけバリデーションをかける
+
+def size_exist
+  selected_grandchild =Category.find(category_id)
+  if related_size_parent = selected_grandchild.sizes[0]
+    @sizes = related_size_parent.children
+    @sizes.exists?
+  else
+    selected_child =Category.find(category_id).parent
+    if related_size_parent = selected_child.sizes[0]
+      @sizes = related_size_parent.children
+      @sizes.exists?
+    end
+  end
+end
 
   enum condition: { 
     brand_new: 1,               # "新品・未使用"

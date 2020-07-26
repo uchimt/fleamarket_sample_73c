@@ -8,6 +8,7 @@ ja:
         title: '商品名'
         description: '商品の説明'
         category_id: 'カテゴリー'
+        size_id: 'サイズ'
         condition: '商品の状態'
         postage: '配送料の負担'
         prefecture_id: '発送元の地域'

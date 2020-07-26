@@ -36,14 +36,13 @@
       font-size: 15px;
       color: #333;
       span.require_label {
-        display: inline;
         margin: 2px 5px;
         align-items: center;
         text-align: center;
         width: 40px;
         height: 13px;
         font-size: 10px;
-        border-radius: 5px;
+        border-radius: 3px;
         border: solid  red;
         background-color: red;
         color: white;   
@@ -55,7 +54,7 @@
         width: 40px;
         height: 13px;
         font-size: 10px;
-        border-radius: 5px;
+        border-radius: 3px;
         color: white;  
         border: solid  lightgrey;
         background-color: lightgrey;
@@ -186,21 +185,21 @@
         }
         .alert {
           @extend %alert;
-        }
-        &--size {
+        } 
+      }
+      &__size {
         @extend %inputName;
+        .alert {
+          @extend %alert;
+        } 
         &--select_form {
           @extend %inputForm;
-          }
         }
       }
+
         
       &__brand {
         @extend %inputName;
-        span {
-          border: solid  lightgrey;
-          background-color: lightgrey;
-        }
         &--select_form {
           @extend %inputForm;
         }
