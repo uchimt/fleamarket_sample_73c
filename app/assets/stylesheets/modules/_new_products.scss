@@ -200,10 +200,6 @@
         
       &__brand {
         @extend %inputName;
-        // span {
-        //   border: solid  lightgrey;
-        //   background-color: lightgrey;
-        // }
         &--select_form {
           @extend %inputForm;
         }
