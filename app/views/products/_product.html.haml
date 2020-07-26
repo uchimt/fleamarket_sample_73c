@@ -5,7 +5,8 @@
   %p= product.description
   %p= product.condition_i18n  
   %p= product.category.name
-  %p= product.brand_id
+  -# %p= @size.size
+  -# %p= product.brand.brand_name
   %p= product.postage_i18n      #enum_helpを用いた記述
   %p= product.prefecture.name
   %p= product.shipping_day.name
