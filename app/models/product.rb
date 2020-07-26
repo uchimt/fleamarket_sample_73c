@@ -22,7 +22,7 @@ class Product < ApplicationRecord
             :price,
             :user_id, 
             presence: true
-  validates :size_id, presence:true, if: :size_exist
+  validates :size_id, presence:true, if: :size_exist #サイズの選択肢が表示されたときだけバリデーションをかける
 
 def size_exist
   selected_grandchild =Category.find(category_id)
