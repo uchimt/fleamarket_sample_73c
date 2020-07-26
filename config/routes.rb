@@ -14,9 +14,18 @@ Rails.application.routes.draw do
     collection do
       get 'get_category_children', defaults: { format: 'json' }
       get 'get_category_grandchildren', defaults: { format: 'json' }
+      get 'get_size', defaults: { format: 'json' }
       get 'new_product_create'
+    end
+    member do
+      get 'get_category_children', defaults: { format: 'json' }
+      get 'get_category_grandchildren', defaults: { format: 'json' }
+      get 'get_size', defaults: { format: 'json' }
     end
   end
   resources :top, only: [:index]
   root to: "top#index"
+
+  root 'products#index'
+  resources :products, except: :show
 end
