@@ -13,7 +13,9 @@ body{
   display: flex;
   align-items: center;
   &-logo{
-    margin: 0 auto;
+    width: 169px;
+    height: 49px;
+    margin: 0px auto;
     &__image{
       height: 49px;
     }
@@ -22,7 +24,8 @@ body{
     margin-bottom: 50px;
     & ul{
       display: flex;
-      margin-left: 10px;
+      padding: 0;
+      margin-left: 0 auto;
       & li{
         display: inline-block;
         text-align: center;
@@ -34,8 +37,8 @@ body{
       }
     }
     .topic-path-wrapper{
-      margin: 0 16px;
-      padding: 0 72px 0 73px;
+      margin: 0 auto;
+      width: 282px;
       display: flex;
       .topic-path{
         display: flex;
@@ -56,8 +59,6 @@ body{
     }
   }
 }
-
-
 
 .main-contents{
   background-color:#fff;
@@ -136,8 +137,10 @@ body{
   text-align: center;
   padding: 35px;
   margin: 0 auto;
-  width: 456px;
+  width: 700px;
   &-list{
+    width: 456px;
+    margin: 0 auto;
     padding-right: 60px;
     font-size: 12px;
     display: flex;
@@ -159,10 +162,12 @@ body{
     }
     & p{
       margin: 0;
+      color: #fff;
       font-size: 12px;
     }
   }
 }
+
 #error_explanation,
 #login_error_explanation{
   color: #ea352d;
@@ -174,3 +179,23 @@ body{
   color: #ea352d;
 }
 
+@media screen and (max-width: 768px){
+  .devise-header{
+    margin-top: 10px;
+    display:block;
+    width: 700px;
+    &-topic-path{
+      display:block;
+      margin: 0 auto;
+      & ul{
+        padding: 16px;
+        margin: 0 auto;
+        width: 392px;
+      }
+    }
+  }
+  .main-contents h2{
+    font-size: 18px;
+    padding: 16px;
+  }
+}
