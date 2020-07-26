@@ -28,7 +28,7 @@ def size_exist
   selected_grandchild =Category.find(category_id)
   if related_size_parent = selected_grandchild.sizes[0]
     @sizes = related_size_parent.children
-    @size.exists?
+    @sizes.exists?
   else
     selected_child =Category.find(category_id).parent
     if related_size_parent = selected_child.sizes[0]
