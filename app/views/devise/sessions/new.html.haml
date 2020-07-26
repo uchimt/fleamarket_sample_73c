@@ -1,17 +1,39 @@
-%h2 ログイン
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "current-password"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "ログイン"
-= render "devise/shared/links"
+:css
+  .devise-header-topic-path{
+    display :none;
+  }
+  @media screen and (max-width: 768px){
+    .devise-header{
+      margin-top: 0;
+    }
+    .devise-header-logo__image{
+      margin-top: 40px;
+    }
+  }
+
+= render partial: "devise/registrations/devise-header"
+.main-contents
+  %h2 ログイン
+  = form_for(resource, as: resource_name, url: session_path(resource_name), html: { method: :post }) do |f|
+    = render "devise/shared/error_messages", resource: resource
+    - flash.each do |name, msg|
+      %h3#login_error_explanation= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
+    .field-wapper
+      .field
+        = f.label :email
+        %br/
+        = f.email_field :email, class: "input", autofocus: true, autocomplete: "email"
+      .field
+        = f.label :password
+        %br/
+        = f.password_field :password, class: "input", autocomplete: "current-password"
+      - if devise_mapping.rememberable?
+        .field
+          = f.check_box :remember_me
+          = f.label :remember_me
+      .actions
+        = f.submit "ログイン",class: "button__next"
+      %br/
+    .button__sign
+      = render "devise/shared/links"
+= render partial: "devise/registrations/devise-footer"
