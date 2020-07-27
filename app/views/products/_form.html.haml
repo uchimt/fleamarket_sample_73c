@@ -25,13 +25,13 @@
           .hidden_post_form
             = f.fields_for :images do |i|
               -# プレビューが出ている分のfile_fieldとdelete用のチェックボックスを設置
-
               = i.file_field :src, class: "hidden-field"
               = i.check_box :_destroy, class: "hidden-checkbox"
             -@product.images.length.upto(4) do |i|
               %input{class: "hidden-field", type: "file", name: "product[images_attributes][#{i}][src]", id: "product_images_attributes_#{i}_src"}
               = check_box :_destroy, data:{ index: i }, class: "hidden-checkbox"
         -# 画像編集機能ここまで
+        //新規投稿時にのみ表示
         -if @path.is('products#new')
           %label{for: "product_images_attributes_0_src", class: "image_input_btn", id: "image_input_btn--0"} 
             #posts.post_form
@@ -49,7 +49,8 @@
               =image.file_field :src, class:"hidden-field", name: "product[images_attributes][3][src]", id: "product_images_attributes_3_src"
               =image.check_box :_destroy, class: "hidden-checkbox", name: "product[images_attributes][3][_destroy]", id: "product_images_attributes_3__destroy"
               =image.file_field :src, class:"hidden-field", name: "product[images_attributes][4][src]", id: "product_images_attributes_4_src"
-              =image.check_box :_destroy, class: "hidden-checkbox", name: "product[images_attributes][4][_destroy]", id: "product_images_attributes_4__destroy"               
+              =image.check_box :_destroy, class: "hidden-checkbox", name: "product[images_attributes][4][_destroy]", id: "product_images_attributes_4__destroy"
+              //            
         -if @product.errors.any? 
           .alert
             %ul
