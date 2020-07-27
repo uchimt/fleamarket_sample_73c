@@ -3,13 +3,13 @@ class ProductsController < ApplicationController
   before_action :move_to_root, except: :show
   before_action :set_product, only: [:edit, :update, :show, :destroy]
   before_action :not_productuser, only: [:edit, :update]
+  before_action :request_path, only: [:new, :edit, :create, :update]
 
   def index
     @products = Product.includes(:images).order('created_at DESC')
     @parents = Category.all.order("id ASC").limit(13) #１層目が13個なのでlimit(2)
   end
 
-  
   
   def new
     @product = Product.new
@@ -121,6 +121,13 @@ class ProductsController < ApplicationController
   def not_productuser
     if current_user.id != @product.user_id
       redirect_to root_path
+    end
+  end
+  
+  def request_path
+    @path = controller_path + '#' + action_name
+    def @path.is(*str)
+        str.map{|s| self.include?(s)}.include?(true)
     end
   end
 

@@ -15,6 +15,22 @@ $(document).on('turbolinks:load', function() {
       return html;
     }
 
+    //投稿編集時
+    //products/:i/editページへリンクした際のアクション
+    if (window.location.href.match(/\/products\/\d+\/edit/)) {
+      //投稿済み画像のプレビュー表示欄の要素を取得する
+      var prevContent = $('.image_input_btn').prev();
+      labelWidth = (640 - $(prevContent).css('width').replace(/[^0-9]/g, ''));
+      $('.image_input_btn').css('width', labelWidth);
+      //プレビューの要素数を取得
+      var count = $('.preview_image_box').length;
+      //プレビューが５つあるときは、投稿ボックスを消しておく
+      if (count == 5) {
+        $('.image_input_btn').hide();
+      }
+    }
+    //
+    
     // image_input_btnのwidth操作
     function setLabel() {
       // プレビューボックスのwidthを取得し、maxから引くことでimage_input_btnのwidthを決定
@@ -22,7 +38,8 @@ $(document).on('turbolinks:load', function() {
       labelWidth = (640 - $(prevContent).css('width').replace(/[^0-9]/g, ''));
       $('.image_input_btn').css('width', labelWidth);
     }
-  
+    //
+
     // プレビューの追加
     $('#image-box').on('change', '.hidden-field', function() {
       setLabel();
@@ -53,17 +70,21 @@ $(document).on('turbolinks:load', function() {
         if (count == 5) {
           $('.image_input_btn').hide();
         }
-
+        //プレビューを削除したフィールドにdestroy用のチェックボックスがあった場合、チェックを外す
+        if ($(`#product_images_attributes_${id}__destroy`)) {
+          $(`#product_images_attributes_${id}__destroy`).prop('checked', false);
+        }
         //image_input_btnのwidth操作
         setLabel();
         //image_input_btnのidとforの値を変更
+        
         if (count < 5) {
-          //プレビューの数でラベルのオプションを更新する
+          //プレビューの数でラベルのオプションを更新する 
           $('.image_input_btn').attr({id: `image_input_btn--${count}`, for:`product_images_attributes_${count}_src`});
         }
       }
     });
-  
+
     //画像の削除
     $('#image-box').on('click', '.js-remove', function() {
       var count = $('.preview_image_box').length;
@@ -74,15 +95,15 @@ $(document).on('turbolinks:load', function() {
       $(`#preview_image_box__${id}`).remove();
       // フォームの中身を削除
       $(`#product_images_attributes_${id}_src`).val("");
-
+      $(`#product_images_attributes_${id}__destroy`).prop('checked',true);
       // 削除時のラベル操作
       var count = $('.preview_image_box').length;
       // 5個目が消されたらラベルを表示
       if (count == 4) {
         $('.image_input_btn').show();
       }
-      setLabel(count);
-
+      //image_input_btnのwidth操作
+      setLabel();
       if(id < 5) {
         // 削除された際に、空っぽになったfile_fieldをもう一度入力可能にする。
         $('.image_input_btn').attr({id: `image_input_btn--${id}`, for: `product_images_attributes_${id}_src`});
