@@ -26,7 +26,7 @@ $(document).on('turbolinks:load', function() {
       var count = $('.preview_image_box').length;
       //プレビューが５つあるときは、投稿ボックスを消しておく
       if (count == 5) {
-        $('.hidden_post_form').hide();
+        $('.image_input_btn').hide();
       }
     }
     //
