@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_category, only: [:new, :edit, :create, :update, :destroy]
   before_action :move_to_root, except: :show
   before_action :set_product, only: [:edit, :update, :show, :destroy]
-  before_action :request_path, only: [:new, :edit]
+  before_action :request_path, only: [:new, :edit, :create, :update]
 
   def index
     @products = Product.includes(:images).order('created_at DESC')
