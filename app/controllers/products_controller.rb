@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_category, only: [:new, :edit, :create, :update, :destroy]
   before_action :move_to_root, except: :show
   before_action :set_product, only: [:edit, :update, :show, :destroy]
-  before_action :request_path, only: [:new, :edit, :create, :update]
+  before_action :request_path, only: [:new, :edit]
 
   def index
     @products = Product.includes(:images).order('created_at DESC')
@@ -49,7 +49,7 @@ class ProductsController < ApplicationController
     @sizes = Size.where(ancestry: nil)
     @product = Product.new(product_params)
     if @product.save
-      redirect_to new_product_create_products_path
+      redirect_to new_product_create_products_path(@product.id)
     else
       render :new and return
     end
@@ -68,7 +68,7 @@ class ProductsController < ApplicationController
     @category_parent_array = Category.where(ancestry: nil)
     
     if @product.update(product_params)
-      redirect_to products_path
+      redirect_to product_path(@product)
     else
       render :edit
     end
@@ -80,7 +80,6 @@ class ProductsController < ApplicationController
 
   def destroy
     @category_parent_array = Category.where(ancestry: nil)
-    
     @product.destroy
     redirect_to products_path
   end
