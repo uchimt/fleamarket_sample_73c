@@ -1,0 +1,39 @@
+.field-wapper{
+  .field{
+    & ul{
+      width: 100%;
+      display: inline-block;
+      list-style-type: none;
+      margin: 0;
+      padding-left: 0;
+      padding-right: 0;
+      display: flex;
+      justify-content: space-between;
+      .input__small, select{
+        height: 48px;
+        margin-top: 6px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        background: #fff;
+        font-size: 16px;
+      }
+      .input__small{
+        width: 165px;
+      }
+      select{
+        padding: 0 6px;
+        width: 76px;
+        color: #3f3f3f;
+        font-size: 16px;
+      }
+      .birth_date{
+        position: relative;
+        top: 6px;
+        display: block;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+

@@ -11,7 +11,6 @@ class CreateProducts < ActiveRecord::Migration[5.2]
       t.integer :status,           null: false, default: 0
       t.references :user,          null: false, foreign_key: true
       # t.references :comment, foreign_key :true
-      # t.references :brand, foreign_key :true
       # t.references :like, foreign_key :true
       # t.references :category, foreign_key :true, null: false
       t.timestamps
