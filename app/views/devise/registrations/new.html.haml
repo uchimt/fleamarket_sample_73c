@@ -1,28 +1,48 @@
-%h2 会員情報登録
-= form_for(@user, url: user_registration_path) do |f|
-  = render "devise/shared/error_messages", resource: @user
-  .field
-    = f.label :ニックネーム
-    %span.required 【必須】
+:css
+  ul li:nth-child(1){ 
+    color: #3ccace;
+  }
+  .topic-path-wrapper 
+  .topic-path:nth-child(1) 
+  .topic-path__point{
+    background-color: #3ccace;
+  }
+
+= render partial: "devise-header"
+.main-contents
+  %h2 会員情報入力
+  = form_for(@user, url: user_registration_path) do |f|
+    = render "devise/shared/error_messages", resource: @user
+    .field-wapper
+      .field
+        = f.label :ニックネーム
+        %p.required 必須
+        = f.text_field :nickname, class: "input", placeholder: "例）フリマプリオ" 
+        - if resource.errors.include?(:nickname)
+          %p.error_message= resource.errors.full_messages_for(:nickname).first
+      .field
+        = f.label :メールアドレス
+        %p.required 必須
+        = f.email_field :email, class: "input", autofocus: true, autocomplete: "email", placeholder: "PC・携帯どちらでも可"
+        - if resource.errors.include?(:email)
+          %p.error_message= resource.errors.full_messages_for(:email).first
+      .field
+        = f.label :パスワード
+        %p.required 必須
+        = f.password_field :password, class: "input", autocomplete: "new-password", pattern: "^([a-zA-Z0-9]{7,24})$", placeholder: "7〜24文字の半角英数字"
+        - if resource.errors.include?(:password)
+          %p.error_message= resource.errors.full_messages_for(:password).first
+      .field
+        = f.label :パスワード（確認用）
+        %p.required 必須
+        = f.password_field :password_confirmation, class: "input", autocomplete: "new-password", pattern: "^([a-zA-Z0-9]{7,24})$", placeholder: "7〜24文字の半角英数字"
+        - if resource.errors.include?(:password_confirmation)
+          %p.error_message= resource.errors.full_messages_for(:password_confirmation).first
+      %br/
+    .actions
+      = f.submit "次へ進む", class: "button__next"
     %br/
-    = f.text_field :nickname, placeholder: "例）フリマ二郎"
-  .field
-    = f.label :メールアドレス
-    %span.required 【必須】
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "PC・携帯どちらでも可"
-  .field
-    = f.label :パスワード
-    %span.required 【必須】
-    %br/
-    = f.password_field :password, autocomplete: "new-password", pattern: "^([a-zA-Z0-9]{7,24})$", placeholder: "7〜24文字の半角英数字"
-  .field
-    = f.label :パスワード（確認用）
-    %span.required 【必須】
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password", pattern: "^([a-zA-Z0-9]{7,24})$", placeholder: "7〜24文字の半角英数字"
-  %br/
-  .actions
-    = f.submit "次のページ"
-%br/
-= render "devise/shared/links"
+  .button__sign
+    = render "devise/shared/links"
+= render partial: "devise-footer"
+

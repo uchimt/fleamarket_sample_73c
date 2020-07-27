@@ -42,13 +42,13 @@ ja:
         destination_family_name_kana: 姓カナ（全角）
         destination_first_name_kana: 名カナ（全角）
         postal_code: 郵便番号
-        prefecture: 都道府県
+        prefecture_id: 都道府県
         city: 市区町村
         address: 番地
         building: 建物
         phone_number: 電話番号
     models:
-      user: ユーザー
+      user: 会員情報
       profile: プロフィール
       destination: 住所
 
@@ -163,5 +163,5 @@ ja:
       not_found: は見つかりませんでした。
       not_locked: は凍結されていません。
       not_saved:
-        one: エラーが発生したため %{resource} は保存されませんでした。
-        other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"
+        one: エラーが発生したため保存されませんでした。
+        other: "%{count} 件のエラーが発生したため保存されませんでした。"
