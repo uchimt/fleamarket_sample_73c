@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_category, only: [:new, :edit, :create, :update, :destroy]
   before_action :move_to_root, except: :show
   before_action :set_product, only: [:edit, :update, :show, :destroy]
+  before_action :not_productuser, only: [:edit, :update]
 
   def index
     @products = Product.includes(:images).order('created_at DESC')
@@ -66,9 +67,8 @@ class ProductsController < ApplicationController
 
   def update
     @category_parent_array = Category.where(ancestry: nil)
-    
     if @product.update(product_params)
-      redirect_to products_path
+      redirect_to product_path
     else
       render :edit
     end
@@ -115,6 +115,13 @@ class ProductsController < ApplicationController
   # ログアウト状態でも商品詳細ページを見ることができるようにした
   def move_to_root
     redirect_to root_path unless user_signed_in?
+  end
+
+  # 投稿者だけが編集ページに遷移できるようにする
+  def not_productuser
+    if current_user.id != @product.user_id
+      redirect_to root_path
+    end
   end
 
 end
