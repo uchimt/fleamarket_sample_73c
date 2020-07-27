@@ -38,35 +38,36 @@ class CardsController < ApplicationController
 
 
   def new # 支払い方法をクリックするとnewに飛ぶ。newのweb上に追加ボタンがあってそれを押すとcreateへ飛ぶ
-    card = Credit_card.where(user_id:current_user.id).first
-      redirect_to action: "index" if @card.present? 
+    card = CreditCard.where(user_id:current_user.id).first
+      redirect_to action: "index" if @card.present? # カード情報があればindexに飛ぶ
   end
 
   def create
-    Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']# 秘密鍵
+    Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']# 秘密鍵。PAY.JPと通信（保存したり、抽出したり）するときはこの秘密鍵が必要。
   
-    if params['payjp-token'].blank? # blankだったらもう一度newで登録画面へ
+    if params['payjp-token'].blank? # トークンがなければもう一度newで登録画面へ
       redirect_to action: "new"
     else
-      customer = Payjp::Customer.create( # トークンがあればpayjpにトークンと顧客情報を結びつける処理（定型文）
-      description:'test', # PAY.JPの顧客情報に表示する概要になるらしい。なくても良い
+      # PAY.JPのメソッドを用いてc顧客idを生成、取得している
+      customer = Payjp::Customer.create( 
       email: current_user.email,# ログイン中のユーザーのemailをキーにセット
       card: params['payjp-token'], # 直前のnewアクションで発行され送られてくるトークンをcardにセット
       metadata: {user_id:current_user.id}
-    )# これでPAY.JPのユーザー登録が完了した。
-    @card = Credit_card.new(user_id: current_user.id, customer_id: customer.id,card_id: customer.default_card) #DBに顧客情報を登録
-    if @card.save #保存に成功したら
-      redirect_to action: "index", notice:"支払い情報の登録が完了しました" #indexに戻る
-    else #失敗したら
-      render new #newに戻る 
+    )# この()内でPAY.JPのユーザー登録が完了した。
+    # これより下は自分のDBに値を保存する処理
+    @card = CreditCard.new(user_id: current_user.id, customer_id: customer.id,card_id: customer.default_card)
+    if @card.save 
+      redirect_to action: "index", notice:"支払い情報の登録が完了しました" 
+    else 
+      render new 
     end
   end
 
   def destroy
     # クレジットカードを削除するときはPAY.JPの顧客情報ごと削除する。PAY.JPに情報が残ったままだとcreateアクションで不具合が起きるかもしれない
-    # PAY.JPの情報にアクセスするときは必ず秘密鍵をセットする！これはもうおまじないのように唱えよう
+    # PAY.JPの情報にアクセスするときは必ず秘密鍵をセットする
     Payjp api_key = ENV["PAYJP_PRIVATE_KEY"]
-    # PAY.JPの情報を取得するおまじない
+    # PAY.JPのメソッドを使って、削除したい顧客情報を検索する
     customer = Payjp::Customer.retrieve(@card.payjp_id)
     customer.delete #PAY.JPの顧客情報を削除
     if @card.destroy #アプリ上でもクレジットカードを削除
@@ -80,7 +81,7 @@ class CardsController < ApplicationController
 
   private
   def set_card 
-    @card = Credit_card.where(user_id: current_user.id).first if Credit_card.where(user_id: current_user.id).present?
+    @card = CreditCard.where(user_id: current_user.id).first if CreditCard.where(user_id: current_user.id).present?
   end
 end
   
