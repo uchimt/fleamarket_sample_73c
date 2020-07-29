@@ -17,7 +17,8 @@
   = form_for(resource, as: resource_name, url: session_path(resource_name), html: { method: :post }) do |f|
     = render "devise/shared/error_messages", resource: resource
     - flash.each do |name, msg|
-      %h3#login_error_explanation= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
+      %h3#login_error_explanation= content_tag :div, msg, :id => "flash_#{name}"
+      -#  if msg.is_a?(String)
     .field-wapper
       .field
         = f.label :email
