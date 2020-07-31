@@ -316,7 +316,7 @@ DEPENDENCIES
   ancestry
   bootsnap (>= 1.1.0)
   byebug
-  capistrano
+  capistrano (= 3.14.1)
   capistrano-bundler
   capistrano-rails
   capistrano-rbenv
