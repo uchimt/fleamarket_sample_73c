@@ -20,7 +20,7 @@ class CardsController < ApplicationController
       # カード会社の画像をviewに表示させるためファイルを指定する
       case  @card_brand
       when "Visa"
-        @card_image = "visa.svg"
+        @card_image = "visa_card.svg"
       when "JCB"
         @card_image = "jcb.svg"
       when "MasterCard"
@@ -28,7 +28,7 @@ class CardsController < ApplicationController
       when "American Express"
         @card_image = "american_express.svg"
       when "Diners Club"
-        @card_image = "diners_club"
+        @card_image = "diners.svg"
       when "Discover"
         @card_image = "discover.svg"
       end
@@ -39,7 +39,7 @@ class CardsController < ApplicationController
 
   def new # 支払い方法をクリックするとnewに飛ぶ。newのweb上に追加ボタンがあってそれを押すとcreateへ飛ぶ
     card = CreditCard.where(user_id:current_user.id).first
-      redirect_to action: "index" if @card.present? # カード情報があればindexに飛ぶ
+      redirect_to action: "index" if @card.present? # カード情報があればindexに飛ぶ（削除もできる画面）
   end
 
   def create
