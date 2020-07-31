@@ -43,10 +43,14 @@
             %tr
               %th ブランド
               %td 
-                = link_to @product.brand.brand_name, product_path, class:"productBox__table--content"
+                - if @product.brand.present?
+                  = link_to @product.brand.brand_name, product_path, class:"productBox__table--content"
+                
             %tr
               %th 商品のサイズ
-              %td= @product.size.size
+              %td
+                -if @product.size.present?
+                  = @product.size.size 
             %tr
               %th 商品の状態
               %td= @product.condition_i18n 
