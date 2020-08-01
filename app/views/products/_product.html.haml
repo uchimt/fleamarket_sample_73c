@@ -1,7 +1,10 @@
-.contents
-  .content
-    = image_tag product.images[0].src.url, class: "_products-index-image"
-  .discription
-    %p.products-index-title= product.title
-    %p.products-index-price= product.price
-    円
+.head
+.productBox
+  .productHead
+  .productLists
+      .productList
+        = image_tag product.images[0].src.url, class: "productList--img"
+        .productList--body
+          %p.name= product.title
+          %p.details= product.price
+          円（税抜）

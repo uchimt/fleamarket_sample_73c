@@ -1,11 +1,39 @@
 .body{
   display: flex;
-  .content{
-    width: 220px;
+  .head{
   }
-  .discription{
-    padding: 16px;
-    .products-index-title{
+  .productBox{
+    .productHead{
+    }
+    .productLists{
+      .productList{
+        height: 150px;
+        width: 220px;
+        position: relative;
+        overflow: hidden;
+        margin: 0;
+        z-index: auto;
+        .productList--img{
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          width: 100%;
+          z-index: auto;
+          height: 150px;
+          object-fit: cover;
+        }
+        .productList--body{
+          background-color: white;
+          padding: 16px;
+          color: #333;
+          .name{
+          }
+          .details{
+          }
+        }
+      }
     }
   }
 }
