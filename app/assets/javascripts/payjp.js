@@ -3,8 +3,9 @@ $(function(){
 
 
   let form = $('.form');
-  $("#charge-form").click(function(){
-    form.find("input[type=submit]").prop("disabled", true);//submitボタンを無効にした
+  $("#charge-form").click(function(e){
+    e.preventDefault();
+    // form.find("input[type=submit]").prop("disabled", true);//submitボタンを無効にした
 
   
 
@@ -15,9 +16,12 @@ $(function(){
     exp_month: $("#exp_month").val(),
     exp_year: $("#exp_year").val()
   };
-
+console.log(card)
   //PAY.JPに登録するためのトークン作成
   Payjp.createToken(card,function(status, response){
+    console.log(response)
+
+    console.log(status)
     if (response.error){
       // エラーがある場合処理しない。
       form.find('.payment-errors').text(response.error.message);
@@ -30,8 +34,8 @@ $(function(){
         $(".cvc").removeAttr("name");
         $(".exp_month").removeAttr("name");
         $(".exp_year").removeAttr("name"); 
-        $("#charge-form").append(
-          $('<input type="hidden" name="payjp_token">').val(response.id)
+        $("#charge").append(
+          $('<input type="hidden" name="payjp-token">').val(response.id)
         ); //取得したトークンを送信できる状態にします
         document.inputForm.submit();
         alert("登録が完了しました"); //正常処理完了確認用。createビューがあればつけなくてもOKかな

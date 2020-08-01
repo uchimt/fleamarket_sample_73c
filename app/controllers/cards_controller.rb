@@ -6,7 +6,7 @@ class CardsController < ApplicationController
   def index
     #カードが存在（登録）しているかどうか確認し、あればPAY.JPからカード情報にアクセスして取得
     if @card.present?
-      Payjp.api_key = ENV['PAYJP_PRIVATE_KEY'] # PAY.JPから情報を取得する際はこの秘密鍵をセットしないと情報にアクセスできない
+      Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY) # PAY.JPから情報を取得する際はこの秘密鍵をセットしないと情報にアクセスできない
       customer = Payjp::Customer.retrieve(@card.payjp_id)#PAY.JPに登録されているカード情報のidに紐づく＠cardを探してる
       @card_info = customer.cards.retrieve(customer.default_card)# PAY.JPの顧客情報からデフォルトで使うクレジットカードを取得する。
       #クレジットカード情報から表示させたい情報を定義する。
@@ -43,8 +43,8 @@ class CardsController < ApplicationController
   end
 
   def create
-    Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']# 秘密鍵。PAY.JPと通信（保存したり、抽出したり）するときはこの秘密鍵が必要。
-  
+    Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY) # 秘密鍵。PAY.JPと通信（保存したり、抽出したり）するときはこの秘密鍵が必要。
+    # binding.pry
     if params['payjp-token'].blank? # トークンがなければもう一度newで登録画面へ
       redirect_to action: "new"
     else
@@ -56,7 +56,7 @@ class CardsController < ApplicationController
     )# この()内でPAY.JPのユーザー登録が完了した。
     # これより下は自分のDBに値を保存する処理
     @card = CreditCard.new(user_id: current_user.id, customer_id: customer.id,card_id: customer.default_card)
-    if @card.save 
+    if @card.save! 
       redirect_to action: "index", notice:"支払い情報の登録が完了しました" 
     else 
       render new 
@@ -66,7 +66,7 @@ class CardsController < ApplicationController
   def destroy
     # クレジットカードを削除するときはPAY.JPの顧客情報ごと削除する。PAY.JPに情報が残ったままだとcreateアクションで不具合が起きるかもしれない
     # PAY.JPの情報にアクセスするときは必ず秘密鍵をセットする
-    Payjp api_key = ENV["PAYJP_PRIVATE_KEY"]
+    Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
     # PAY.JPのメソッドを使って、削除したい顧客情報を検索する
     customer = Payjp::Customer.retrieve(@card.payjp_id)
     customer.delete #PAY.JPの顧客情報を削除
