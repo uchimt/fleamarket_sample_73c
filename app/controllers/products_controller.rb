@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.includes(:images).order('created_at DESC')
-    @parents = Category.all.order("id ASC").limit(13) #１層目が13個なのでlimit(2)
+    @parents = Category.all.order("id ASC").limit(13) #１層目が13個なのでlimit(13)
   end
 
   
@@ -21,26 +21,26 @@ class ProductsController < ApplicationController
   #親カテゴリーが選択された後に動くアクション
   def get_category_children
     #選択された親カテゴリーに紐付く子カテゴリーの配列を取得
-    @category_children = Category.find(params[:parent_name]).children
+      @category_children = Category.find(params[:parent_name]).children
   end
 
   #子カテゴリーが選択された後に動くアクション
   def get_category_grandchildren
     #選択された子カテゴリーに紐付く孫カテゴリーの配列を取得
-    @category_grandchildren = Category.find("#{params[:child_id]}").children
+      @category_grandchildren = Category.find("#{params[:child_id]}").children
   end
 
   # 孫カテゴリーが選択された後に動くアクション
   def get_size
-    selected_grandchild = Category.find("#{params[:grandchild_id]}") #孫カテゴリーを取得
-    if related_size_parent = selected_grandchild.sizes[0] #孫カテゴリーと紐付くサイズ（親）があれば取得
-      @sizes = related_size_parent.children #紐付いたサイズ（親）の子供の配列を取得
-    else
-      selected_child = Category.find("#{params[:grandchild_id]}").parent #孫カテゴリーの親を取得
-      if related_size_parent = selected_child.sizes[0] #孫カテゴリーの親と紐付くサイズ（親）があれば取得
-        @sizes = related_size_parent.children #紐づいたサイズ（親）の子供の配列を取得
+      selected_grandchild = Category.find("#{params[:grandchild_id]}") #孫カテゴリーを取得
+      if related_size_parent = selected_grandchild.sizes[0] #孫カテゴリーと紐付くサイズ（親）があれば取得
+        @sizes = related_size_parent.children #紐付いたサイズ（親）の子供の配列を取得
+      else
+        selected_child = Category.find("#{params[:grandchild_id]}").parent #孫カテゴリーの親を取得
+        if related_size_parent = selected_child.sizes[0] #孫カテゴリーの親と紐付くサイズ（親）があれば取得
+          @sizes = related_size_parent.children #紐づいたサイズ（親）の子供の配列を取得
+        end
       end
-    end
   end
 
   def create
@@ -59,13 +59,25 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    @category_id = @product.category_id
     @category_parent_array = Category.where(ancestry: nil)
-    @category_children = @product.category.parent.children
+    @category_children = @product.category.parent.parent.children
     @category_grandchildren = @product.category.parent.children
+    # サイズを取得するメソッド
+    selected_grandchild =Category.find(@category_id)
+    if related_size_parent = selected_grandchild.sizes[0]
+      @sizes = related_size_parent.children
+    else
+      selected_child =Category.find(@category_id).parent
+      if related_size_parent = selected_child.sizes[0]
+        @sizes = related_size_parent.children
+      end
+    end
+
   end
 
   def update
-    @category_parent_array = Category.where(ancestry: nil)
+    @category_parent = Category.where(ancestry: nil)
     
     if @product.update(product_params)
       redirect_to product_path(@product)

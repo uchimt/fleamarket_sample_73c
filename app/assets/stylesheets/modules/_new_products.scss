@@ -294,8 +294,18 @@
         font-size: 15px;
         text-align: center;
         cursor: pointer;
-        color: #3CCACE;
-        
+        color: #3CCACE; 
+      }
+      a.return_show_btn {
+        display: block;
+        text-decoration: none;
+        margin: 20px auto;
+        width: 100px;
+        border-radius: 5px;
+        font-size: 15px;
+        text-align: center;
+        cursor: pointer;
+        color: rgb(168, 168, 168);
       }
     }
     .important-points {
