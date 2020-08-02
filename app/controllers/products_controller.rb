@@ -56,6 +56,7 @@ class ProductsController < ApplicationController
   end
 
   def new_product_create
+    @user = User.find(current_user.id)
   end
 
   def edit
