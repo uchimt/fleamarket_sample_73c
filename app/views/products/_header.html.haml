@@ -3,6 +3,7 @@
   .login_information
   - if user_signed_in?
     %span ログインしています
+    = link_to "マイページ", "/users/#{current_user.id}"
     = link_to "ログアウト", destroy_user_session_path, method: :delete
   - else
     %span ログインしていません
