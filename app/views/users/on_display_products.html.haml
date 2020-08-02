@@ -1,0 +1,23 @@
+.header
+.on_display_product_body
+  .products_box
+    %h2　出品した商品
+    %ul.status_select_box
+      %li.on_display_products 出品中
+      %li.sold_products　売却済み
+    .products_list
+      -if @my_on_display_products.present?
+        - @my_on_display_products.each do |product|
+          .product_link_box
+            .product_link_box__image
+              %p.image= image_tag product.images[0].src.url
+            .product_link_box__information
+              %p.product_name= product.title
+              %p.status= product.status_i18n
+        = paginate(@my_on_display_products)
+      -else 
+        =image_tag('logo.png', class: "icon__image")
+        %p.text 出品中の商品がありません
+  .side_bar
+    = render partial: 'side_bar'  
+.footer

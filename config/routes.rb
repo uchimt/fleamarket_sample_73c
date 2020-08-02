@@ -21,11 +21,14 @@ Rails.application.routes.draw do
     end
   end
 
-  
   resources :cards, only: [:index, :new, :create, :destroy]
 
-  
-  resources :users, only: :show
+  resources :users, only: :show do
+    member do
+      get 'on_display_products'
+      get 'sold_products'
+    end
+  end
 
   resources :top, only: [:index]
   root to: "top#index"
