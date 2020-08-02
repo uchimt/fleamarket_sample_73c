@@ -1,9 +1,25 @@
 .form__head
   %h2 支払い方法
-.credit_card__list
-  .credi_card__list__content
-    .credit_card__list__content__title
-      %h3 クレジットカード一覧
+.credit_card__content
+  .credi_card__content__list
+    .credit_card__content__list__title
+      %h3.single__content クレジットカード一覧
+  - if @card.present?  
     %ul.setting__payment__list
-      %li  
-  
+      %li
+        %figure.form_space
+          = image_tag"creditcards/visa_card.svg",size: "50x35"
+        %p.payment__form__number
+          = "**** **** **** " + @card_info.last4
+        %p.payment__form__expired
+          =@exp_month + " / " + @exp_year
+        = button_to "削除する", card_path(@card), method: :delete, class:"creditcard_delete"
+    .settings-not-regist
+      %span.regist 支払い方法について
+  - else
+    .new-card
+      = link_to new_card_path, class:"new-card-btn" do
+        クレジットカードを追加する
+                
+     
+       

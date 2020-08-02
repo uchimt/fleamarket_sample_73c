@@ -1,0 +1,73 @@
+.credit_card__content {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 64px 64px 120px 64px;
+  
+  .credi_card__content__list{
+    border-bottom: 1px solid #eee;
+
+  }
+
+    .credit_card__content__list__title {
+      max-width: 320px;
+      margin: 0 auto;
+      padding: 0;
+      h3 {
+        font-size: 16px;
+      }
+  
+    }
+    .setting__payment__list {
+      padding-left: 120px;
+
+      li {
+        position: relative;
+      
+      }
+        .form_space{
+          margin: 8px 0 0 0;
+        }
+        p {
+          margin: 0;
+          font-size: 16px;
+        }
+        .creditcard_delete {
+          position: absolute;
+          top: 5px;
+          right: 126px;
+          padding: 4px 6px;
+          background: #fff;
+          border-radius: 3px;
+          border: 1px solid #ea352d;
+          color: #ea352d;
+          cursor: pointer;
+        }
+       
+       
+    }
+    .regist {
+      display: block;
+      margin: 40px 0 0;
+      float: right;
+      color: #0099e8;
+    }
+    .new-card {
+      padding: 24px 0;
+      text-align: center;
+
+      .new-card-btn{
+        display: block;
+        margin: 0 auto;
+        max-width: 320px;
+        line-height: 48px;
+        font-size: 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        background-color: #ea352d;
+        color: #fff;
+        border: 1px solid #ea352d;
+        text-decoration: none;
+      }
+    }
+}  

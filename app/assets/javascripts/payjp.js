@@ -16,12 +16,12 @@ $(function(){
     exp_month: $("#exp_month").val(),
     exp_year: $("#exp_year").val()
   };
-console.log(card)
+
   //PAY.JPに登録するためのトークン作成
   Payjp.createToken(card,function(status, response){
-    console.log(response)
+    
 
-    console.log(status)
+    
     if (response.error){
       // エラーがある場合処理しない。
       form.find('.payment-errors').text(response.error.message);
