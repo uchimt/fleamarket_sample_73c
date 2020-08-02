@@ -79,7 +79,7 @@
           = link_to "ログインしてください", root_path, class:"productBox__login--btn"
       - elsif current_user.id == @product.user_id
         .productBox__edit
-          = link_to product_path,{class: "productBox__edit--btn"} do
+          = link_to edit_product_path,{class: "productBox__edit--btn"} do
             %i{class: "fa fa-cog"}
             編集する
           = link_to product_path(@product),class: "productBox__edit--btn", method: :delete, data: { confirm: "本当に削除しますか？" } do

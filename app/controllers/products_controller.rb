@@ -128,6 +128,13 @@ class ProductsController < ApplicationController
     redirect_to root_path unless user_signed_in?
   end
 
+  # 投稿者だけが編集ページに遷移できるようにする
+  def not_productuser
+    if current_user.id != @product.user_id
+      redirect_to root_path
+    end
+  end
+  
   def request_path
     @path = controller_path + '#' + action_name
     def @path.is(*str)
