@@ -83,7 +83,8 @@
             %i{class: "fa fa-cog"}
             編集する
           = link_to product_path(@product),class: "productBox__edit--btn", method: :delete, data: { confirm: "本当に削除しますか？" } do
-            %i.fa.fa-trash 削除する
+            %i.fa.fa-trash
+            削除する
 
       - else
         .productBox__toBuy
