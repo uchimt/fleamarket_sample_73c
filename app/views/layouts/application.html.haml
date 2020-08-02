@@ -3,10 +3,14 @@
   %head
     %meta{content: "text/html; charset=UTF-8", "http-equiv": "Content-Type"}
     %title FleamarketSample73c
+    /payjp.jsはカード情報のトークン化のみに特化したライブラリ。payjp.jsライブラリは、 https://js.pay.jp にホストされているので、このドメインを読み込んで使う
+    %script{src: "https://js.pay.jp/", type: "text/javascript"}
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    'application', media: 'all'
     %script{ type: 'text/javascript', src: "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application'
+
+    
   %body
     = yield
