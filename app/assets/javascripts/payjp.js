@@ -5,7 +5,7 @@ $(function(){
   let form = $('.form');
   $("#charge-form").click(function(e){
     e.preventDefault();
-    // form.find("input[type=submit]").prop("disabled", true);//submitボタンを無効にした
+    
 
   
 
