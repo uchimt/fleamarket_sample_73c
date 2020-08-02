@@ -19,26 +19,20 @@ $(function(){
 
   //PAY.JPに登録するためのトークン作成
   Payjp.createToken(card,function(status, response){
-    
-
-    
-    if (response.error){
-      // エラーがある場合処理しない。
-      form.find('.payment-errors').text(response.error.message);
-      form.find('button').prop('disabled', false);
-    }   
-    
-      if (status === 200) { //成功した場合(status === 200はリクエストが成功している状況です。)
-        //データを自サーバにpostしないようにremoveAttr("name")で削除
-        $(".number").removeAttr("name");
-        $(".cvc").removeAttr("name");
-        $(".exp_month").removeAttr("name");
-        $(".exp_year").removeAttr("name"); 
-        $("#charge").append(
-          $('<input type="hidden" name="payjp-token">').val(response.id)
+    form.find("input[type=submit]").prop("disabled", true);
+    if (status === 200) { 
+      //データを自サーバにpostしないようにremoveAttr("name")で削除
+      $(".number").removeAttr("name");
+      $(".cvc").removeAttr("name");
+      $(".exp_month").removeAttr("name");
+      $(".exp_year").removeAttr("name"); 
+      $("#charge").append(
+        $('<input type="hidden" name="payjp-token">').val(response.id)
         ); //取得したトークンを送信できる状態にします
         document.inputForm.submit();
-        alert("登録が完了しました"); //正常処理完了確認用。createビューがあればつけなくてもOKかな
+        alert("登録が完了しました"); 
+      }else{
+        alert("カード情報が正しくありません")
       } 
    
     });

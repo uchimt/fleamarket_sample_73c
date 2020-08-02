@@ -44,7 +44,7 @@ class CardsController < ApplicationController
 
   def create
     Payjp.api_key = Rails.application.credentials.payjp[:PAYJP_SECRET_KEY] # 秘密鍵。PAY.JPと通信（保存したり、抽出したり）するときはこの秘密鍵が必要。
-    # binding.pry
+     #binding.pry
     if params['payjp-token'].blank? # トークンがなければもう一度newで登録画面へ
       redirect_to action: "new"
     else
