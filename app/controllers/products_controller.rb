@@ -49,7 +49,7 @@ class ProductsController < ApplicationController
     @sizes = Size.where(ancestry: nil)
     @product = Product.new(product_params)
     if @product.save
-      redirect_to new_product_create_products_path(@product.id)
+      redirect_to new_product_create_product_path(@product.id)
     else
       render :new and return
     end
@@ -96,6 +96,14 @@ class ProductsController < ApplicationController
     redirect_to products_path
   end
 
+  # def search_brand
+  #   @brands = Brand.search(params[:keyword])
+  #   respond_to do |format|
+  #     format.html
+  #     format.json
+  #   end
+  # end
+  
   private 
 
   def product_params

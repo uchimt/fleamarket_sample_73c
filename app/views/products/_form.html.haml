@@ -100,7 +100,12 @@
       .product-information__brand
         %label ブランド 
         %span.optional_label 任意
-        = f.collection_select :brand_id, Brand.all, :id, :brand_name, {include_blank: "例：グッチ"}, { class: "product-information__brand--select_form"}
+        -# = f.collection_select :brand_id, Brand.all, :id, :brand_name, {include_blank: "例：グッチ"}, { class: "product-information__brand--select_form"}
+        .product_information__brand--select
+          %input#brand-search-field.product-information__brand--select_form{placeholder: "例：グッチ", type: "text"}
+        #brand-search-result
+        .product-information__brand--select_form
+
       .product-information__condition
         %label 商品の状態 
         %span.require_label 必須

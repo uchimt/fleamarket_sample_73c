@@ -9,7 +9,7 @@
       」からいつでもみることができます。
     .putting_up_product__link
       =link_to "続けて出品する", new_product_path, class: "new_product_btn"
-      =link_to "出品した商品をみる", product_path(params[:format]), class: "index_btn"
+      =link_to "出品した商品をみる", product_path(params[:id]), class: "index_btn"
       =link_to "商品一覧をみる", products_path, class: "index_btn"
     %p= link_to "マイページを見る", "#"
 .footer
