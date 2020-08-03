@@ -10,6 +10,19 @@
   = link_to "新規登録", new_user_registration_path
   = link_to "ログイン", new_user_session_path
 
+%p 検索
+= form_tag(top_index_path,method: :get) do
+  = text_field_tag :search
+  = submit_tag 'Search', name: :nil
+%ul
+  - @products.each do |product|
+    %li
+      = link_to product.title, product
+      = product.created_at
+      = product.status
+    = link_to "編集",edit_product_path(product)
+    = link_to "削除",product, method: :delete
+
 .body
   新規アイテム
   = render @products

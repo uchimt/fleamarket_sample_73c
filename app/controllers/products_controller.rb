@@ -96,6 +96,10 @@ class ProductsController < ApplicationController
     redirect_to products_path
   end
 
+  def search
+    @products = Product.search(params[:search])
+  end
+
   private 
 
   def product_params
