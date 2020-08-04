@@ -7,43 +7,19 @@
       %p.post-image-list__explanation 最大5枚までアップロードできます
       #image-box.post-image-list__box  
         #previews.preview_list
-          -# 画像編集機能
-          -if @product.persisted?
-            -@product.images.each_with_index do |image, i|
-              .preview_image_box{id: "preview_image_box__#{i}"}
-                .upper-box
-                  =image_tag image.src.url, alt:"preview", width: "120", height: '120', class: "preview_image", id: "preview_image"
-                .update_box
-                  .js-remove{id: "delete_btn_#{i}"}
-                    %span 削除
-        -if @product.persisted?
-          -# プレビューの数に合わせてforオプションを指定
-          %label{for: "product_images_attributes_#{@product.images.length}_src", class: "image_input_btn", id: "image_input_btn--#{@product.images.length}"} 
-            #posts.post_form
-              =image_tag('icon_camera.png', class: "image_input_btn_camera")
-              .image_input_btn_text クリックしてファイルをアップロード
-          .hidden_post_form
-            = f.fields_for :images do |i|
-              -# プレビューが出ている分のfile_fieldとdelete用のチェックボックスを設置
-              = i.file_field :src, class: "hidden-field"
-              = i.check_box :_destroy, class: "hidden-checkbox"
-            -@product.images.length.upto(4) do |i|
-              %input{class: "hidden-field", type: "file", name: "product[images_attributes][#{i}][src]", id: "product_images_attributes_#{i}_src"}
-        -# 画像編集機能ここまで
-        //新規投稿時にのみ表示
-        -if @path.is('products#new')
-          %label{for: "product_images_attributes_0_src", class: "image_input_btn", id: "image_input_btn--0"} 
-            #posts.post_form
-              =image_tag('icon_camera.png', class: "image_input_btn_camera")
-              .image_input_btn_text クリックしてファイルをアップロード
-          .hidden_post_form
-            =f.fields_for :images do |image|
-              -# 画像がビルドされた際に振られるidを取得
-              =image.file_field :src, class:"hidden-field" 
-              =image.file_field :src, class:"hidden-field", name: "product[images_attributes][1][src]", id: "product_images_attributes_1_src"
-              =image.file_field :src, class:"hidden-field", name: "product[images_attributes][2][src]", id: "product_images_attributes_2_src"
-              =image.file_field :src, class:"hidden-field", name: "product[images_attributes][3][src]", id: "product_images_attributes_3_src"
-              =image.file_field :src, class:"hidden-field", name: "product[images_attributes][4][src]", id: "product_images_attributes_4_src"
+
+        %label{for: "product_images_attributes_0_src", class: "image_input_btn", id: "image_input_btn--0"} 
+          #posts.post_form
+            =image_tag('icon_camera.png', class: "image_input_btn_camera")
+            .image_input_btn_text クリックしてファイルをアップロード
+        .hidden_post_form
+          =f.fields_for :images do |image|
+            -# 画像がビルドされた際に振られるidを取得
+            =image.file_field :src, class:"hidden-field" 
+            =image.file_field :src, class:"hidden-field", name: "product[images_attributes][1][src]", id: "product_images_attributes_1_src"
+            =image.file_field :src, class:"hidden-field", name: "product[images_attributes][2][src]", id: "product_images_attributes_2_src"
+            =image.file_field :src, class:"hidden-field", name: "product[images_attributes][3][src]", id: "product_images_attributes_3_src"
+            =image.file_field :src, class:"hidden-field", name: "product[images_attributes][4][src]", id: "product_images_attributes_4_src"
         -if @product.errors.any? 
           .alert
             %ul
@@ -73,25 +49,13 @@
         %label カテゴリー
         %span.require_label 必須
         .product-information__category--form
-          -if @path.is('products#new')
-            = f.select :category_id, options_for_select(@category_parent_array.map{|c| [c[:name], c[:id]]}), {include_blank: "選択してください"}, { class: "product-information__category--select_form", id: "parent_category"}
-          -if @product.persisted?
-            = f.select :category_id, options_for_select(@category_parent_array.map{|c| [c[:name], c[:id], {'data-category'=>c[:id]}]}, @product.category.parent.parent.id), {}, { class: "product-information__category--select_form", id: "parent_category"}
-            #children_form.product-information__category--form
-              = f.select :category_id, options_for_select(@category_children.map{|c| [c[:name], c[:id], {'data-category'=>c[:id]}]}, @product.category.parent.id), {}, { class: "product-information__category--select_form", id: "child_category"}
-            #grandchildren_form.product-information__category--form
-              = f.select :category_id, options_for_select(@category_grandchildren.map{|c| [c[:name], c[:id],{'data-category'=>c[:id]}]}, @product.category.id), {}, { class: "product-information__category--select_form", id: "grandchild_category"}
+          = f.select :category_id, options_for_select(@category_parent_array.map{|c| [c[:name], c[:id]]}), {include_blank: "選択してください"}, { class: "product-information__category--select_form", id: "parent_category"}
         -if @product.errors.any? 
           .alert
             %ul
               -@product.errors.full_messages_for(:category_id).each do |error| 
                 %li= error
       #size_wrapper.product-information__size
-        -if @sizes.present?
-          %label.product-information__label サイズ
-          %span.require_label 必須
-          #size_form.product-information__size--form
-            = f.collection_select :size_id, @sizes, :id, :size, {}, { class: "product-information__size--select_form", id: "size"}
         -if @product.errors.any? 
           .alert
             %ul
@@ -146,17 +110,11 @@
         %span.require_label 必須
         %span.en ￥
         = f.number_field :price, class: "price_form", min: 300, max:9999999, placeholder: "0"
-      -if @product.errors.any? 
-        .alert
-          %ul
-            -@product.errors.full_messages_for(:price).each do |error| 
-              %li= error
-    -if @path.is('products#new')
-      .post-form
-        = f.submit "出品する", class: "submit_btn"
-        = link_to "もどる", root_path, class: "return_btn"
-    -if @product.persisted?
-      .post-form
-        = f.submit "変更する", class: "submit_btn"
-        = link_to "キャンセル", product_path(@product.id), class: "return_show_btn"
-
+        -if @product.errors.any? 
+          .alert
+            %ul
+              -@product.errors.full_messages_for(:price).each do |error| 
+                %li= error
+    .post-form
+      = f.submit "出品する", class: "submit_btn"
+      = link_to "もどる", root_path, class: "return_btn"

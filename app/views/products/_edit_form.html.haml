@@ -130,11 +130,11 @@
         %span.require_label 必須
         %span.en ￥
         = f.number_field :price, class: "price_form", min: 300, max:9999999, placeholder: "0"
-      -if @product.errors.any? 
-        .alert
-          %ul
-            -@product.errors.full_messages_for(:price).each do |error| 
-              %li= error
+        -if @product.errors.any? 
+          .alert
+            %ul
+              -@product.errors.full_messages_for(:price).each do |error| 
+                %li= error
     .post-form
       = f.submit "変更する", class: "submit_btn"
       = link_to "キャンセル", product_path(@product.id), class: "return_show_btn"
