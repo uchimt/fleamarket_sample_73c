@@ -88,6 +88,8 @@ class ProductsController < ApplicationController
 
   def show
     @images = @product.images
+    @comment = Comment.new
+    @comments = @product.comment.includes(:user)
   end
 
   def destroy
