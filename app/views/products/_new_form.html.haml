@@ -1,5 +1,5 @@
 .product_form
-  = form_with model: @product do |f|
+  = form_with model: @product, local: true do |f|
     .post-image-list
       .post-image-list__title
         %label 出品画像

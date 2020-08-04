@@ -76,10 +76,8 @@ class ProductsController < ApplicationController
   end
 
   def update
-    @category_parent = Category.where(ancestry: nil)
-    @sizes = Size.where(ancestry: nil)
     if @product.update(product_params)
-      redirect_to product_path(@product)
+      redirect_to product_path(@product.id)
     else
       render :edit
     end
