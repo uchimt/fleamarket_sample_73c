@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  require "payjp"
   before_action :set_category, only: [:new, :edit, :create, :update, :destroy]
   before_action :move_to_root, except: :show
   before_action :set_product, only: [:edit, :update, :show, :destroy]
@@ -141,5 +142,51 @@ class ProductsController < ApplicationController
         str.map{|s| self.include?(s)}.include?(true)
     end
   end
+
+  def buy
+    @user = current_user
+    @creditcard = CreditCard.where(user_id: @user.id).first
+    @address = Destination.where(user_id: @user.id).first
+    @product = Product.find(params[:id])
+
+    Payjp.api_key = Rails.application.credentials.payjp[:PAYJP_SECRET_KEY]
+    customer = Payjp::Customer.retrieve(@creditcard.customer_id)
+    @creditcard_information = customer.cards.retrieve(@creditcard.card_id)
+    @card_brand = @creditcard_information.brand
+
+    case @card_brand
+      when "Visa"
+        @card_image = "visa_card.svg"
+      when "JCB"
+        @card_image = "jcb.svg"
+      when "MasterCard"
+        @card_image = "master_card.svg"
+      when "American Express"
+        @card_image = "american_express.svg"
+      when "Diners Club"
+        @card_image = "diners.svg"
+      when "Discover"
+        @card_image = "discover.svg" 
+      end
+    end
+
+    def purchase
+      @creditcard = Creditcard.where(user_id: current_user.id).first
+      @product = Product.find(params[:id])
+
+      Payjp.api_key = Rails.application.credentials.payjp[:PAYJP_SECRET_KEY]
+
+      #payjp経由で支払いを実行
+      charge = Payjp::Charge.create(
+        amount: @product.price,
+        customer: Payjp::Customer.retrieve(@creditcard.customer_id),
+        currency: 'jpy'
+      )
+      @product_buyer= Product.find(params[:id])
+      @product_buyer.update(status:'sold')
+      redirect_to purchase_product_path
+    end
+
+
 
 end
