@@ -93,16 +93,17 @@
 
     -# コメント欄
     .commentBox
-      = form_with model: @product do |form|
-        = form.text_area :comment, class:"commentBox__area"
-        %p.commentBox__note
-          相手のことを考え丁寧なコメントを心がけましょう。
-          %br
-          不快な言葉遣いなどは利用制限や退会処分となることがあります。
-        
-        %button{type: "submit", class: "commentBox__btn"}
-          %i.fa.fa-comment
-            コメントする
+      -if current_user
+        = form_with model: @product do |form|
+          = form.text_area :comment, class:"commentBox__area"
+          %p.commentBox__note
+            相手のことを考え丁寧なコメントを心がけましょう。
+            %br
+            不快な言葉遣いなどは利用制限や退会処分となることがあります。
+          
+          %button{type: "submit", class: "commentBox__btn"}
+            %i.fa.fa-comment
+              コメントする
 
     .sameContent
       %ul.sameContent__link
