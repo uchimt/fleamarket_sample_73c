@@ -9,6 +9,7 @@ class Product < ApplicationRecord
   belongs_to_active_hash :shipping_day
   accepts_nested_attributes_for :images, allow_destroy: true
   accepts_nested_attributes_for :brand, allow_destroy: true
+  has_many :comments, dependent: :destroy
   
   validates_associated :images
   validates :images, presence: true
