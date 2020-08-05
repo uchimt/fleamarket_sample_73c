@@ -18,12 +18,17 @@ Rails.application.routes.draw do
     end
     member do
       get 'new_product_create'
+      #クレジットカード購入確認、購入時のアクション
+      post 'purchase'
+      get 'purchased'
+      get 'buy'
+  
     end
   end
 
   
-  resources :cards, only: [:index, :new, :create, :destroy]
-
+  resources :cards, only: [:index, :new, :create, :destroy] 
+    
   
   resources :users, only: :show
 
