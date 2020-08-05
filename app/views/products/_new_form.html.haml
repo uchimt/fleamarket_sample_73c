@@ -1,0 +1,120 @@
+.product_form
+  = form_with model: @product, local: true do |f|
+    .post-image-list
+      .post-image-list__title
+        %label 出品画像
+        %span.require_label 必須
+      %p.post-image-list__explanation 最大5枚までアップロードできます
+      #image-box.post-image-list__box  
+        #previews.preview_list
+
+        %label{for: "product_images_attributes_0_src", class: "image_input_btn", id: "image_input_btn--0"} 
+          #posts.post_form
+            =image_tag('icon_camera.png', class: "image_input_btn_camera")
+            .image_input_btn_text クリックしてファイルをアップロード
+        .hidden_post_form
+          =f.fields_for :images do |image|
+            -# 画像がビルドされた際に振られるidを取得
+            =image.file_field :src, class:"hidden-field" 
+            =image.file_field :src, class:"hidden-field", name: "product[images_attributes][1][src]", id: "product_images_attributes_1_src"
+            =image.file_field :src, class:"hidden-field", name: "product[images_attributes][2][src]", id: "product_images_attributes_2_src"
+            =image.file_field :src, class:"hidden-field", name: "product[images_attributes][3][src]", id: "product_images_attributes_3_src"
+            =image.file_field :src, class:"hidden-field", name: "product[images_attributes][4][src]", id: "product_images_attributes_4_src"
+        -if @product.errors.any? 
+          .alert
+            %ul
+              -@product.errors.full_messages_for(:images).each do |error| 
+                %li= error
+    .product-information
+      商品の詳細
+      .product-information__title
+        %label 商品名 
+        %span.require_label 必須
+        = f.text_field :title, { class: "product-information__title--text_form", maxlength: 40, placeholder: "40文字まで" }
+        -if @product.errors.any? 
+          .alert
+            %ul
+              -@product.errors.full_messages_for(:title).each do |error| 
+                %li= error
+      .product-information__description
+        %label 商品の説明
+        %span.require_label 必須
+        = f.text_area :description, { class: "product-information__description--text_area_form", placeholder: "" }
+        -if @product.errors.any? 
+          .alert
+            %ul
+              -@product.errors.full_messages_for(:description).each do |error| 
+                %li= error
+      .product-information__category
+        %label カテゴリー
+        %span.require_label 必須
+        .product-information__category--form
+          = f.select :category_id, options_for_select(@category_parent_array.map{|c| [c[:name], c[:id]]}), {include_blank: "選択してください"}, { class: "product-information__category--select_form", id: "parent_category"}
+        -if @product.errors.any? 
+          .alert
+            %ul
+              -@product.errors.full_messages_for(:category_id).each do |error| 
+                %li= error
+      #size_wrapper.product-information__size
+        -if @product.errors.any? 
+          .alert
+            %ul
+              -@product.errors.full_messages_for(:size_id).each do |error| 
+                %li= error
+      .product-information__brand
+        %label ブランド 
+        %span.optional_label 任意
+        = f.collection_select :brand_id, Brand.all, :id, :brand_name, {include_blank: "例：グッチ"}, { class: "product-information__brand--select_form"}
+      .product-information__condition
+        %label 商品の状態 
+        %span.require_label 必須
+        = f.select :condition, Product.conditions_i18n.invert, { prompt: "選択してください" }, { class: "product-information__condition--select_form"}
+        -if @product.errors.any? 
+          .alert
+            %ul
+              -@product.errors.full_messages_for(:condition).each do |error| 
+                %li= error
+    .delivery-information 
+      配送について
+      .delivery-information__postage
+        %label 配送料の負担
+        %span.require_label 必須
+        = f.select :postage, Product.postages_i18n.invert, { prompt: "選択してください" }, { class: "delivery-information__postage--select_form"}
+        -if @product.errors.any? 
+          .alert
+            %ul
+              -@product.errors.full_messages_for(:postage).each do |error| 
+                %li= error
+      .delivery-information__prefecture
+        %label 発送元の地域
+        %span.require_label 必須
+        = f.collection_select :prefecture_id, Prefecture.all, :id, :name, { prompt: "選択してください" }, { class: "delivery-information__prefecture--select_form" }
+        -if @product.errors.any? 
+          .alert
+            %ul
+              -@product.errors.full_messages_for(:prefecture_id).each do |error| 
+                %li= error
+      .delivery-information__shipping_day
+        %shipping_day_id 発送までの日数 
+        %span.require_label 必須
+        = f.collection_select :shipping_day_id, ShippingDay.all, :id, :name, { prompt: "選択してください" }, {class: "delivery-information__shipping_day--select_form" }
+        -if @product.errors.any? 
+          .alert
+            %ul
+              -@product.errors.full_messages_for(:shipping_day_id).each do |error| 
+                %li= error
+    .price-information
+      価格
+      .price-information__price
+        %label 販売価格
+        %span.require_label 必須
+        %span.en ￥
+        = f.number_field :price, class: "price_form", min: 300, max:9999999, placeholder: "0"
+        -if @product.errors.any? 
+          .alert
+            %ul
+              -@product.errors.full_messages_for(:price).each do |error| 
+                %li= error
+    .post-form
+      = f.submit "出品する", class: "submit_btn"
+      = link_to "もどる", root_path, class: "return_btn"
