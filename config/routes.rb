@@ -23,8 +23,8 @@ Rails.application.routes.draw do
       get 'get_size', defaults: { format: 'json' }
       #クレジットカード購入確認、購入時のアクション
       post 'purchase'
+      get 'purchased'
       get 'buy'
-      
   
     end
   end
