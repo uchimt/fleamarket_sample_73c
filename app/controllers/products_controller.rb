@@ -2,7 +2,6 @@ class ProductsController < ApplicationController
   before_action :set_category, only: [:new, :edit, :create, :update, :destroy]
   before_action :move_to_root, except: :show
   before_action :set_product, only: [:edit, :update, :show, :destroy]
-  before_action :request_path, only: [:new, :edit]
 
   def index
     @products = Product.includes(:images).order('created_at DESC')
@@ -51,7 +50,7 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to new_product_create_products_path(@product.id)
     else
-      render :new and return
+      render action: :new, locals: { product: @product }
     end
   end
 
@@ -77,10 +76,8 @@ class ProductsController < ApplicationController
   end
 
   def update
-    @category_parent = Category.where(ancestry: nil)
-    
     if @product.update(product_params)
-      redirect_to product_path(@product)
+      redirect_to product_path(@product.id)
     else
       render :edit
     end
@@ -132,13 +129,6 @@ class ProductsController < ApplicationController
   def not_productuser
     if current_user.id != @product.user_id
       redirect_to root_path
-    end
-  end
-  
-  def request_path
-    @path = controller_path + '#' + action_name
-    def @path.is(*str)
-        str.map{|s| self.include?(s)}.include?(true)
     end
   end
 
