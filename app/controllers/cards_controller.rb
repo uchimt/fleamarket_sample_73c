@@ -78,7 +78,9 @@ class CardsController < ApplicationController
       redirect_to action: "index", notice: "削除できませんでした"
     end
   end
-
+  
+  
+  
 
   private
   def set_card 
