@@ -1,0 +1,30 @@
+.mypage_pay_done {
+  margin: 0 43px;
+  background-color: #fff;
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
+
+  .payment_content {
+    margin: 0 auto;
+    text-align: center;
+    .payment_content__title {
+      height: 100px;
+      line-height: 100px;
+      h1 {
+        
+      }
+    }  
+    .logaut_content {
+      background-color:red;
+      padding: 10px;
+      .btn-default{
+        color: white;
+        text-decoration: none;
+        line-height: 30px;
+        cursor: pointer;
+      }
+    } 
+  }
+
+}
