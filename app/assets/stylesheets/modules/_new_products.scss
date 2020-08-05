@@ -33,6 +33,7 @@
       padding-top: 15px;
       padding-bottom: 10px;
       font-size: 15px;
+      font-weight: bold;
       color: #333;
       span.require_label {
         margin: 2px 5px;
@@ -145,7 +146,7 @@
         }
         .hidden_post_form {
           .hidden-field {
-            // display: none;
+            display: none;
           } 
         }
         .alert {
