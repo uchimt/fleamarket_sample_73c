@@ -21,13 +21,19 @@ Rails.application.routes.draw do
       get 'get_category_children', defaults: { format: 'json' }
       get 'get_category_grandchildren', defaults: { format: 'json' }
       get 'get_size', defaults: { format: 'json' }
+      #クレジットカード購入確認、購入時のアクション
+      post 'purchase'
+      get 'purchased'
+      get 'buy'
+  
     end
   end
 
   
-  resources :cards, only: [:index, :new, :create, :destroy]
-
+  resources :cards, only: [:index, :new, :create, :destroy] 
+    
   
+
   resources :top, only: [:index]
   root to: "top#index"
 
