@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   require "payjp"
   before_action :set_category, only: [:new, :edit, :create, :update, :destroy]
   before_action :move_to_root, except: :show
-  before_action :set_product, only: [:edit, :update, :show, :destroy]
+  before_action :set_product, only: [:edit, :update, :show, :destroy, :buy, :purchase]
 
   def index
     @products = Product.includes(:images).order('created_at DESC')
@@ -95,10 +95,9 @@ class ProductsController < ApplicationController
   end
 
   def buy
-    @user = current_user
-    @creditcard = CreditCard.where(user_id: @user.id).first
-    @address = Destination.where(user_id: @user.id).first
-    @product = Product.find(params[:id])
+    @creditcard = CreditCard.find_by(user_id: current_user.id)
+    @address = Destination.find_by(user_id: current_user.id)
+    
     
   
     
@@ -127,8 +126,8 @@ class ProductsController < ApplicationController
     
 
     def purchase
-      @creditcard = CreditCard.where(user_id: current_user.id).first
-      @product = Product.find(params[:id])
+      @creditcard = CreditCard.find_by(user_id: current_user.id)
+     
 
       Payjp.api_key = Rails.application.credentials.payjp[:PAYJP_SECRET_KEY]
 
