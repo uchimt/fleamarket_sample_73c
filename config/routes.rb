@@ -18,6 +18,10 @@ Rails.application.routes.draw do
     end
     member do
       get 'new_product_create'
+      #クレジットカード購入確認、購入時のアクション
+      post 'purchase'
+      get 'purchased'
+      get 'buy'
     end
   end
 
@@ -29,22 +33,9 @@ Rails.application.routes.draw do
       get 'sold_products'
     end
   end
-      get 'get_category_children', defaults: { format: 'json' }
-      get 'get_category_grandchildren', defaults: { format: 'json' }
-      get 'get_size', defaults: { format: 'json' }
-      #クレジットカード購入確認、購入時のアクション
-      post 'purchase'
-      get 'purchased'
-      get 'buy'
-  
-    end
-  end
 
-  
   resources :cards, only: [:index, :new, :create, :destroy] 
-    
-  
-
+ 
   resources :top, only: [:index]
   root to: "top#index"
 
