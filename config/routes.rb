@@ -32,11 +32,13 @@ Rails.application.routes.draw do
       get 'on_display_products'
       get 'sold_products'
       get 'purchased_products'
+      get 'logout_link'
     end
   end
 
   resources :cards, only: [:index, :new, :create, :destroy] 
  
   resources :top, only: [:index]
+  root to: "top#index"
 
 end

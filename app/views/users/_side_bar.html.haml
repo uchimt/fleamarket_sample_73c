@@ -6,10 +6,10 @@
   %li= link_to "購入した商品", purchased_products_user_path(current_user.id)
 %label 設定
 %ul.user_edit_bar
-  %li= link_to "プロフィール", edit_user_registration_path
-  %li= link_to "発送元・お届け住所変更", destinations_path
+  -# %li= link_to "プロフィール", "#" 余裕があったら実装
+  -# %li= link_to "発送元・お届け住所変更", "#" 余裕があったら実装
   %li= link_to "支払い方法", cards_path
-  %li= link_to "メール/パスワード", user_password_path
-  %li= link_to "本人情報", edit_user_password_path
-  %li= link_to "電話番号の確認", new_destinations_path
-  %li= link_to "ログアウト", destroy_user_session_path
+  %li= link_to "メール/パスワード", edit_user_registration_path
+  -# %li= link_to "本人情報", "#" 余裕があったら実装
+  -# %li= link_to "電話番号の確認", "#" 余裕があったら実装
+  %li= link_to "ログアウト", logout_link_user_path
