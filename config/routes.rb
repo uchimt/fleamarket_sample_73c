@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     member do
       get 'on_display_products'
       get 'sold_products'
+      get 'purchased_products'
     end
   end
 

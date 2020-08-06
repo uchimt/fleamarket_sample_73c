@@ -1,0 +1,17 @@
+%h2　出品した商品
+  %ul.status_select_box
+    %li.on_display_products 出品中
+    %li.sold_products 売却済み
+.products_list
+  -if @my_sold_products.present?
+    - @my_sold_products.each do |product|
+      .product_link_box
+        .product_link_box__image
+          %p.image= image_tag product.images[0].src.url
+        .product_link_box__information
+          %p.product_name= product.title
+          %p.status= product.status_i18n
+      = paginate(@my_sold_products)
+    -else 
+      =image_tag('logo.png', class: "icon__image")
+      %p.text 売却済みの商品がありません
