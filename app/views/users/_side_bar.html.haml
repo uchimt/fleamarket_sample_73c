@@ -3,7 +3,7 @@
   %li= link_to "出品する", new_product_path
   %li= link_to "出品した商品-出品中", on_display_products_user_path(current_user.id)
   %li= link_to "出品した商品-売却済み", sold_products_user_path(current_user.id)
-  %li= link_to "購入した商品", "#"
+  %li= link_to "購入した商品", purchased_products_user_path(current_user.id)
 %label 設定
 %ul.user_edit_bar
   %li= link_to "プロフィール", "#"
