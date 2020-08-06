@@ -139,7 +139,7 @@ class ProductsController < ApplicationController
         currency: 'jpy'
       )
       @product_buyer= Product.find(params[:id])
-      @product_buyer.update(status:'sold')
+      @product_buyer.update(status:'sold',buyer_id: current_user.id)
       redirect_to purchased_product_path
     end
 

@@ -38,6 +38,5 @@ Rails.application.routes.draw do
   resources :cards, only: [:index, :new, :create, :destroy] 
  
   resources :top, only: [:index]
-  root to: "top#index"
 
 end
