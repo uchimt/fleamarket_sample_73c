@@ -94,22 +94,40 @@
       - else
         .productBox__toBuy
           = link_to "購入する", product_path, class:"productBox__toBuy--buy"
-
-
+    
+      
     -# コメント欄
     .commentBox
-      -if current_user
-        = form_with model: @product do |form|
+      -# コメント一覧
+      .commentList
+      - if @product.user_id == current_user.id
+        - @comments.each do |comment|
+          .commentList__content
+            = comment.comment
+          .commentList__time
+            = comment.created_at.strftime("%Y年%m月%d日 %H時%M分")
+          .commetntList__userName
+            = comment.user.nickname
+      - else
+        - @comments.each do |comment|
+          .commetntList__userName--other
+            = comment.user.nickname
+          .commentList__content--other
+            = comment.comment
+          .commentList__time--other
+            = comment.created_at.strftime("%Y年%m月%d日 %H時%M分")
+
+      - if current_user
+        = form_with model: [@product, @comment], local: true do |form|
           = form.text_area :comment, class:"commentBox__area"
           %p.commentBox__note
             相手のことを考え丁寧なコメントを心がけましょう。
             %br
             不快な言葉遣いなどは利用制限や退会処分となることがあります。
-          
-          %button{type: "submit", class: "commentBox__btn"}
+          %button{type: "submit", class: "commentBox__btn", name: "button"} 
             %i.fa.fa-comment
-              コメントする
-      -else
+            コメントする
+      - else
         %p ※コメントの投稿には新規登録、ログインが必要です
 
     .sameContent
