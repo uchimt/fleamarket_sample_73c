@@ -10,6 +10,11 @@
         %ul.images
           %li.images__list
             = image_tag @images[0].src.url, class: "images__list--main"
+              //buyer_idがある場合には、SOLDと表示させる
+              -if @product.buyer_id.present? 
+              .items-box_photo__sold
+                .items-box_photo__sold__inner SOLD
+
             %ul.subImages
               - @images.drop(1).each do |image|
                 %li.subImages__list

@@ -157,7 +157,19 @@ ul {
     &--main {
       object-fit: contain;
       height: 346px;
+      
     }
+    .items-box_photo__sold{
+      display: block;
+      
+      position: absolute;
+      top: 50;
+      left: 40;
+      color:#fff;
+      font-size: 50px;
+      background-color: #ea352d;
+    }
+
   }
 }
 
