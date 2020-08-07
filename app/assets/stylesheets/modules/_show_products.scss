@@ -229,6 +229,12 @@ ul {
   }
 }
 
+.commentList {
+  &__content {
+    float: left;
+  }
+}
+
 // 前の賞品、後ろの商品
 .sameContent {
   width: 700px;
