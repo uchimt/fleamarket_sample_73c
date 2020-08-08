@@ -1,8 +1,10 @@
 .on_display_products_title
   %h2.title　出品した商品
-  %ul.status_select_box 
-    %li.on_display_products 出品中
-    %li.sold_products　売却済み
+  %ul.status_select_box
+    = link_to on_display_products_user_path(current_user.id) do
+      %li.on_display_products 出品中
+    = link_to sold_products_user_path(current_user.id) do  
+      %li.sold_products 売却済み
   .on_display_products_list
     -if @my_on_display_products.present?
       - @my_on_display_products.each do |product| 
@@ -12,8 +14,9 @@
               %p.image= image_tag product.images[0].src.url
             .product_link_box__information
               %p.product_name= product.title
-              %p.status= product.status_i18n     
-      = paginate(@my_on_display_products)
+              %p.status= product.status_i18n
+      .paginate  
+        = paginate(@my_on_display_products)
     -else 
       .product_nonlist_box
         =image_tag('logo.png', class: "icon_image")

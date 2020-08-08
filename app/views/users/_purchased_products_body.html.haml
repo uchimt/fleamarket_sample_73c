@@ -10,7 +10,8 @@
             .product_link_box__information
               %p.product_name= product.title
               %p.status= product.status_i18n
-      = paginate(@purchased_products)
+      .paginate  
+        = paginate(@purchased_products)
     -else
       .product_nonlist_box
         =image_tag('logo.png', class: "icon_image")

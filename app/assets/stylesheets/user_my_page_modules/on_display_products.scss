@@ -21,20 +21,29 @@
         display: flex;
         justify-content: space-around;
         font-size: 18px;
-        .on_display_products {
+        a {
           display: block;
-          height: 70px;
-          line-height: 70px;
           width: 100%;
-          background-color: white;
-          border-top: solid 2px red
+          text-decoration: none;
+          color: #333;
+          .on_display_products {
+            height: 70px;
+            line-height: 70px;
+            background-color: white;
+            border-top: solid 2px red
+          }
         }
-        .sold_products {
+        a {
           display: block;
-          height: 70px;
-          line-height: 70px;
           width: 100%;
-          background-color: #eee;
+          text-decoration: none;
+          color: #333;
+          .sold_products {
+            height: 70px;
+            line-height: 70px;
+            width: 100%;
+            background-color: #eee;
+          }
         }
       }
     }
