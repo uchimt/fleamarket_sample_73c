@@ -1,8 +1,48 @@
 .purchased_products_body {
-  width: 100%;
+  width: 700px;
+  margin: 0 auto;
   .purchased_products_box {
-    max-width: 700px;
-    margin: 0 auto;
+    width: 100%;
+    margin: 40px 0;
+    .products_box {
+      .title {
+        margin: 0;
+        height: 80px;
+        line-height: 80px;
+        font-size: 20px;
+        background-color:#fafafa;
+      }
+      .products_list {
+        width: 100%;
+        height: 240px;
+        position: relative;
+        border: solid 1px #fafafa;
+        background-color: white;
+        .product_link_box {
+        
+          &__image {
+
+          }
+          &__information {
+
+          }
+        }
+        .product_nonlist_box {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateY(-50%) translateX(-50%);
+          -webkit-transform: translateY(-50%) translateX(-50%);
+          .icon_image {
+            width: 200px;
+            opacity: 0.1;
+          }
+          .text {
+            color: #ccc;
+          }
+        } 
+      }
+    }
   }
   .purchased_side_bar {
     @include sidebar_body;

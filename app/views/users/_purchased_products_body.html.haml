@@ -3,12 +3,13 @@
   .products_list
     -if @my_purchased_products.present?
       - @my_purchased_products.each do |product|
-        .product_link_box
-          .product_link_box__image
-            %p.image= image_tag product.images[0].src.url
-          .product_link_box__information
-            %p.product_name= product.title
-            %p.status= product.status_i18n
+        =link_to product_path(product.id) do
+          .product_link_box
+            .product_link_box__image
+              %p.image= image_tag product.images[0].src.url
+            .product_link_box__information
+              %p.product_name= product.title
+              %p.status= product.status_i18n
       = paginate(@purchased_products)
     -else
       .product_nonlist_box
