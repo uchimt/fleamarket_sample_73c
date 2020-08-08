@@ -13,5 +13,6 @@
           %p.status= product.status_i18n
     = paginate(@my_sold_products)
   -else 
-    =image_tag('logo.png', class: "icon__image")
-    %p.text 売却済みの商品がありません
+    .product_nonlist_box
+      =image_tag('logo.png', class: "icon__image")
+      %p.text 売却済みの商品がありません

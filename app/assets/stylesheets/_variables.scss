@@ -1,0 +1,25 @@
+@mixin sidebar_body {
+  max-width: 700px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+@mixin sidebar_list {
+  background-color: white;
+  padding-left: 0px;
+  margin-top: 0;
+}
+
+@mixin sidebar_li {
+  padding-left: 20px;
+  height: 50px;
+  line-height: 50px;
+  border: solid 1px #eee;
+}
+
+@mixin sidebar_a {
+  display: block;
+  text-decoration: none;
+  color: #333;
+  font-size: 15px;  
+}

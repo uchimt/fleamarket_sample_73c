@@ -1,0 +1,28 @@
+.purchased_products_body {
+  width: 100%;
+  .purchased_products_box {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .purchased_side_bar {
+    @include sidebar_body;
+    .my_page_list {
+      @include sidebar_list;
+      li {
+        @include sidebar_li;
+      }
+      a {
+        @include sidebar_a;
+      }
+      .purchased {
+        background-color: #eee;
+      }
+     
+    }
+    .my_page_list_title {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 500px;
+    }
+  }
+}
