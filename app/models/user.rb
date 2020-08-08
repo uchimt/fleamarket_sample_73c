@@ -6,4 +6,6 @@ class User < ApplicationRecord
   validates :nickname, presence: true
   has_one :profile
   has_one :destination
+  has_one :credit_card
+  has_many :products, dependent: :destroy
 end

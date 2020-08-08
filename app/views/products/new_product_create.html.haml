@@ -1,0 +1,16 @@
+.header
+  = render partial: 'header'
+.new_product_create_body
+  .putting_up_product
+    %h1.putting_up_product__title 出品が完了しました。
+    %div
+      出品した商品は「
+      %span 商品一覧
+      」からいつでもみることができます。
+    .putting_up_product__link
+      =link_to "続けて出品する", new_product_path, class: "new_product_btn"
+      =link_to "出品した商品をみる", product_path(params[:format]), class: "index_btn"
+      =link_to "商品一覧をみる", products_path, class: "index_btn"
+    %p= link_to "マイページを見る", "#"
+.footer
+  = render partial: 'footer'

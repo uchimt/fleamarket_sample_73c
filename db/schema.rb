@@ -10,7 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_03_181357) do
+ActiveRecord::Schema.define(version: 2020_08_06_005640) do
+
+  create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "brand_name"
+    t.string "japanese_brand_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_categories_on_ancestry"
+  end
+
+  create_table "category_sizes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "category_id"
+    t.integer "size_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "credit_cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "card_id", null: false
+    t.string "customer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_credit_cards_on_user_id"
+  end
 
   create_table "destinations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "destination_family_name", null: false
@@ -29,6 +60,36 @@ ActiveRecord::Schema.define(version: 2020_07_03_181357) do
     t.index ["user_id"], name: "index_destinations_on_user_id"
   end
 
+  create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "src", null: false
+    t.bigint "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_images_on_product_id"
+  end
+
+  create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description", null: false
+    t.integer "condition", null: false
+    t.integer "prefecture_id", null: false
+    t.integer "postage", null: false
+    t.integer "shipping_day_id", null: false
+    t.integer "price", null: false
+    t.integer "status", default: 0, null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "brand_id"
+    t.bigint "category_id", null: false
+    t.bigint "size_id"
+    t.integer "buyer_id"
+    t.index ["brand_id"], name: "index_products_on_brand_id"
+    t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["size_id"], name: "index_products_on_size_id"
+    t.index ["user_id"], name: "index_products_on_user_id"
+  end
+
   create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "family_name", null: false
     t.string "first_name", null: false
@@ -41,6 +102,14 @@ ActiveRecord::Schema.define(version: 2020_07_03_181357) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "sizes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "size", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_sizes_on_ancestry"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -56,6 +125,12 @@ ActiveRecord::Schema.define(version: 2020_07_03_181357) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "credit_cards", "users"
   add_foreign_key "destinations", "users"
+  add_foreign_key "images", "products"
+  add_foreign_key "products", "brands"
+  add_foreign_key "products", "categories"
+  add_foreign_key "products", "sizes"
+  add_foreign_key "products", "users"
   add_foreign_key "profiles", "users"
 end

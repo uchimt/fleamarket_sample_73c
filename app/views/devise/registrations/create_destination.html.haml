@@ -1,2 +1,21 @@
-%h2 登録が完了しました
-= link_to "トップへ戻る", root_path
+:css
+  ul li:nth-child(4){ 
+    color: #3ccace;
+  }
+  .topic-path-wrapper 
+  .topic-path:nth-child(-n+4) 
+  .topic-path__point{
+    background-color: #3ccace;
+  }
+  .topic-path-wrapper 
+  .topic-path:nth-child(-n+4) 
+  .topic-path__border{
+    border-bottom: 2px solid #3ccace;
+  }
+
+= render partial: "devise-header"
+.main-contents
+  %h2 登録が完了しました
+  .button__next.button__top
+    %p= link_to "トップへ戻る", root_path
+= render partial: "devise-footer"
