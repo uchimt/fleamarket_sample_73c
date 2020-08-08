@@ -1,5 +1,5 @@
 .products_box
-  %h2　購入した商品
+  %h2.title　購入した商品
   .products_list
     -if @my_purchased_products.present?
       - @my_purchased_products.each do |product|
@@ -10,6 +10,7 @@
             %p.product_name= product.title
             %p.status= product.status_i18n
       = paginate(@purchased_products)
-    -else 
-      =image_tag('logo.png', class: "icon__image")
-      %p.text 購入した商品がありません
+    -else
+      .product_nonlist_box
+        =image_tag('logo.png', class: "icon_image")
+        %p.text 購入した商品がありません

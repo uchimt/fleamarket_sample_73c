@@ -1,15 +1,15 @@
-%ul.my_page_bar 
-  %li= link_to "マイページ", user_path(current_user.id)
-  %li= link_to "出品する", new_product_path
-  %li= link_to "出品した商品-出品中", on_display_products_user_path(current_user.id)
-  %li= link_to "出品した商品-売却済み", sold_products_user_path(current_user.id)
-  %li= link_to "購入した商品", purchased_products_user_path(current_user.id)
-%label 設定
-%ul.user_edit_bar
+%ul.my_page_list
+  %li.mypage= link_to "マイページ", user_path(current_user.id)
+  %li.exhibit= link_to "出品する", new_product_path
+  %li.on_display= link_to "出品した商品-出品中", on_display_products_user_path(current_user.id)
+  %li.sold= link_to "出品した商品-売却済み", sold_products_user_path(current_user.id)
+  %li.purchased= link_to "購入した商品", purchased_products_user_path(current_user.id)
+%h3.my_page_list_title 設定
+%ul.my_page_list
   -# %li= link_to "プロフィール", "#" 余裕があったら実装
   -# %li= link_to "発送元・お届け住所変更", "#" 余裕があったら実装
-  %li= link_to "支払い方法", cards_path
-  %li= link_to "メール/パスワード", edit_user_registration_path
+  %li.pay= link_to "支払い方法", cards_path
+  %li.pass= link_to "メール/パスワード", edit_user_registration_path
   -# %li= link_to "本人情報", "#" 余裕があったら実装
   -# %li= link_to "電話番号の確認", "#" 余裕があったら実装
-  %li= link_to "ログアウト", logout_link_user_path
+  %li.log_out= link_to "ログアウト", logout_link_user_path

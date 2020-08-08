@@ -1,6 +1,7 @@
 .my_page_box
   .my_page_user_icon
     .my_page_user_icon__image
-      = icon('fas', 'user', class: 'user_icon_user')
-    .my_page_user_icon__name
-      = @user.nickname
+      %span.fa-stack
+        = icon('fas', 'circle',class: 'fa-stack-2x')
+        = icon('fas', 'user', class: 'fa-stack-1x') 
+    .my_page_user_icon__name= @user.nickname
