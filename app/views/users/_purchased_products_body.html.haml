@@ -1,7 +1,7 @@
 .products_box
   %h2.title　購入した商品
-  .products_list
-    -if @my_purchased_products.present?
+  -if @my_purchased_products.present?
+    .products_list
       - @my_purchased_products.each do |product|
         =link_to product_path(product.id) do
           .product_link_box
@@ -11,8 +11,9 @@
               %p.product_name= product.title
               %p.status= product.status_i18n
       .paginate  
-        = paginate(@purchased_products)
-    -else
+        = paginate(@my_purchased_products)
+  -else 
+    .product_non_list
       .product_nonlist_box
         =image_tag('logo.png', class: "icon_image")
-        %p.text 購入した商品がありません
+        %p.text 購入済みの商品がありません

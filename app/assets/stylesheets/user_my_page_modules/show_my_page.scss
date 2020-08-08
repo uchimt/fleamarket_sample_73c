@@ -4,7 +4,7 @@
     max-width: 700px;
     margin: 0 auto;
     .my_page_box {
-      background-image: url('background/water-bg-pattern-02.jpg');
+      background-image: url('background/stone-tile01.jpg');
       background-size: cover;
       height: 200px;
       width: 100%;
@@ -49,19 +49,54 @@
         }
         .products_list {
           width: 100%;
-          height: 240px;
+          max-height: 450px;
           position: relative;
           border: solid 1px #fafafa;
           background-color: white;
+          a {
+            text-decoration: none;
+          }
           .product_link_box {
-          
-            &__image {
-
+            height: 80px;
+            width: 100%;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            border-bottom: solid 1px #eee;
+            &__image img{
+              width: 60px;
+              margin: 0 10px;
             }
             &__information {
-
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              padding: 10px 0;
+              text-align: center;
+              p {
+                margin: 0;
+              }
+              .product_name {
+                font-size: 16px;
+                color: #333;
+              }
+              .status {
+                color: white;
+                background-color: #3CCACE;
+                align-items: center;
+                text-align: center;
+                width: 50px;
+                height: 18px;
+                font-size: 14px;
+                border-radius: 3px;
+              }
             }
           }
+        }
+        .product_non_list {
+          height: 240px;
+          position: relative;
+          background-color: white;
           .product_nonlist_box {
             position: absolute;
             top: 50%;
@@ -74,6 +109,7 @@
             }
             .text {
               color: #ccc;
+              text-align: center;
             }
           } 
         }
@@ -93,13 +129,11 @@
       .mypage {
         background-color: #eee;
       }
-     
     }
     .my_page_list_title {
       margin: 0;
       font-size: 16px;
       font-weight: 500px;
     }
-
   }
 }

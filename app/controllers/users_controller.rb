@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(current_user.id)
+    @my_purchased_products = Product.includes(:images).where(buyer_id: current_user.id, status: 1).order('created_at DESC').page(params[:page]).per(5)
   end
   
   def on_display_products

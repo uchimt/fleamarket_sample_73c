@@ -49,49 +49,55 @@
     }
     .products_list {
       width: 100%;
-      height: 240px;
-      background-color:white;
+      max-height: 450px;
       position: relative;
+      border: solid 1px #fafafa;
+      background-color: white;
       a {
         text-decoration: none;
-        .product_link_box {
-          height: 80px;
-          width: 100%;
+      }
+      .product_link_box {
+        height: 80px;
+        width: 100%;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        border-bottom: solid 1px #eee;
+        &__image img{
+          width: 60px;
+          margin: 0 10px;
+        }
+        &__information {
           display: flex;
-          justify-content: left;
-          align-items: center;
-          border-bottom: solid 1px #eee;
-          &__image img{
-            width: 60px;
-            margin: 0 10px;
+          flex-direction: column;
+          justify-content: space-between;
+          padding: 10px 0;
+          text-align: center;
+          p {
+            margin: 0;
           }
-          &__information {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 10px 0;
+          .product_name {
+            font-size: 16px;
+            color: #333;
+          }
+          .status {
+            color: white;
+            background-color: #ea352d;
+            align-items: center;
             text-align: center;
-            p {
-              margin: 0;
-            }
-            .product_name {
-              font-size: 16px;
-            }
-            .status {
-              color: white;
-              background-color: #3CCACE;
-              align-items: center;
-              text-align: center;
-              width: 50px;
-              height: 18px;
-              font-size: 14px;
-              border-radius: 3px;
-            }
+            width: 50px;
+            height: 18px;
+            font-size: 14px;
+            border-radius: 3px;
           }
         }
       }
+    }
+    .product_non_list {
+      height: 240px;
+      position: relative;
+      background-color: white;
       .product_nonlist_box {
-        background-color: white;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -103,8 +109,9 @@
         }
         .text {
           color: #ccc;
+          text-align: center;
         }
-      }
+      } 
     }
   }
   .sold_side_bar {
