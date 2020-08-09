@@ -14,28 +14,30 @@ Rails.application.routes.draw do
     collection do
       get 'get_category_children', defaults: { format: 'json' }
       get 'get_category_grandchildren', defaults: { format: 'json' }
-      get 'get_size', defaults: { format: 'json' }
-      get 'new_product_create'
+      get 'get_size', defaults: { format: 'json' } 
     end
     member do
-      get 'get_category_children', defaults: { format: 'json' }
-      get 'get_category_grandchildren', defaults: { format: 'json' }
-      get 'get_size', defaults: { format: 'json' }
+      get 'new_product_create'
       #クレジットカード購入確認、購入時のアクション
       post 'purchase'
       get 'purchased'
       get 'buy'
-  
     end
   end
 
-  
-  resources :cards, only: [:index, :new, :create, :destroy] 
-    
-  
+  resources :cards, only: [:index, :new, :create, :destroy]
 
+  resources :users, only: :show do
+    member do
+      get 'on_display_products'
+      get 'sold_products'
+      get 'purchased_products'
+      get 'logout_link'
+    end
+  end
+
+  resources :cards, only: [:index, :new, :create, :destroy] 
+ 
   resources :top, only: [:index]
   root to: "top#index"
-  root 'products#index'
-  resources :products, except: :show
 end
