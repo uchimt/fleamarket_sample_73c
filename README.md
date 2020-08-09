@@ -153,8 +153,8 @@ Things you may want to cover:
 ## category_sizes テーブル
 |Column|Type|Options|
 |------|----|-------|
-|category_id|integer|
-|size_id|integer|
+|category|references|foreign_key:true|
+|size|references|foreign_key:true|
 
 ### Asociation
 - belongs_to :category
