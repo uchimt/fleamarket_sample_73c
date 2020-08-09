@@ -49,13 +49,14 @@ class ProductsController < ApplicationController
     @sizes = Size.where(ancestry: nil)
     @product = Product.new(product_params)
     if @product.save
-      redirect_to new_product_create_products_path(@product.id)
+      redirect_to new_product_create_product_path(@product.id)
     else
       render action: :new, locals: { product: @product }
     end
   end
 
   def new_product_create
+    @user = User.find(current_user.id)
   end
 
   def edit
@@ -99,11 +100,7 @@ class ProductsController < ApplicationController
   def buy
     @creditcard = CreditCard.find_by(user_id: current_user.id)
     @address = Destination.find_by(user_id: current_user.id)
-    
-    
   
-    
-
     Payjp.api_key = Rails.application.credentials.payjp[:PAYJP_SECRET_KEY]
     customer = Payjp::Customer.retrieve(@creditcard.customer_id)
     @creditcard_information = customer.cards.retrieve(@creditcard.card_id)
@@ -125,12 +122,9 @@ class ProductsController < ApplicationController
       end
     end
 
-    
-
     def purchase
       @creditcard = CreditCard.find_by(user_id: current_user.id)
      
-
       Payjp.api_key = Rails.application.credentials.payjp[:PAYJP_SECRET_KEY]
 
       #payjp経由で支払いを実行
@@ -182,9 +176,4 @@ class ProductsController < ApplicationController
       redirect_to root_path
     end
   end
-
-  
-
-
-
 end

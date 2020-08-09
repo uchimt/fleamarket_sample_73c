@@ -1,4 +1,5 @@
 @import "reset";
+@import "variables";
 @import "modules/index_products";
 @import "modules/new_products";
 @import "modules/edit_products";
@@ -13,6 +14,12 @@
 @import "modules/new_profile_registrations";
 @import "modules/new_destination_registrations";
 @import "modules/create_destination_registrations";
+
+@import "user_my_page_modules/show_my_page";
+@import "user_my_page_modules/on_display_products";
+@import "user_my_page_modules/sold_products";
+@import "user_my_page_modules/purchased_products";
+@import "user_my_page_modules/logout_link";
 
 @import "font-awesome-sprockets";
 @import "font-awesome";
