@@ -123,7 +123,6 @@
       width: 100%;
       border: solid;
     }
-
   }
   &__toBuy {
     text-align: center;
@@ -145,6 +144,12 @@
       font-size: 18px;
       border-radius: 100px;
       margin: 0 auto;
+      text-decoration: none;
+    }
+  }
+  &__edit{
+    &--btn {
+      color: black;
       text-decoration: none;
     }
   }
