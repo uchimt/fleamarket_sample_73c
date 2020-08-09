@@ -107,18 +107,18 @@
         - @comments.each do |comment|
           .commentList__content
             = comment.comment
-          .commentList__time
-            = comment.created_at.strftime("%Y年%m月%d日 %H時%M分")
+            .commentList__time
+              = comment.created_at.strftime("%Y年%m月%d日 %H時%M分")
           .commetntList__userName
             = comment.user.nickname
       - else
         - @comments.each do |comment|
-          .commetntList__userName--other
+          .commetntList__otherUserName
             = comment.user.nickname
-          .commentList__content--other
+          .commentList__otherContent
             = comment.comment
-          .commentList__time--other
-            = comment.created_at.strftime("%Y年%m月%d日 %H時%M分")
+            .commentList__otherTime
+              = comment.created_at.strftime("%Y年%m月%d日 %H時%M分")
 
       - if current_user
         = form_with model: [@product, @comment], local: true do |form|
