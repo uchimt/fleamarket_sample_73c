@@ -259,6 +259,33 @@ ul {
       text-align: left;
     }
   }
+  &__userName {
+    height: 50px;
+    line-height: 50px;
+  }
+
+  &__otherComment {
+    display: flex;
+    padding-top: 20px;
+    border-bottom: 1px solid lightgray;
+  }
+
+  &__otherUserName{
+    width: 70px;
+    text-align: left;
+    line-height: 50px;
+  }
+
+  &__otherContent {
+    &--comment {
+      padding-bottom: 10px;
+    }
+
+    &--time {
+      font-size: 5px;
+      text-align: left;
+    }
+  }
 }
 
 // 前の賞品、後ろの商品
