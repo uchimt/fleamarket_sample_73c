@@ -212,6 +212,8 @@ ul {
   background-color: #fff;
   margin: 10px auto;
   text-align: center;
+  min-height: 457px;
+  height: auto !important;
   width: 700px;
   &__area {
     display: inline-block;
@@ -239,8 +241,23 @@ ul {
 }
 
 .commentList {
+  padding: 0px 24px 24px 24px;
+  &__comment {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    border-bottom: 1px solid lightgray;
+  }
+
   &__content {
-    float: left;
+    &--comment {
+      text-align: left;
+      padding-bottom: 10px;
+    }
+    &--time {
+      font-size: 5px;
+      text-align: left;
+    }
   }
 }
 
