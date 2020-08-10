@@ -5,21 +5,33 @@
         %label 出品画像
         %span.require_label 必須
       %p.post-image-list__explanation 最大5枚までアップロードできます
-      #image-box.post-image-list__box  
+      #image-box.post-image-list__box
         #previews.preview_list
-
+          -# cacheに値がセットされている場合は画像を表示
+          -if @product.images[0].src.url.present?
+            -@product.images.each_with_index do |image, i|
+              .preview_image_box{id: "preview_image_box__#{i}"}
+                .upper-box
+                  =image_tag image.src.url, alt:"preview", width: "120", height: '120', class: "preview_image", id: "preview_image"
+                .update_box
+                  .js-remove{id: "delete_btn_#{i}"}
+                    %span 削除
+              -# =image_tag @product.images[0].src.url if @product.images[0].src.url.present?
         %label{for: "product_images_attributes_0_src", class: "image_input_btn", id: "image_input_btn--0"} 
           #posts.post_form
             =image_tag('icon_camera.png', class: "image_input_btn_camera")
             .image_input_btn_text クリックしてファイルをアップロード
         .hidden_post_form
           =f.fields_for :images do |image|
+            
             -# 画像がビルドされた際に振られるidを取得
             =image.file_field :src, class:"hidden-field" 
             =image.file_field :src, class:"hidden-field", name: "product[images_attributes][1][src]", id: "product_images_attributes_1_src"
             =image.file_field :src, class:"hidden-field", name: "product[images_attributes][2][src]", id: "product_images_attributes_2_src"
             =image.file_field :src, class:"hidden-field", name: "product[images_attributes][3][src]", id: "product_images_attributes_3_src"
             =image.file_field :src, class:"hidden-field", name: "product[images_attributes][4][src]", id: "product_images_attributes_4_src"
+            -# cacheを使用するためにhidden_fieldを設置
+            =image.hidden_field :src_cache
         -if @product.errors.any? 
           .alert
             %ul
@@ -49,7 +61,24 @@
         %label カテゴリー
         %span.require_label 必須
         .product-information__category--form
-          = f.select :category_id, options_for_select(@category_parent_array.map{|c| [c[:name], c[:id]]}), {include_blank: "選択してください"}, { class: "product-information__category--select_form", id: "parent_category"}
+          -if @product.category.parent.parent.id.exists?
+            = f.select :category_id, options_for_select(@category_parent_array.map{|c| [c[:name], c[:id], {'data-category'=>c[:id]}]}, @product.category.parent.parent.id), {include_blank: "選択してください"}, { class: "product-information__category--select_form", id: "parent_category"}
+              #children_form.product-information__category--form
+                = f.select :category_id, options_for_select(@category_children.map{|c| [c[:name], c[:id], {'data-category'=>c[:id]}]}, @product.category.parent.id), {include_blank: "選択してください"}, { class: "product-information__category--select_form", id: "child_category"}
+              #grandchildren_form.product-information__category--form
+                = f.select :category_id, options_for_select(@category_grandchildren.map{|c| [c[:name], c[:id],{'data-category'=>c[:id]}]}, @product.category.id), {include_blank: "選択してください"}, { class: "product-information__category--select_form", id: "grandchild_category"}
+          -elsif @product.category.parent.id.exists?
+            = f.select :category_id, options_for_select(@category_parent_array.map{|c| [c[:name], c[:id], {'data-category'=>c[:id]}]}, @product.category.parent.id), {include_blank: "選択してください"}, { class: "product-information__category--select_form", id: "parent_category"}
+              #children_form.product-information__category--form
+                = f.select :category_id, options_for_select(@category_children.map{|c| [c[:name], c[:id], {'data-category'=>c[:id]}]}, @product.category.id), {include_blank: "選択してください"}, { class: "product-information__category--select_form", id: "child_category"}
+              #grandchildren_form.product-information__category--form
+                = f.select :category_id, options_for_select(@category_grandchildren.map{|c| [c[:name], c[:id],{'data-category'=>c[:id]}]}), {include_blank: "選択してください"}, { class: "product-information__category--select_form", id: "grandchild_category"}
+          -elsif  @product.category.id.exists?
+            = f.select :category_id, options_for_select(@category_parent_array.map{|c| [c[:name], c[:id], {'data-category'=>c[:id]}]}, @product.category.id), {include_blank: "選択してください"}, { class: "product-information__category--select_form", id: "parent_category"}
+              #children_form.product-information__category--form
+                = f.select :category_id, options_for_select(@category_children.map{|c| [c[:name], c[:id], {'data-category'=>c[:id]}]}), {include_blank: "選択してください"}, { class: "product-information__category--select_form", id: "child_category"}
+          -else
+            = f.select :category_id, options_for_select(@category_parent_array.map{|c| [c[:name], c[:id]]}), {include_blank: "選択してください"}, { class: "product-information__category--select_form", id: "parent_category"}
         -if @product.errors.any? 
           .alert
             %ul

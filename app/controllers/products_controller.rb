@@ -43,7 +43,7 @@ class ProductsController < ApplicationController
       end
   end
 
-  def create
+  def create   
     @brands = Brand.all
     @category_parent_array = Category.where(ancestry: nil)
     @sizes = Size.where(ancestry: nil)
@@ -78,6 +78,7 @@ class ProductsController < ApplicationController
   end
 
   def update
+    @sizes = Size.where(ancestry: nil)
     if @product.update(product_params)
       redirect_to product_path(@product.id)
     else
@@ -150,7 +151,7 @@ class ProductsController < ApplicationController
                            :prefecture_id, 
                            :shipping_day_id, 
                            :price, 
-                           images_attributes: [:src, :_destroy, :id])
+                           images_attributes: [:src, :_destroy, :id, :src_cache])
                            .merge(user_id: current_user.id)
   end
 
