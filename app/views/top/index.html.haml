@@ -1,5 +1,22 @@
 -# 仮のトップviewです
-%h1 Top#index
+%h1.header
+  Top#index
+  .header__inner
+    .inner__main
+      %h1.main__icon
+      .main__search
+    .inner__nav
+      %ul.nav__left
+        %li.left__category
+          %a.category__btn
+          カテゴリー
+        %li.left__brand
+          %a.brand__btn
+          ブランド
+      %ul.nav__right
+        %li.right__login
+        %li.right__new
+.main
 - if user_signed_in?
   %h2 ログインしています
   = link_to "ログアウト", destroy_user_session_path, method: :delete
@@ -10,6 +27,18 @@
   = link_to "新規登録", new_user_registration_path
   = link_to "ログイン", new_user_session_path
 
-.body
-  新規アイテム
+.pickupContainer
   = render @products
+  -# .head
+  -# ピックアップカテゴリー
+  -# .productBox
+  -#   .productHead
+  -#     .title
+  -#       新規投稿商品
+  -#   .productLists
+  -#     .productList
+  -#       = image_tag product.images[0].src.url, class: "productList--img"
+  -#       .productList--body
+  -#         %p.name= product.title
+  -#         %p.details= product.price
+  -#         円（税抜）
