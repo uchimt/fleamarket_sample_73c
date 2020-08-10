@@ -10,6 +10,11 @@
         %ul.images
           %li.images__list
             = image_tag @images[0].src.url, class: "images__list--main"
+              -# buyer_idがある場合には、SOLDと表示させる
+              -if @product.buyer_id.present? 
+              .items-box_photo__sold
+                .items-box_photo__sold__inner SOLD
+
             %ul.subImages
               - @images.drop(1).each do |image|
                 %li.subImages__list
@@ -79,15 +84,19 @@
           = link_to "ログインしてください", root_path, class:"productBox__login--btn"
       - elsif current_user.id == @product.user_id
         .productBox__edit
-          = link_to product_path,{class: "productBox__edit--btn"} do
+          = link_to edit_product_path,{class: "productBox__edit--btn"} do
             %i{class: "fa fa-cog"}
             編集する
           = link_to product_path(@product),class: "productBox__edit--btn", method: :delete, data: { confirm: "本当に削除しますか？" } do
-            %i.fa.fa-trash 削除する
-
+            %i.fa.fa-trash
+            削除する
+        -#「購入する」リンクを「売り切れました」ボタンに変える     
+      - elsif @product.buyer_id.present?
+        .productBox__sold 
+          %button.disabled-button 売り切れました
       - else
         .productBox__toBuy
-          = link_to "購入する", product_path, class:"productBox__toBuy--buy"
+          = link_to "購入する", buy_product_path, class:"productBox__toBuy--buy"
 
 
     -# コメント欄

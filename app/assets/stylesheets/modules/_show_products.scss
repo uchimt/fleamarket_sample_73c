@@ -2,7 +2,8 @@
   padding: 40px;
   margin: 0 auto;
   background-color: #f8f8f8;
-  height: 650vh;
+  width: 100vw;
+  height: 350vh;
 }
 
 //productBox
@@ -102,42 +103,46 @@
     height: 40px;
     margin-top: 15px;
   }
+  &__sold {
+    text-align: center;
+    margin: 16px 0 0;
+    background: #888888;
+    width: 100%;
+    border-radius: 100px;
+    .disabled-button {
+      color: #fff;
+      border-radius: 100px;
+      font-size: 24px;
+      text-decoration: none;
+      display: block;
+      cursor: not-allowed;
+      background: #888888;
+      width: 100%;
+      border: solid;
+    }
+
+  }
   &__toBuy {
     text-align: center;
     line-height: 48px;
     background: #3CCACE;
     border: 1px solid #3CCACE;
+    color: #fff;
     width: 60%;
     font-size: 18px;
     border-radius: 100px;
     margin: 0 auto;
     text-decoration: none;
     &--buy {
-      text-decoration: none;
+      line-height: 40px;
+      background: #3CCACE;
+      border: 1px solid #3CCACE;
       color: #fff;
-    }
-  }
-  &__login {
-    text-align: center;
-    line-height: 48px;
-    background: #3CCACE;
-    border: 1px solid #3CCACE;
-    width: 60%;
-    font-size: 18px;
-    border-radius: 100px;
-    margin: 0 auto;
-    &--btn {
+      width: 60%;
+      font-size: 18px;
+      border-radius: 100px;
+      margin: 0 auto;
       text-decoration: none;
-      color: #fff;
-    }
-  }
-  &__edit {
-    display: flex;
-    justify-content: space-between;
-    padding-right: 430px;
-    &--btn {
-      text-decoration: none;
-      color: #333;
     }
   }
 }
@@ -159,6 +164,18 @@ ul {
       object-fit: contain;
       height: 346px;
     }
+    // 購入されたら画像にsoldと表示される
+    .items-box_photo__sold{
+      display: block;
+      
+      position: absolute;
+      top: 50;
+      left: 40;
+      color:#fff;
+      font-size: 50px;
+      background-color: #ea352d;
+    }
+
   }
 }
 

@@ -1,8 +1,8 @@
 class ProductsController < ApplicationController
+  require "payjp"
   before_action :set_category, only: [:new, :edit, :create, :update, :destroy]
   before_action :move_to_root, except: :show
-  before_action :set_product, only: [:edit, :update, :show, :destroy]
-  before_action :request_path, only: [:new, :edit]
+  before_action :set_product, only: [:edit, :update, :show, :destroy, :buy, :purchase]
 
   def index
     @products = Product.includes(:images).order('created_at DESC')
@@ -49,13 +49,14 @@ class ProductsController < ApplicationController
     @sizes = Size.where(ancestry: nil)
     @product = Product.new(product_params)
     if @product.save
-      redirect_to new_product_create_products_path(@product.id)
+      redirect_to new_product_create_product_path(@product.id)
     else
-      render :new and return
+      render action: :new, locals: { product: @product }
     end
   end
 
   def new_product_create
+    @user = User.find(current_user.id)
   end
 
   def edit
@@ -77,10 +78,8 @@ class ProductsController < ApplicationController
   end
 
   def update
-    @category_parent = Category.where(ancestry: nil)
-    
     if @product.update(product_params)
-      redirect_to product_path(@product)
+      redirect_to product_path(@product.id)
     else
       render :edit
     end
@@ -95,6 +94,47 @@ class ProductsController < ApplicationController
     @product.destroy
     redirect_to products_path
   end
+
+  def buy
+    @creditcard = CreditCard.find_by(user_id: current_user.id)
+    @address = Destination.find_by(user_id: current_user.id)
+  
+    Payjp.api_key = Rails.application.credentials.payjp[:PAYJP_SECRET_KEY]
+    customer = Payjp::Customer.retrieve(@creditcard.customer_id)
+    @creditcard_information = customer.cards.retrieve(@creditcard.card_id)
+    @card_brand = @creditcard_information.brand
+
+    case @card_brand
+      when "Visa"
+        @card_image = "visa_card.svg"
+      when "JCB"
+        @card_image = "jcb.svg"
+      when "MasterCard"
+        @card_image = "master_card.svg"
+      when "American Express"
+        @card_image = "american_express.svg"
+      when "Diners Club"
+        @card_image = "diners.svg"
+      when "Discover"
+        @card_image = "discover.svg" 
+      end
+    end
+
+    def purchase
+      @creditcard = CreditCard.find_by(user_id: current_user.id)
+     
+      Payjp.api_key = Rails.application.credentials.payjp[:PAYJP_SECRET_KEY]
+
+      #payjp経由で支払いを実行
+      charge = Payjp::Charge.create(
+        amount: @product.price,
+        customer: Payjp::Customer.retrieve(@creditcard.customer_id),
+        currency: 'jpy'
+      )
+      @product_buyer= Product.find(params[:id])
+      @product_buyer.update(status:'sold',buyer_id: current_user.id)
+      redirect_to purchased_product_path
+    end
 
   private 
 
@@ -128,11 +168,10 @@ class ProductsController < ApplicationController
     redirect_to root_path unless user_signed_in?
   end
 
-  def request_path
-    @path = controller_path + '#' + action_name
-    def @path.is(*str)
-        str.map{|s| self.include?(s)}.include?(true)
+  # 投稿者だけが編集ページに遷移できるようにする
+  def not_productuser
+    if current_user.id != @product.user_id
+      redirect_to root_path
     end
   end
-
 end

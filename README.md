@@ -89,6 +89,8 @@ Things you may want to cover:
 |category|references|null:false,foreign_key:true|
 |prefecture_id|integer|null:false|
 |sipping_day_id|integer|null:false|
+|size|references|null:false,foreign_key:true|
+|buyer_id|integer|
 
 ### enum
 - enum condition:{brand_new: 1, look_brand_new: 2, no_noticeable_scratches: 3, some_scratches: 4, noticeable_scratches: 5, bad_condition: 6}
@@ -98,6 +100,7 @@ Things you may want to cover:
 - belongs_to: user
 - belongs_to: brand
 - belongs_to: category
+- belongs_to: size, optional: true
 - has_many: images,dependent::destroy
 - has_many: commemts,dependent::destroy
 - has_many: likes,dependent::destroy
@@ -131,7 +134,32 @@ Things you may want to cover:
 
 ### Asociation
 - has_many :products
+- has_many :category_sizes
+- has_many :sizes, through: :category_sizes
 - has_ancestry
+
+## sizesテーブル
+|Column|Type|Options|
+|------|----|-------|
+|size|string|null:false|
+|ancestry|string|
+
+### Asociation
+- has_many :products
+- has_many :category_sizes
+- has_many :categories, through: :category_sizes
+- has_ancestry
+
+## category_sizes テーブル
+|Column|Type|Options|
+|------|----|-------|
+|category|references|foreign_key:true|
+|size|references|foreign_key:true|
+
+### Asociation
+- belongs_to :category
+- belongs_to :size
+
 ## brandsテーブル
 |Column|Type|Options|
 |------|----|-------|

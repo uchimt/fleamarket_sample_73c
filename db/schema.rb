@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_25_220208) do
+ActiveRecord::Schema.define(version: 2020_08_09_041453) do
 
   create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "brand_name"
     t.string "japanese_brand_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["brand_name"], name: "index_brands_on_brand_name"
+    t.index ["japanese_brand_name"], name: "index_brands_on_japanese_brand_name"
   end
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -28,10 +30,21 @@ ActiveRecord::Schema.define(version: 2020_07_25_220208) do
   end
 
   create_table "category_sizes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "category_id"
-    t.integer "size_id"
+    t.bigint "category_id"
+    t.bigint "size_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_category_sizes_on_category_id"
+    t.index ["size_id"], name: "index_category_sizes_on_size_id"
+  end
+
+  create_table "credit_cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "card_id", null: false
+    t.string "customer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_credit_cards_on_user_id"
   end
 
   create_table "destinations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -74,6 +87,7 @@ ActiveRecord::Schema.define(version: 2020_07_25_220208) do
     t.bigint "brand_id"
     t.bigint "category_id", null: false
     t.bigint "size_id"
+    t.integer "buyer_id"
     t.index ["brand_id"], name: "index_products_on_brand_id"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["size_id"], name: "index_products_on_size_id"
@@ -115,6 +129,9 @@ ActiveRecord::Schema.define(version: 2020_07_25_220208) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "category_sizes", "categories"
+  add_foreign_key "category_sizes", "sizes"
+  add_foreign_key "credit_cards", "users"
   add_foreign_key "destinations", "users"
   add_foreign_key "images", "products"
   add_foreign_key "products", "brands"

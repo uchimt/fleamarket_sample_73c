@@ -25,15 +25,18 @@ class Product < ApplicationRecord
   validates :size_id, presence:true, if: :size_exist #サイズの選択肢が表示されたときだけバリデーションをかける
 #サイズの情報を取得するメソッド
 def size_exist
-  selected_grandchild =Category.find(category_id)
-  if related_size_parent = selected_grandchild.sizes[0]
-    @sizes = related_size_parent.children
-    @sizes.exists?
-  else
-    selected_child =Category.find(category_id).parent
-    if related_size_parent = selected_child.sizes[0]
+  if category_id.present?
+    selected_grandchild =Category.find(category_id)
+    if related_size_parent = selected_grandchild.sizes[0]
       @sizes = related_size_parent.children
       @sizes.exists?
+    elsif
+      selected_child =Category.find(category_id).parent
+      if related_size_parent = selected_child.sizes[0]
+        @sizes = related_size_parent.children
+        @sizes.exists?
+      end
+    else
     end
   end
 end

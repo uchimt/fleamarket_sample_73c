@@ -1,13 +1,12 @@
-.head
-  ピックアップカテゴリー
-.productBox
-  .productHead
-    .title
-      新規投稿商品
-  .productLists
-    .productList
-      = image_tag product.images[0].src.url, class: "productList--img"
-      .productList--body
-        %p.name= product.title
-        %p.details= product.price
-        円（税抜）
+.contents
+  .content
+    = image_tag product.images[0].src.url, class: "_products-index-image"
+      //buyer_idがある場合には、SOLDと表示させる
+      - if product.buyer_id.present? 
+      .items-box_photo__sold
+        .items-box_photo__sold__inner SOLD
+
+  .discription
+    %p.products-index-title= product.title
+    %p.products-index-price= product.price
+    円
