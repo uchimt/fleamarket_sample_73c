@@ -111,15 +111,16 @@
                   = comment.comment
                 .commentList__content--time
                   = comment.created_at.strftime("%Y年%m月%d日 %H時%M分")
-              .commetntList__userName
+              .commentList__userName
                 = comment.user.nickname
           - else
-            .commentList
-              .commetntList__otherUserName
+            .commentList__otherComment
+              .commentList__otherUserName
                 = comment.user.nickname
               .commentList__otherContent
-                = comment.comment
-                .commentList__otherTime
+                .commentList__otherContent--comment
+                  = comment.comment
+                .commentList__otherContent--time
                   = comment.created_at.strftime("%Y年%m月%d日 %H時%M分")
 
       - if current_user
