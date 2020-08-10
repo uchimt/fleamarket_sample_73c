@@ -16,8 +16,6 @@ class CardsController < ApplicationController
       @exp_month = @card_info.exp_month.to_s #カードの有効期限を取得
       @exp_year = @card_info.exp_year.to_s.slice(2,3) # 年は最後の下2桁をsliceメソッドを使って取り出す
 
-      # この後各カード会社のimageをそれぞれファイルに突っ込んで、そのファイルを変数に代入するコードを書く
-      # カード会社の画像をviewに表示させるためファイルを指定する
       case  @card_brand
         when "Visa"
           @card_image = "visa_card.svg"
@@ -44,7 +42,7 @@ class CardsController < ApplicationController
 
   def create
     Payjp.api_key = Rails.application.credentials.payjp[:PAYJP_SECRET_KEY] # 秘密鍵。PAY.JPと通信（保存したり、抽出したり）するときはこの秘密鍵が必要。
-     #binding.pry
+    
     if params['payjp-token'].blank? # トークンがなければもう一度newで登録画面へ
       redirect_to action: "new"
     else
@@ -58,24 +56,24 @@ class CardsController < ApplicationController
     # これより下は自分のDBに値を保存する処理
     @card = CreditCard.new(user_id: current_user.id, customer_id: customer.id,card_id: customer.default_card)
     if @card.save
-      redirect_to action: "index", notice:"支払い情報の登録が完了しました" 
+      flash[:alert] ="支払い情報の登録が完了しました"
+      redirect_to action: "index" 
     else 
       render new 
     end
   end
 
   def destroy
-    # クレジットカードを削除するときはPAY.JPの顧客情報ごと削除する。PAY.JPに情報が残ったままだとcreateアクションで不具合が起きるかもしれない
-    # PAY.JPの情報にアクセスするときは必ず秘密鍵をセットする
-    
     Payjp.api_key = Rails.application.credentials.payjp[:PAYJP_SECRET_KEY]
     # PAY.JPのメソッドを使って、削除したい顧客情報を検索する
     customer = Payjp::Customer.retrieve(@card.customer_id)
     customer.delete #PAY.JPの顧客情報を削除
     if @card.destroy #アプリ上でもクレジットカードを削除
-      redirect_to action: "index", notice: "削除しました"
+      flash[:alert] ="削除しました"
+      redirect_to action: "index"
     else
-      redirect_to action: "index", notice: "削除できませんでした"
+      flash[:alert] = "削除できませんでした"
+      redirect_to action: "index"
     end
   end
   
