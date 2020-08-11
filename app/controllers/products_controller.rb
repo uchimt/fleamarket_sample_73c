@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   require "payjp"
-  before_action :set_category, only: [:new, :edit, :create, :update, :destroy]
-  before_action :move_to_root, except: :show
+  before_action :set_category, only: [:new, :edit, :create, :update, :destroy, :search]
+  before_action :move_to_root, except: [:show, :search]
   before_action :set_product, only: [:edit, :update, :show, :destroy, :buy, :purchase]
 
   def index
@@ -87,6 +87,10 @@ class ProductsController < ApplicationController
 
   def show
     @images = @product.images
+  end
+
+  def search
+    @products = Product.search(params[:keyword])
   end
 
   def destroy
