@@ -23,7 +23,7 @@ Rails.application.routes.draw do
       get 'purchased'
       get 'buy'
     end
-    resources :comments, only: :create
+    resources :comments, only: [:create, :destroy]
   end
 
   resources :cards, only: [:index, :new, :create, :destroy]
