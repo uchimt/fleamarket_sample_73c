@@ -4,6 +4,12 @@ class CommentsController < ApplicationController
     redirect_to product_path(@comment.product.id)  # 商品詳細画面へ遷移
   end
 
+  def destroy
+    comment = Comment.find(params[:id])
+    comment.destroy
+    redirect_to product_path(comment.product.id)  # 商品詳細画面へ遷移
+  end
+
   private
   def comment_params
     params.require(:comment).permit(:comment).merge(user_id: current_user.id, product_id: params[:product_id])
