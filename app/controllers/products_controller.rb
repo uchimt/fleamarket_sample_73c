@@ -44,14 +44,14 @@ class ProductsController < ApplicationController
   end
 
   def create   
+    @brands = Brand.all
+    @category_parent_array = Category.where(ancestry: nil)
     @sizes = Size.where(ancestry: nil)
     @product = Product.new(product_params)
     if @product.save
       redirect_to new_product_create_product_path(@product.id)
     else
-      if @product.category_id.present?
-        set_sizes
-      end
+      set_sizes
       render action: :new, locals: { product: @product }
     end
   end
@@ -65,11 +65,10 @@ class ProductsController < ApplicationController
     @category_parent_array = Category.where(ancestry: nil)
     @category_children = @product.category.parent.parent.children
     @category_grandchildren = @product.category.parent.children
-    @sizes = Size.where(ancestry: nil)
+    # サイズを取得するメソッド
     set_sizes
   end
 
-  # サイズを取得するメソッド
   def set_sizes
     @category_id = @product.category_id
     selected_grandchild =Category.find(@category_id)
@@ -83,37 +82,13 @@ class ProductsController < ApplicationController
     end
   end
 
-  def size_exist
-    @category_id = @product.category_id
-    if @product.category_id.present?
-      selected_grandchild =Category.find(@category_id)
-      if related_size_parent = selected_grandchild.sizes[0]
-        @sizes = related_size_parent.children
-        @sizes.exists?
-      elsif
-        selected_child =Category.find(@category_id).parent
-        if related_size_parent = selected_child.sizes[0]
-          @sizes = related_size_parent.children
-          @sizes.exists?
-        end
-      else
-      end
-    end
-  end
-
-  helper_method :size_exist
+  helper_method :set_sizes
 
   def update
     @sizes = Size.where(ancestry: nil)
     if @product.update(product_params)
-      if @product.size.nil?
-        @product.size.update == nil
-      end
       redirect_to product_path(@product.id)
     else
-      if @product.category_id.present?
-        set_sizes
-      end
       render :edit
     end
   end

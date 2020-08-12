@@ -61,21 +61,21 @@
         %label カテゴリー
         %span.require_label 必須
         .product-information__category--form
-          -if @product.category_id.present?
+          -if @product.category_id.blank?
+            = f.select :category_id, options_for_select(@category_parent_array.map{|c| [c[:name], c[:id], {'data-category'=>c[:id]}]}, ), {include_blank: "選択してください"}, { class: "product-information__category--select_form", id: "parent_category"} 
+          -else
             = f.select :category_id, options_for_select(@category_parent_array.map{|c| [c[:name], c[:id], {'data-category'=>c[:id]}]}, @product.category.parent.parent.id), {}, { class: "product-information__category--select_form", id: "parent_category"}
             #children_form.product-information__category--form
               = f.select :category_id, options_for_select(@product.category.parent.parent.children.map{|c| [c[:name], c[:id], {'data-category'=>c[:id]}]}, @product.category.parent.id), {}, { class: "product-information__category--select_form", id: "child_category"}
             #grandchildren_form.product-information__category--form
               = f.select :category_id, options_for_select(@product.category.parent.children.map{|c| [c[:name], c[:id],{'data-category'=>c[:id]}]}, @product.category.id), {}, { class: "product-information__category--select_form", id: "grandchild_category"}
-          -else
-            = f.select :category_id, options_for_select(@category_parent_array.map{|c| [c[:name], c[:id], {'data-category'=>c[:id]}]}, ), {include_blank: "選択してください"}, { class: "product-information__category--select_form", id: "parent_category"} 
         -if @product.errors.any? 
           .alert
             %ul
               -@product.errors.full_messages_for(:category_id).each do |error| 
                 %li= error
       #size_wrapper.product-information__size
-        -if size_exist
+        -if @sizes.present?
           %label.product-information__label サイズ
           %span.require_label 必須
           #size_form.product-information__size--form
