@@ -257,11 +257,19 @@ ul {
     &--time {
       font-size: 5px;
       text-align: left;
+      margin-top: 10px;
     }
   }
   &__userName {
     height: 50px;
     line-height: 50px;
+
+    &--master {
+      font-size: 12px;
+      padding-left: 6px;
+      height: 10px;
+      line-height: 0px;
+    }
   }
 
   &__otherComment {
@@ -274,6 +282,13 @@ ul {
     width: 70px;
     text-align: left;
     line-height: 50px;
+    
+    &--master {
+      font-size: 12px;
+      padding-left: 6px;
+      height: 10px;
+      line-height: 0px;
+    }
   }
 
   &__otherContent {
@@ -284,6 +299,7 @@ ul {
     &--time {
       font-size: 5px;
       text-align: left;
+      margin-top: 10px;
     }
   }
 }
