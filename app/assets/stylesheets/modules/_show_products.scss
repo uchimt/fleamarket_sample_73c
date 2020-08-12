@@ -254,10 +254,21 @@ ul {
       text-align: left;
       padding-bottom: 10px;
     }
+
+    &--delete {
+      text-align: left;
+      padding-top: 10px;
+      font-size: 5px;
+    }
+
+    &--delete a {
+      text-decoration: none;
+      color: black;
+    }
+
     &--time {
       font-size: 5px;
       text-align: left;
-      margin-top: 10px;
     }
   }
   &__userName {
