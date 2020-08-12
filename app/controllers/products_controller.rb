@@ -2,9 +2,7 @@ class ProductsController < ApplicationController
   require "payjp"
   before_action :set_category, only: [:new, :edit, :create, :update, :destroy]
   before_action :move_to_root, except: :show
-  before_action :set_product, only: [:edit, :update, :show, :destroy, :buy, :purchase]
-  before_action :not_buy_product, only: :buy
-
+  before_action :set_product, only: [:edit, :update, :show, :destroy, :buy, :purchase, :set_sizes]
 
   def index
     @products = Product.includes(:images).order('created_at DESC')
@@ -53,6 +51,7 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to new_product_create_product_path(@product.id)
     else
+      set_sizes
       render action: :new, locals: { product: @product }
     end
   end
@@ -67,6 +66,11 @@ class ProductsController < ApplicationController
     @category_children = @product.category.parent.parent.children
     @category_grandchildren = @product.category.parent.children
     # サイズを取得するメソッド
+    set_sizes
+  end
+
+  def set_sizes
+    @category_id = @product.category_id
     selected_grandchild =Category.find(@category_id)
     if related_size_parent = selected_grandchild.sizes[0]
       @sizes = related_size_parent.children
@@ -76,8 +80,9 @@ class ProductsController < ApplicationController
         @sizes = related_size_parent.children
       end
     end
-
   end
+
+  helper_method :set_sizes
 
   def update
     @sizes = Size.where(ancestry: nil)
@@ -101,21 +106,12 @@ class ProductsController < ApplicationController
   def buy
     @creditcard = CreditCard.find_by(user_id: current_user.id)
     @address = Destination.find_by(user_id: current_user.id)
-    # 商品が購入されていたら
-    if @product.buyer_id.present?
-      redirect_back(fallback_location: root_path)
-     #creditcardが未登録であれば登録画面へ戻る 
-    elsif @creditcard.blank?
-      flash[:alert] = '購入にはクレジットカード登録が必要です'
-      redirect_to new_card_path
-      
-    else    
-     # 購入者もいないし、クレジットカードもある場合、決済処理に移行
-      Payjp.api_key = Rails.application.credentials.payjp[:PAYJP_SECRET_KEY]
-      customer = Payjp::Customer.retrieve(@creditcard.customer_id)
-      @creditcard_information = customer.cards.retrieve(@creditcard.card_id)
-      @card_brand = @creditcard_information.brand
-    end
+  
+    Payjp.api_key = Rails.application.credentials.payjp[:PAYJP_SECRET_KEY]
+    customer = Payjp::Customer.retrieve(@creditcard.customer_id)
+    @creditcard_information = customer.cards.retrieve(@creditcard.card_id)
+    @card_brand = @creditcard_information.brand
+
     case @card_brand
       when "Visa"
         @card_image = "visa_card.svg"
@@ -131,8 +127,6 @@ class ProductsController < ApplicationController
         @card_image = "discover.svg" 
       end
     end
-
-   
 
     def purchase
       @creditcard = CreditCard.find_by(user_id: current_user.id)
@@ -185,13 +179,6 @@ class ProductsController < ApplicationController
   # 投稿者だけが編集ページに遷移できるようにする
   def not_productuser
     if current_user.id != @product.user_id
-      redirect_to root_path
-    end
-  end
-
-  # ログイン中のユーザーと、商品のユーザーidが同じであればトップ画面に戻る
-  def not_buy_product
-    if current_user.id == @product.user_id
       redirect_to root_path
     end
   end
