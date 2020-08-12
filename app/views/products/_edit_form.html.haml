@@ -63,20 +63,20 @@
         .product-information__category--form
           = f.select :category_id, options_for_select(@category_parent_array.map{|c| [c[:name], c[:id], {'data-category'=>c[:id]}]}, @product.category.parent.parent.id), {}, { class: "product-information__category--select_form", id: "parent_category"}
           #children_form.product-information__category--form
-            = f.select :category_id, options_for_select(@category_children.map{|c| [c[:name], c[:id], {'data-category'=>c[:id]}]}, @product.category.parent.id), {}, { class: "product-information__category--select_form", id: "child_category"}
+            = f.select :category_id, options_for_select(@product.category.parent.parent.children.map{|c| [c[:name], c[:id], {'data-category'=>c[:id]}]}, @product.category.parent.id), {}, { class: "product-information__category--select_form", id: "child_category"}
           #grandchildren_form.product-information__category--form
-            = f.select :category_id, options_for_select(@category_grandchildren.map{|c| [c[:name], c[:id],{'data-category'=>c[:id]}]}, @product.category.id), {}, { class: "product-information__category--select_form", id: "grandchild_category"}
+            = f.select :category_id, options_for_select(@product.category.parent.children.map{|c| [c[:name], c[:id],{'data-category'=>c[:id]}]}, @product.category.id), {}, { class: "product-information__category--select_form", id: "grandchild_category"}
         -if @product.errors.any? 
           .alert
             %ul
               -@product.errors.full_messages_for(:category_id).each do |error| 
                 %li= error
       #size_wrapper.product-information__size
-        -if @sizes.present?
+        -if size_exist
           %label.product-information__label サイズ
           %span.require_label 必須
           #size_form.product-information__size--form
-            = f.collection_select :size_id, @sizes, :id, :size, {}, { class: "product-information__size--select_form", id: "size"}
+            = f.collection_select :size_id, @sizes, :id, :size, {include_blank: "選択してください"}, { class: "product-information__size--select_form", id: "size"}
         -if @product.errors.any? 
           .alert
             %ul
