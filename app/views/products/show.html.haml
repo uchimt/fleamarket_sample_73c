@@ -113,10 +113,16 @@
                   = comment.created_at.strftime("%Y年%m月%d日 %H時%M分")
               .commentList__userName
                 = comment.user.nickname
+                - if comment.user_id == @product.user.id
+                  .commentList__userName--master
+                    出品者
           - else
             .commentList__otherComment
               .commentList__otherUserName
                 = comment.user.nickname
+                - if comment.user_id == @product.user.id
+                  .commentList__otherUserName--master
+                    出品者
               .commentList__otherContent
                 .commentList__otherContent--comment
                   = comment.comment
