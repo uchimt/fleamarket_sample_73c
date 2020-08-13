@@ -2,9 +2,7 @@ class ProductsController < ApplicationController
   require "payjp"
   before_action :set_category, only: [:new, :edit, :create, :update, :destroy]
   before_action :move_to_root, except: :show
-  before_action :set_product, only: [:edit, :update, :show, :destroy, :buy, :purchase]
-  before_action :not_buy_product, only: :buy
-
+  before_action :set_product, only: [:edit, :update, :show, :destroy, :buy, :purchase, :set_sizes]
 
   def index
     @products = Product.includes(:images).order('created_at DESC')
@@ -45,14 +43,15 @@ class ProductsController < ApplicationController
       end
   end
 
-  def create
-    @brands = Brand.all
-    @category_parent_array = Category.where(ancestry: nil)
+  def create   
     @sizes = Size.where(ancestry: nil)
     @product = Product.new(product_params)
     if @product.save
       redirect_to new_product_create_product_path(@product.id)
     else
+      if @product.category_id.present?
+        set_sizes
+      end
       render action: :new, locals: { product: @product }
     end
   end
@@ -66,7 +65,13 @@ class ProductsController < ApplicationController
     @category_parent_array = Category.where(ancestry: nil)
     @category_children = @product.category.parent.parent.children
     @category_grandchildren = @product.category.parent.children
-    # サイズを取得するメソッド
+    @sizes = Size.where(ancestry: nil)
+    set_sizes
+  end
+
+  # サイズを取得するメソッド
+  def set_sizes
+    @category_id = @product.category_id
     selected_grandchild =Category.find(@category_id)
     if related_size_parent = selected_grandchild.sizes[0]
       @sizes = related_size_parent.children
@@ -76,13 +81,39 @@ class ProductsController < ApplicationController
         @sizes = related_size_parent.children
       end
     end
-
   end
 
+  def size_exist
+    @category_id = @product.category_id
+    if @product.category_id.present?
+      selected_grandchild =Category.find(@category_id)
+      if related_size_parent = selected_grandchild.sizes[0]
+        @sizes = related_size_parent.children
+        @sizes.exists?
+      elsif
+        selected_child =Category.find(@category_id).parent
+        if related_size_parent = selected_child.sizes[0]
+          @sizes = related_size_parent.children
+          @sizes.exists?
+        end
+      else
+      end
+    end
+  end
+
+  helper_method :size_exist
+
   def update
+    @sizes = Size.where(ancestry: nil)
     if @product.update(product_params)
+      if @product.size.nil?
+        @product.size.update == nil
+      end
       redirect_to product_path(@product.id)
     else
+      if @product.category_id.present?
+        set_sizes
+      end
       render :edit
     end
   end
@@ -100,21 +131,12 @@ class ProductsController < ApplicationController
   def buy
     @creditcard = CreditCard.find_by(user_id: current_user.id)
     @address = Destination.find_by(user_id: current_user.id)
-    # 商品が購入されていたら
-    if @product.buyer_id.present?
-      redirect_back(fallback_location: root_path)
-     #creditcardが未登録であれば登録画面へ戻る 
-    elsif @creditcard.blank?
-      flash[:alert] = '購入にはクレジットカード登録が必要です'
-      redirect_to new_card_path
-      
-    else    
-     # 購入者もいないし、クレジットカードもある場合、決済処理に移行
-      Payjp.api_key = Rails.application.credentials.payjp[:PAYJP_SECRET_KEY]
-      customer = Payjp::Customer.retrieve(@creditcard.customer_id)
-      @creditcard_information = customer.cards.retrieve(@creditcard.card_id)
-      @card_brand = @creditcard_information.brand
-    end
+  
+    Payjp.api_key = Rails.application.credentials.payjp[:PAYJP_SECRET_KEY]
+    customer = Payjp::Customer.retrieve(@creditcard.customer_id)
+    @creditcard_information = customer.cards.retrieve(@creditcard.card_id)
+    @card_brand = @creditcard_information.brand
+
     case @card_brand
       when "Visa"
         @card_image = "visa_card.svg"
@@ -130,8 +152,6 @@ class ProductsController < ApplicationController
         @card_image = "discover.svg" 
       end
     end
-
-   
 
     def purchase
       @creditcard = CreditCard.find_by(user_id: current_user.id)
@@ -163,7 +183,7 @@ class ProductsController < ApplicationController
                            :prefecture_id, 
                            :shipping_day_id, 
                            :price, 
-                           images_attributes: [:src, :_destroy, :id])
+                           images_attributes: [:src, :_destroy, :id, :src_cache])
                            .merge(user_id: current_user.id)
   end
 
@@ -184,13 +204,6 @@ class ProductsController < ApplicationController
   # 投稿者だけが編集ページに遷移できるようにする
   def not_productuser
     if current_user.id != @product.user_id
-      redirect_to root_path
-    end
-  end
-
-  # ログイン中のユーザーと、商品のユーザーidが同じであればトップ画面に戻る
-  def not_buy_product
-    if current_user.id == @product.user_id
       redirect_to root_path
     end
   end

@@ -29,7 +29,22 @@ $(function() {
     }
   }
   //
-  
+
+  //バリデーションエラーで入力欄に戻った時
+  if (window.location.href.match(/\/(products)$/)) {
+    //投稿済み画像のプレビュー表示欄の要素を取得する
+    var prevContent = $('.image_input_btn').prev();
+    labelWidth = (640 - $(prevContent).css('width').replace(/[^0-9]/g, ''));
+    $('.image_input_btn').css('width', labelWidth);
+    //プレビューの要素数を取得
+    var count = $('.preview_image_box').length;
+    //プレビューが５つあるときは、投稿ボックスを消しておく
+    if (count == 5) {
+      $('.image_input_btn').hide();
+    }
+  }
+  //
+
   // image_input_btnのwidth操作
   function setLabel() {
     // プレビューボックスのwidthを取得し、maxから引くことでimage_input_btnのwidthを決定
