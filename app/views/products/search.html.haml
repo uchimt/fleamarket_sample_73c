@@ -1,0 +1,9 @@
+= render partial: "search_header"
+.search_main
+  %h2 検索結果
+  .entries-info
+    = page_entries_info(@products)
+  =render @products
+  .search-paginate
+    = paginate @products
+= render partial: "search_footer"
