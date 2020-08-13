@@ -4,6 +4,7 @@ class ProductsController < ApplicationController
   before_action :set_category, only: [:new, :edit, :create, :update, :destroy, :search]
   before_action :move_to_root, except: [:show, :search]
   before_action :set_product, only: [:edit, :update, :show, :destroy, :buy, :purchase, :set_sizes]
+  before_action :not_buy_product, only: :buy
 
   def index
     @products = Product.includes(:images).order('created_at DESC')
@@ -123,7 +124,7 @@ class ProductsController < ApplicationController
   end
 
   def search
-    @products = Product.search(params[:keyword])
+    @products = Product.search(params[:keyword]).page(params[:page]).per(10)
   end
 
   def destroy

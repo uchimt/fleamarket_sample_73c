@@ -4,6 +4,10 @@
   margin: 0 auto;
   padding-top: 8px;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+  & a{
+    text-decoration: none;
+    color: #3ccace;
+  }
   &__login-information{
     text-align: center;
     margin: 8px;
