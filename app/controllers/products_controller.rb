@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
   before_action :set_category, only: [:new, :edit, :create, :update, :destroy]
   before_action :move_to_root, except: :show
   before_action :set_product, only: [:edit, :update, :show, :destroy, :buy, :purchase]
+  
   before_action :not_buy_product, only: :buy
 
 
@@ -188,6 +189,7 @@ class ProductsController < ApplicationController
     end
   end
 
+  
   # ログイン中のユーザーと、商品のユーザーidが同じであればトップ画面に戻る
   def not_buy_product
     if current_user.id == @product.user_id
