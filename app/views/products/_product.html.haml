@@ -1,4 +1,4 @@
-.contents
+=link_to product_path(product.id), class: "contents" do
   .content
     = image_tag product.images[0].src.url, class: "_products-index-image"
       //buyer_idがある場合には、SOLDと表示させる
@@ -9,4 +9,3 @@
   .discription
     %p.products-index-title= product.title
     %p.products-index-price= product.price
-    円
