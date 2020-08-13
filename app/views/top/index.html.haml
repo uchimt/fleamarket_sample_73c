@@ -1,22 +1,61 @@
--# 仮のトップviewです
-%h1.header
-  Top#index
+.header
   .header__inner
     .inner__main
-      %h1.main__icon
+      .main__icon
+        = link_to "/" do
+          =image_tag('logo.png', class: "icon__image")
       .main__search
+        -# = f.text_field :title, {class: "search__input"}
     .inner__nav
-      %ul.nav__left
-        %li.left__category
-          %a.category__btn
+      .nav__left
+        .left__category
+          .category__btn
           カテゴリー
-        %li.left__brand
-          %a.brand__btn
+        .left__brand
+          .brand__btn
           ブランド
-      %ul.nav__right
-        %li.right__login
-        %li.right__new
+      .nav__right
+        .right__login
+          .login__btn
+          ログイン
+        .right__new
+          .new__btn
+          新規会員登録
 .main
+  = image_tag('bg-mainVisual-pict_pc.jpg', class: "main__visual") do
+    .visual__content
+      .content__subtitle
+      人生を変えるフリマアプリ
+      .content__text
+      FURIMAはだれでもかんたんに出品・購入できる
+      フリマアプリです
+      .content__btn
+        .a-btn
+        .g-btn
+    .visual__picture
+  .main__introduction
+  .main__middle-dl
+  .main__features
+  .main__pickupContainer
+    = render @products
+    -# .head
+    -# ピックアップカテゴリー
+    -# .productBox
+    -#   .productHead
+    -#     .title
+    -#       新規投稿商品
+    -#   .productLists
+    -#     .productList
+    -#       = image_tag product.images[0].src.url, class: "productList--img"
+    -#       .productList--body
+    -#         %p.name= product.title
+    -#         %p.details= product.price
+    -#         円（税抜）
+
+.app-banner
+.fotter
+
+
 - if user_signed_in?
   %h2 ログインしています
   = link_to "ログアウト", destroy_user_session_path, method: :delete
@@ -26,19 +65,3 @@
   %h2 ログインしていません
   = link_to "新規登録", new_user_registration_path
   = link_to "ログイン", new_user_session_path
-
-.pickupContainer
-  = render @products
-  -# .head
-  -# ピックアップカテゴリー
-  -# .productBox
-  -#   .productHead
-  -#     .title
-  -#       新規投稿商品
-  -#   .productLists
-  -#     .productList
-  -#       = image_tag product.images[0].src.url, class: "productList--img"
-  -#       .productList--body
-  -#         %p.name= product.title
-  -#         %p.details= product.price
-  -#         円（税抜）
