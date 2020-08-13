@@ -41,6 +41,11 @@ def size_exist
   end
 end
 
+def self.search(search)
+  return Product.all unless search
+  Product.where('title LIKE(?)', "%#{search}%")
+end
+
   enum condition: { 
     brand_new: 1,               # "新品・未使用"
     look_brand_new: 2,          # "未使用に近い"
