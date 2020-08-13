@@ -1,15 +1,16 @@
 class ProductsController < ApplicationController
   require "payjp"
-  before_action :set_category, only: [:new, :edit, :create, :update, :destroy]
-  before_action :move_to_root, except: :show
+
+  before_action :set_category, only: [:new, :edit, :create, :update, :destroy, :search]
+  before_action :move_to_root, except: [:show, :search]
   before_action :set_product, only: [:edit, :update, :show, :destroy, :buy, :purchase, :set_sizes]
+  before_action :not_buy_product, only: :buy
 
   def index
     @products = Product.includes(:images).order('created_at DESC')
     @parents = Category.all.order("id ASC").limit(13) #１層目が13個なのでlimit(13)
   end
 
-  
   def new
     @product = Product.new
     @product.images.build
@@ -122,6 +123,10 @@ class ProductsController < ApplicationController
     @images = @product.images
     @comment = Comment.new
     @comments = @product.comments.includes(:user)
+  end
+
+  def search
+    @products = Product.search(params[:keyword]).page(params[:page]).per(10)
   end
 
   def destroy

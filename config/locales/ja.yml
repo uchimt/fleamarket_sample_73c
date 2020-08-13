@@ -233,3 +233,18 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
+  views:
+    pagination:
+      first: <i class="fas fa-angle-double-left"></i>
+      last: <i class="fas fa-angle-double-right"></i>
+      previous: <i class="fas fa-angle-left"></i>
+      next: <i class="fas fa-angle-right"></i>
+      truncate: "..."
+  helpers:
+    page_entries_info:
+      one_page:
+        zero: "<b>該当データがありません。</b>"
+        one: "<b>1件中 1-1 件を表示</b>"
+        display_entries: '1-%{count}件を表示中 / 合計%{count}件'
+      more_pages:
+        display_entries: '%{first}-%{last}件を表示中 / 合計%{total}件'
