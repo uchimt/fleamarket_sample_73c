@@ -15,7 +15,7 @@ $(function() {
   function appendChildrenBox(insertHTML){
     var childSelectHtml =  '';
     childSelectHtml = `<div class="product-information__category--form" id= "children_form">
-                        <select class="product-information__category--select_form" id="child_category">
+                        <select class="product-information__category--select_form" id="child_category" name="product[category_id]">
                           <option value="" data-category="" >選択してください</option>
                           ${insertHTML}
                         </select>
