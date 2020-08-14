@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
   require "payjp"
-
   before_action :set_category, only: [:new, :edit, :create, :update, :destroy, :search]
   before_action :move_to_root, except: [:show, :search]
   before_action :set_product, only: [:edit, :update, :show, :destroy, :buy, :purchase, :set_sizes]
@@ -209,6 +208,13 @@ class ProductsController < ApplicationController
   # 投稿者だけが編集ページに遷移できるようにする
   def not_productuser
     if current_user.id != @product.user_id
+      redirect_to root_path
+    end
+  end
+
+  # ログイン中のユーザーと、商品のユーザーidが同じであればトップ画面に戻る
+  def not_buy_product
+    if current_user.id == @product.user_id
       redirect_to root_path
     end
   end
