@@ -120,6 +120,7 @@ class ProductsController < ApplicationController
 
   def show
     @images = @product.images
+    @product = Product.find(params[:id])
   end
 
   def search
@@ -129,7 +130,7 @@ class ProductsController < ApplicationController
   def destroy
     @category_parent_array = Category.where(ancestry: nil)
     @product.destroy
-    redirect_to products_path
+    redirect_to root_path
   end
 
   def buy

@@ -12,6 +12,9 @@
   padding:24px 40px 40px;
   width: 700px;
   margin: 0 auto;
+  &__edit--btn{
+    color: #3ccace;
+  }
   &__title {
     text-align: center;
   }
@@ -35,6 +38,7 @@
   }
   &__table--content {
     text-decoration: none;
+    color: #3ccace;
   }
   &__table table {
     width: 100%;
@@ -244,9 +248,11 @@ ul {
     padding-left: 0px;
     &--left {
       text-decoration: none;
+      color: #3ccace;
     }
     &--right {
       text-decoration: none;
+      color: #3ccace;
     }
   }
 }

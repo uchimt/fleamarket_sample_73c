@@ -43,7 +43,7 @@ end
 
 def self.search(search)
   return Product.all unless search
-  Product.where('title LIKE(?)', "%#{search}%")
+  Product.where('description LIKE ? OR title LIKE ?', "%#{search}%", "%#{search}%")
 end
 
   enum condition: { 
