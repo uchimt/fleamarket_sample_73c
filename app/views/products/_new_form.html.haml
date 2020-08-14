@@ -86,9 +86,10 @@
               -@product.errors.full_messages_for(:size_id).each do |error| 
                 %li= error
       .product-information__brand
-        %label ブランド 
-        %span.optional_label 任意
-        = f.collection_select :brand_id, Brand.all, :id, :brand_name, {include_blank: "例：グッチ"}, { class: "product-information__brand--select_form"}
+        %p 
+          ブランド 
+          %span.optional_label 任意
+        = f.collection_select :brand_id, Brand.all, :id, :brand_name, {include_blank: "例：GUCCI"}, { class: "product-information__brand--select_form js-searchable"}
       .product-information__condition
         %label 商品の状態 
         %span.require_label 必須
