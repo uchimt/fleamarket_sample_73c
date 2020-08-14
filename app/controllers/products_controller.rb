@@ -129,7 +129,7 @@ class ProductsController < ApplicationController
   def destroy
     @category_parent_array = Category.where(ancestry: nil)
     @product.destroy
-    redirect_to products_path
+    redirect_to root_path
   end
 
   def buy
