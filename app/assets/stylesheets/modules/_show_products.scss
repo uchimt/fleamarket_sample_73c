@@ -152,7 +152,9 @@ ul {
 
 // 画像部分のCSS
 .images {
+  padding-left: 0;
   display: flex;
+  position: relative;
   &__list {
     flex-direction: column;
     width: 560px;
@@ -161,20 +163,23 @@ ul {
     display: flex;
     &--main {
       object-fit: contain;
-      height: 346px;
+      width: 620px;
+      height: auto;
     }
     // 購入されたら画像にsoldと表示される
     .items-box_photo__sold{
-      display: block;
-      
+      display: inline-block;
       position: absolute;
-      top: 50;
-      left: 40;
-      color:#fff;
+      left: 0;
+      width: 210px;
+      height: 210px;
       font-size: 50px;
-      background-color: #ea352d;
+      &__inner{
+        position: relative;
+        top: 40px;
+        left: 14px
+      }
     }
-
   }
 }
 
