@@ -120,7 +120,6 @@ class ProductsController < ApplicationController
 
   def show
     @images = @product.images
-    @product = Product.find(params[:id])
   end
 
   def search
