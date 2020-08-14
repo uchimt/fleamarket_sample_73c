@@ -120,7 +120,7 @@ class ProductsController < ApplicationController
   end
 
   def search
-    @products = Product.search(params[:keyword]).page(params[:page]).per(10)
+    @products = Product.search(params[:keyword]).order('created_at DESC').page(params[:page]).per(10)
   end
 
   def destroy
