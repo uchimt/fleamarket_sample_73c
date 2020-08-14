@@ -183,12 +183,20 @@
           @extend %inputForm;
         }
       }
-
-        
       &__brand {
         @extend %inputName;
+        p {
+          margin: 10px 0;
+        }
         &--select_form {
           @extend %inputForm;
+        }
+        .select2-selection {
+          height: 50px;
+          .select2-selection__rendered {
+            @extend %inputForm;
+            font-weight: normal;
+          }
         }
       }
       &__condition {

@@ -11,7 +11,7 @@
 @import "modules/purchased_products";
 @import "modules/search_header_products";
 @import "modules/search_main_products";
-
+@import "modules/select2_doropdown_search";
 @import "modules/new_cards";
 @import "modules/index_cards";
 @import "modules/flash.scss";
@@ -29,3 +29,5 @@
 
 @import "font-awesome-sprockets";
 @import "font-awesome";
+
+@import "select2";
