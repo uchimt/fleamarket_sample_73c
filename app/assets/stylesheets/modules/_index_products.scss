@@ -1,13 +1,20 @@
 .content{
   width: 220px; 
   .items-box_photo__sold{
+    pointer-events: none;
+    z-index: 10;
+    width: 70px;
+    height: 70px;
     position: absolute;
     color: #fff;
     background-color:#ea352d;
+    background: linear-gradient(315deg, rgba(255,255,255,0) 50%, #ea352d 50.5%) no-repeat top left/100% 100%;
+    &__inner{
+      position: relative;
+      right: 10px;
+      top: 12px;
+      display: inline-block;
+      transform: rotate(-45deg);
+    }
   }
 } 
-.discription{
-  padding: 16px;
-  .products-index-title{
-  }
-}
