@@ -106,9 +106,6 @@ class ProductsController < ApplicationController
   def update
     @sizes = Size.where(ancestry: nil)
     if @product.update(product_params)
-      if @product.size.nil?
-        @product.size.update == nil
-      end
       redirect_to product_path(@product.id)
     else
       if @product.category_id.present?
