@@ -7,8 +7,7 @@
         .items-box_photo__sold__inner SOLD
 
   .discription
-    %p.products-index-title= product.title
+    %p.products-index-title= product.title 
     %p.products-index-price 
-      ￥
-      = product.price
-    
+      %span￥
+      %span= product.price.to_s(:delimited, delimiter: ',')

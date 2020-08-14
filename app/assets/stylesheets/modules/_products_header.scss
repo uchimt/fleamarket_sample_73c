@@ -1,0 +1,11 @@
+.products_header {
+    background-color: rgb(245, 245, 245);
+    padding: 30px;
+    .header-icon {
+     text-align: center;
+      &__image {
+        max-width: 200px;
+        min-width: 100px;
+      }
+    }
+}
