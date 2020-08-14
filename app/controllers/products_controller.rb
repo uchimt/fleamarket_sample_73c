@@ -106,9 +106,6 @@ class ProductsController < ApplicationController
   def update
     @sizes = Size.where(ancestry: nil)
     if @product.update(product_params)
-      if @product.size.nil?
-        @product.size.update == nil
-      end
       redirect_to product_path(@product.id)
     else
       if @product.category_id.present?
@@ -135,11 +132,21 @@ class ProductsController < ApplicationController
   def buy
     @creditcard = CreditCard.find_by(user_id: current_user.id)
     @address = Destination.find_by(user_id: current_user.id)
-  
-    Payjp.api_key = Rails.application.credentials.payjp[:PAYJP_SECRET_KEY]
-    customer = Payjp::Customer.retrieve(@creditcard.customer_id)
-    @creditcard_information = customer.cards.retrieve(@creditcard.card_id)
-    @card_brand = @creditcard_information.brand
+    
+    # 商品が購入されていたら
+    if @product.buyer_id.present?
+      redirect_back(fallback_location: root_path)
+     #creditcardが未登録であれば登録画面へ戻る 
+    elsif @creditcard.blank?
+      flash[:alert] = '購入にはクレジットカード登録が必要です'
+      redirect_to new_card_path
+    else    
+     # 購入者もいないし、クレジットカードもある場合、決済処理に移行
+      Payjp.api_key = Rails.application.credentials.payjp[:PAYJP_SECRET_KEY]
+      customer = Payjp::Customer.retrieve(@creditcard.customer_id)
+      @creditcard_information = customer.cards.retrieve(@creditcard.card_id)
+      @card_brand = @creditcard_information.brand
+    end
 
     case @card_brand
       when "Visa"
