@@ -1,7 +1,10 @@
 @import "reset";
 @import "variables";
+@import "modules/products_header";
+@import "modules/products_footer";
 @import "modules/index_products";
 @import "modules/new_products";
+@import "modules/new_product_create";
 @import "modules/edit_products";
 @import "modules/show_products";
 @import "modules/buy_products";
@@ -9,6 +12,7 @@
 @import "modules/top-page";
 @import "modules/search_header_products";
 @import "modules/search_main_products";
+@import "modules/select2_doropdown_search";
 
 @import "modules/new_cards";
 @import "modules/index_cards";
@@ -27,3 +31,5 @@
 
 @import "font-awesome-sprockets";
 @import "font-awesome";
+
+@import "select2";
