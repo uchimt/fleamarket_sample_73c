@@ -1,7 +1,10 @@
 @import "reset";
 @import "variables";
+@import "modules/products_header";
+@import "modules/products_footer";
 @import "modules/index_products";
 @import "modules/new_products";
+@import "modules/new_product_create";
 @import "modules/edit_products";
 @import "modules/show_products";
 @import "modules/buy_products";

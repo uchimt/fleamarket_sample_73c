@@ -3,7 +3,7 @@
 -#     出品が完了しました。
 -#   .btn
 -#     トップへ戻る。
-.header
+.products_header
   = render partial: 'header'
 .new_product_create_body
   .putting_up_product
@@ -17,5 +17,5 @@
       =link_to "出品した商品をみる", product_path(:id), class: "index_btn"
       -# =link_to "商品一覧をみる", products_path, class: "index_btn"
     %p= link_to "マイページを見る", "#"
-.footer
+.products_footer
   = render partial: 'footer'

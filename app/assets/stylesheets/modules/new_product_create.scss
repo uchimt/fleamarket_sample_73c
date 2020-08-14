@@ -1,0 +1,60 @@
+.new_product_create_body {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  .putting_up_product {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 300px;
+    max-width: 640px;
+    background-color: white;
+    margin: auto; 
+    .putting_up_product_box {
+      margin: 40px auto;
+      width: 90%;
+      height: 90%;
+      &__title {
+        color: #333333;
+        font-size: 17px;
+        text-align: center;
+      }
+      &__message {
+        display: block;
+        columns: #333333;
+        font-size: 14px;
+        text-align: center;
+        span {
+          color: #0095EE;
+        }    
+      }
+      &__link {
+        .link_btn {
+          display: block;
+          width: 360px;
+          height: 50px;
+          line-height: 50px;
+          border-radius: 5px;
+          font-size: 20px;
+          text-align: center;
+          cursor: pointer;
+          color: white;
+          background-color: #3CCACE;
+          text-decoration: none;
+          margin: 10px auto;
+        }
+      }
+      a.my_page_link {
+        display: block;
+        text-decoration: none;
+        font-size: 14px;
+        color: #0095EE;
+        cursor: pointer;
+        text-align: center;
+      }
+    }
+  }
+  
+}
