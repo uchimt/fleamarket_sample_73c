@@ -134,7 +134,7 @@
                   = comment.created_at.strftime("%Y年%m月%d日 %H時%M分")
 
       - if current_user
-        = form_with model: [@product, @comment], local: true do |form|
+        = form_with model: [@product, @comment], local: true, id:"newComment" do |form|
           = form.text_area :comment, class:"commentBox__area"
           %p.commentBox__note
             相手のことを考え丁寧なコメントを心がけましょう。
