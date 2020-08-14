@@ -5,7 +5,9 @@
         = link_to "/" do
           =image_tag('logo.png', class: "icon__image")
       .main__search
-        -# = f.text_field :title, {class: "search__input"}
+        = form_with(url: search_products_path, local: true, method: :get, class: "search-form") do |form| 
+          = form.text_field :keyword, placeholder: "投稿を検索する", class: "search-input" 
+          = form.submit "検索", class: "search-btn" 
     .inner__nav
       .nav__left
         .left__category
@@ -37,9 +39,33 @@
     .introduction__subtitle
     FURIMAが選ばれる3つの理由
     .introduction__lists
-      .list1
-      .list2
-      .list3
+      .lists__list1
+        .list1__pict1
+          .pict1__number
+          1
+          =image_tag('pict-reason-01.jpg', class: "pict1-reason-01")
+        .list1__text
+        3分ですぐに出品
+        .list1__discription
+        スマホで入力するだけで簡単に出品できる！
+      .lists__list2
+        .list2__pict2
+          .pict2__number
+          2
+          =image_tag('pict-reason-02.jpg', class: "pict2-reason-02")
+        .list2__text2
+        シンプルで使いやすい
+        .list2__discription2
+        めんどくさい入力しては必要なく、検索も購入もスムーズ！
+      .lists__list3
+        .list3__pict3
+          .pict3__number
+          3
+          =image_tag('pict-reason-03.jpg', class: "pict3-reason-03")
+        .list3__text3
+        手数料業界最安
+        .list3__discription3
+        最大3％でお得に出品＆購入！
   .main__middle-dl
   .main__features
   .main__pickupContainer
