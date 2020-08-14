@@ -115,14 +115,14 @@
     .sameContent
       %ul.sameContent__link
         %li
-          -if @product.previous.present?
-            = link_to  product_path(@product.previous), {class: "sameContent__link--left"} do
-              %i.fa.fa-angle-left
-              前の商品  
-        %li
           -if @product.next.present?
-            = link_to  product_path(@product.next), {class: "sameContent__link--right"} do
-              後ろの商品
+            = link_to  product_path(@product.next), {class: "sameContent__link--left"} do
+              %i.fa.fa-angle-left
+              前の商品
+        %li
+          -if @product.previous.present?
+            = link_to  product_path(@product.previous), {class: "sameContent__link--right"} do
+              後ろの商品  
               %i.fa.fa-angle-right
     
     -# 関連商品欄
