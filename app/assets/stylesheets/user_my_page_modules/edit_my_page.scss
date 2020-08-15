@@ -1,0 +1,106 @@
+.edit_user_contents {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #fff;
+  h2 {
+    padding: 12px 4%;
+    border-bottom: 1px solid #f5f5f5;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.4;
+    margin: 0;
+  }
+  .edit_user {
+    padding: 40px;
+    //border-top: 1px solid #f5f5f5;
+  }
+  .innner_content {
+    max-width: 320px;
+    margin: 0 auto;
+    padding: 0;
+    .upper_field {
+      margin:0 0 0;
+      label {
+        font-weight: 600;
+      }
+      #user_email {
+        width: 100%;
+        margin: 8px 0 0;
+        height: 48px;
+        padding: 10px 16px 8px;
+        border-radius: 4px;
+        border: solid 1px #ccc;
+        background: #fff;
+        line-height: 1.5;
+        font-size: 16px;
+      }
+      p {
+        margin: 8px 0 0;
+        line-height: 1.5;
+        color: #888;
+        font-size: 12px;
+      }
+    }
+    .field {
+      margin: 40px 0 0; 
+      label {
+        font-weight: 600;
+      }
+      #user_password {
+        width: 100%;
+        margin: 8px 0 0;
+        height: 48px;
+        padding: 10px 16px 8px;
+        border-radius: 4px;
+        border: solid 1px #ccc;
+        background: #fff;
+        line-height: 1.5;
+        font-size: 16px;
+      }
+      p {
+        margin: 8px 0 0;
+        line-height: 1.5;
+        color: #888;
+        font-size: 12px;
+      }
+      #user_password_confirmation {
+        width: 100%;
+        margin: 8px 0 0;
+        height: 48px;
+        padding: 10px 16px 8px;
+        border-radius: 4px;
+        border: solid 1px #ccc;
+        background: #fff;
+        line-height: 1.5;
+        font-size: 16px;
+      }
+      #user_current_password {
+        width: 100%;
+        margin: 8px 0 0;
+        height: 48px;
+        padding: 10px 16px 8px;
+        border-radius: 4px;
+        border: solid 1px #ccc;
+        background: #fff;
+        line-height: 1.5;
+        font-size: 16px;
+      }   
+         
+    }
+    .actions {
+      margin: 40px 0 0;
+        input {
+        background: #3ccace;
+        border: 1px solid #3ccace;
+        height: 48px;
+        color: #fff;
+        display: block;
+        width: 100%;
+        font-size: 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+      }
+    }
+  }
+}
