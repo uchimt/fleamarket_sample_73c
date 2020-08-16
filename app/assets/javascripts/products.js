@@ -65,12 +65,13 @@ $(function() {
   //
 
   // file_fieldのnameに動的なindexをつける為の配列
-  let fileIndex = [1,2,3,4];
+  let fileIndex = [1,2,3,4,5];
   // 既に使われているindexを除外
   lastIndex = $('.js-file_group:last').data('index');
   fileIndex.splice(0, lastIndex);
-  // $('.hidden-destroy').hide();
+  $('.hidden-destroy').hide();
  
+  //画像投稿
   $('#image-box').on('change', '.js-file', function(e) {
     // js-fileのidの数値のみ取得
     var id = $(this).attr('id').replace(/[^0-9]/g, '');
@@ -100,56 +101,7 @@ $(function() {
       // ラベルのオプションを更新する
       $('.image_input_btn').attr({id: `image_input_btn--${fileIndex[0]-1}`, for:`product_images_attributes_${fileIndex[0]-1}_src`});
     }
-    // if (count < 5) {
-    //   //プレビューの数でラベルのオプションを更新する 
-    //   $('.image_input_btn').attr({id: `image_input_btn--${count}`, for:`product_images_attributes_${count}_src`});
-    // }
   });
-
-  // // プレビューの追加
-  // $('#image-box').on('change', '.js-file', function() {
-  //   setLabel();
-  //   // js-fileのidの数値のみ取得
-  //   var id = $(this).attr('id').replace(/[^0-9]/g, '');
-  //   // image_input_btnのidとforを更新
-  //   $('.image_input_btn').attr({id: `image_input_btn--${id}`, for: `product_images_attributes_${id}_src`});
-  //   // 選択したfileのオブジェクトを取得
-  //   var file = this.files[0];
-  //   var reader = new FileReader();
-  //   //readAsDataURLで指定したFileオブジェクトを読み込む
-  //   reader.readAsDataURL(file);
-  //   //読み込み時に発火するイベント
-  //   reader.onload = function() {
-  //     var image = this.result;
-  //     //プレビューがもともと無かった場合はhtmlを追加
-  //     if ($(`#preview_image_box__${id}`).length == 0) {
-  //       var count = $('.preview_image_box').length;
-  //       var html = buildHTML(id);
-  //       //ラベルの直前のプレビュー群にプレビューを追加
-  //       var prevContent = $('.image_input_btn').prev();
-  //       $(prevContent).append(html);
-  //     }
-  //     //イメージを追加
-  //     $(`#preview_image_box__${id} img`).attr('src', `${image}`);
-  //     var count = $('.preview_image_box').length;
-  //     //プレビューが5こあったらラベルを隠す
-  //     if (count == 5) {
-  //       $('.image_input_btn').hide();
-  //     }
-  //     //プレビューを削除したフィールドにdestroy用のチェックボックスがあった場合、チェックを外す
-  //     if ($(`#product_images_attributes_${id}__destroy`)) {
-  //       $(`#product_images_attributes_${id}__destroy`).prop('checked', false);
-  //     }
-  //     //image_input_btnのwidth操作
-  //     setLabel();
-  //     //image_input_btnのidとforの値を変更
-      
-  //     if (count < 5) {
-  //       //プレビューの数でラベルのオプションを更新する 
-  //       $('.image_input_btn').attr({id: `image_input_btn--${count}`, for:`product_images_attributes_${count}_src`});
-  //     }
-  //   }
-  // });
 
   //画像の削除
   $('#image-box').on('click', '.js-remove', function() {
