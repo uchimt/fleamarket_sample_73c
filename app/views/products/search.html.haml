@@ -2,8 +2,12 @@
 .search_main
   %h2 検索結果
   .entries-info
+  .searchbox
+    = search_form_for @search, url: search_products_path do |f|
+      = f.text_field :title_cont ,placeholder: '検索するテキストを入力...'
+      = f.submit ("検索") , class: 'search-btn'
+      = render @search_products
     = page_entries_info(@products)
-  =render @products
   .search-paginate
     = paginate @products
 = render partial: "search_footer"
