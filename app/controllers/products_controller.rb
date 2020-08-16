@@ -4,8 +4,7 @@ class ProductsController < ApplicationController
   before_action :move_to_root, except: [:show, :search]
   before_action :set_product, only: [:edit, :update, :show, :destroy, :buy, :purchase, :set_sizes]
   before_action :not_buy_product, only: :buy
-  before_action :set_search
-  
+
   def index
     @products = Product.includes(:images).order('created_at DESC')
     @parents = Category.all.order("id ASC").limit(13) #１層目が13個なのでlimit(13)
@@ -122,11 +121,6 @@ class ProductsController < ApplicationController
 
   def search
     @products = Product.search(params[:keyword]).order('created_at DESC').page(params[:page]).per(10)
-  end
-
-  def set_search
-    @search = Product.ransack(params[:q])
-    @search_products = @search.result.page(params[:page]).order('created_at DESC')
   end
 
   def destroy
