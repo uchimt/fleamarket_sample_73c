@@ -109,8 +109,18 @@
         display: flex;
         margin: 24px 0 0 0;
         .a-btn{
+          margin-right: 10px;
+          .a-btn__image{
+            width: 100%;
+            vertical-align: bottom;
+          }
         }
         .g-btn{
+          width: 10%;
+          .g-btn__image{
+            width: 100%;
+            vertical-align: bottom;
+          }
         }
       }
     }
@@ -261,9 +271,140 @@
     background-size: cover;
     display: flex;
     align-items: center;
+    .middle-dl__inner{
+      color: #fff;
+      text-shadow: 0 0 5px rgba(0,0,0,0.4);
+      text-align: left;
+      max-width: 1040px;
+      width: 100%;
+      margin: 0 auto;
+      .inner__subtitle{
+        font-size: 27px;
+        font-weight: bold;
+        line-height: 1.4;
+      }
+      .inner__text{
+        font-size: 18px;
+        margin: 20px 0 30px;
+        line-height: 1.5;
+      }
+      .inner__btn{
+        display: flex;
+        .abtn__link{
+          margin-right: 10px;
+          .abtn__image{
+            width: 180px;
+          }
+        }
+        .gbtn__link{
+          margin-right: 10px;
+          .gbtn{
+            width: 180px;
+          }
+        }
+      }
+    }
   }
   .main__features{
-
+    padding: 60px 100px;
+    background-color: #fff;
+    .features__head{
+      font-size: 27px;
+      text-align: center;
+      margin: 0 0 40px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      position: relative;
+    }
+    .features__items{
+      max-width: calc(1040px + 20px);
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      .items__item1{
+        display: flex;
+        flex-direction: column;
+        width: calc(1 / 3 * 100%);
+        text-align: center;
+        padding: 0 20px;
+        .item1__image{
+          width: 70%;
+          margin: 0 auto;
+          line-height: 120px;
+          .icon-01{
+            width: 100%;
+            vertical-align: bottom;
+          }
+        }
+        .item1__subtitle{
+          margin: 38px 0 10px;
+          font-size: 19px;
+          font-weight: bold;
+        }
+        .item1__detail{
+          margin: 0 0 40px;
+          font-size: 17px;
+          font-weight: 200;
+          text-align: left;
+        }
+      }
+      .items__item2{
+        display: flex;
+        flex-direction: column;
+        width: calc(1 / 3 * 100%);
+        text-align: center;
+        padding: 0 20px;
+        .item2__image{
+          width: 70%;
+          margin: 0 auto;
+          line-height: 120px;
+          .icon-03{
+            width: 100%;
+            vertical-align: bottom;
+          }
+        }
+        .item2__subtitle{
+          margin: 38px 0 10px;
+          font-size: 19px;
+          font-weight: bold;
+        }
+        .item2__detail{
+          margin: 0 0 40px;
+          font-size: 17px;
+          font-weight: 200;
+          text-align: left;
+        }
+      }
+      .items__item3{
+        display: flex;
+        flex-direction: column;
+        width: calc(1 / 3 * 100%);
+        text-align: center;
+        padding: 0 20px;
+        .item3__image{
+          width: 70%;
+          margin: 0 auto;
+          line-height: 120px;
+          .icon-04{
+            width: 100%;
+            vertical-align: bottom;
+          }
+        }
+        .item3__subtitle{
+          margin: 38px 0 10px;
+          font-size: 19px;
+          font-weight: bold;
+        }
+        .item3__detail{
+          margin: 0 0 40px;
+          font-size: 17px;
+          font-weight: 200;
+          text-align: left;
+        }
+      }
+    }
   }
   .main__pickupContainer{
     
@@ -276,6 +417,26 @@
   position: relative;
   background-size: cover;
   background-position: center;
+  .app-banner__inner{
+    color: #fff;
+    text-align: center;
+    .inner__title{
+      text-shadow: 0 0 5px rgba(0,0,0,0.4);
+      font-size: 24px;
+      font-weight: bold;
+      line-height: 1.4;
+    }
+    .inner__text{
+      font-size: 35px;
+      text-shadow: 0 0 5px rgba(0,0,0,0.4);
+    }
+    .inner__icon{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin: 20px auto 0;
+    }
+  }
 }
 
 .fotter{
