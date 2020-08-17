@@ -20,18 +20,19 @@
                     %span 削除
         -if @product.persisted?
           -# プレビューの数に合わせてforオプションを指定
-          %label{for: "product_images_attributes_#{@product.images.length}_src", class: "image_input_btn", id: "image_input_btn--#{@product.images.length}"} 
+          %label{for: "product_images_attributes_#{@product.images.count}_src", class: "image_input_btn", id: "image_input_btn--#{@product.images.count}"} 
             #posts.post_form
               =image_tag('icon_camera.png', class: "image_input_btn_camera")
               .image_input_btn_text クリックしてファイルをアップロード
           .hidden_post_form
-            = f.fields_for :images do |i|
+            = f.fields_for :images do |image|
               -# プレビューが出ている分のfile_fieldとdelete用のチェックボックスを設置
-              = i.file_field :src, class: "hidden-field"
-              = i.check_box :_destroy, class: "hidden-checkbox"
-              = i.hidden_field :src_cache
-            -@product.images.length.upto(4) do |i|
-              %input{class: "hidden-field", type: "file", name: "product[images_attributes][#{i}][src]", id: "product_images_attributes_#{i}_src"}
+              %div{ data: {index: "#{ image.index }" }, class: "js-file_group" }
+                = image.file_field :src, class: "js-file"
+                = image.check_box :_destroy, data:{ index: image.index }, class: "hidden-destroy"
+            -# 投稿用のfile_fieldを設置
+            %div{ data: {index: "#{ @product.images.count }" }, class: "js-file_group" }
+              = file_field_tag :src, name: "product[images_attributes][#{@product.images.count}][src]", id:"product_images_attributes_#{@product.images.count}_src", class: 'js-file'
         -if @product.errors.any? 
           .alert
             %ul

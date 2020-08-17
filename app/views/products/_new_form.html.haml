@@ -7,7 +7,7 @@
       %p.post-image-list__explanation 最大5枚までアップロードできます
       #image-box.post-image-list__box
         #previews.preview_list
-          -# cacheに値がセットされている場合は画像を表示
+          -# バリデーションエラー時cacheに値がセットされている場合は画像を表示
           -if @product.images[0].src.url.present?
             -@product.images.each_with_index do |image, i|
               .preview_image_box{id: "preview_image_box__#{i}"}
@@ -16,22 +16,17 @@
                 .update_box
                   .js-remove{id: "delete_btn_#{i}"}
                     %span 削除
-              -# =image_tag @product.images[0].src.url if @product.images[0].src.url.present?
         %label{for: "product_images_attributes_0_src", class: "image_input_btn", id: "image_input_btn--0"} 
           #posts.post_form
             =image_tag('icon_camera.png', class: "image_input_btn_camera")
             .image_input_btn_text クリックしてファイルをアップロード
         .hidden_post_form
-          =f.fields_for :images do |image|
-            
+          =f.fields_for :images do |image|          
             -# 画像がビルドされた際に振られるidを取得
-            =image.file_field :src, class:"hidden-field" 
-            =image.file_field :src, class:"hidden-field", name: "product[images_attributes][1][src]", id: "product_images_attributes_1_src"
-            =image.file_field :src, class:"hidden-field", name: "product[images_attributes][2][src]", id: "product_images_attributes_2_src"
-            =image.file_field :src, class:"hidden-field", name: "product[images_attributes][3][src]", id: "product_images_attributes_3_src"
-            =image.file_field :src, class:"hidden-field", name: "product[images_attributes][4][src]", id: "product_images_attributes_4_src"
-            -# cacheを使用するためにhidden_fieldを設置
-            =image.hidden_field :src_cache
+            %div{ data: {index: "#{image.index}" }, class: "js-file_group" }
+              =image.file_field :src, class:"js-file" 
+              -# cacheを使用するためにhidden_fieldを設置
+              =image.hidden_field :src_cache
         -if @product.errors.any? 
           .alert
             %ul
