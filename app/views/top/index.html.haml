@@ -18,9 +18,10 @@
           ブランド
       .nav__right
         - if user_signed_in?
-          = link_to "ログアウト", destroy_user_session_path, method: :delete
-          %p= link_to "マイページを見る", user_path(current_user.id)
-          %p= link_to '出品', new_product_path
+          .right__logout
+            = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "logout__btn"
+          .right__mypage
+            = link_to "マイページを見る", user_path(current_user.id), class: "mypage__btn"
         - else
           .right__login
           = link_to "ログイン", new_user_session_path, class: "login__btn"
@@ -39,10 +40,15 @@
       .content__subtitle 人生を変えるフリマアプリ
       .content__text FURIMAはだれでもかんたんに出品・購入できるフリマアプリです
       .content__btn
-        .a-btn
+        = link_to "/", class: "a-btn__link" do
           =image_tag('https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg', class: "a-btn__image")
-        .g-btn
+        = link_to "/", class: "g-btn__link" do
           =image_tag('google-play-badge.png', class: "g-btn__image")
+        -# .a-btn
+        -#   .a-btn__image
+        -#   =image_tag('https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg')
+        -# .g-btn
+        -#   =image_tag('google-play-badge.png', class: "g-btn__image")
     .visual__picture
   .main__introduction
     .introduction__subtitle FURIMAが選ばれる3つの理由
@@ -79,7 +85,7 @@
         = link_to "/", class: "abtn__link" do
           =image_tag('https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg', class: "abtn__image")
         = link_to "/", class: "gbtn__link" do
-          =image_tag('google-play-badge.png', class: "gbtn")
+          =image_tag('google-play-badge.png', class: "gbtn__image")
   .main__features
     .features__head FURIMAの特徴
     .features__items
@@ -99,38 +105,53 @@
         .item3__subtitle 様々な支払いに対応
         .item3__detail お支払いは、クレジットカードだけでなく、ポイントや売上金など多彩な方法があります。
   .main__pickupContainer
+    %h1.pickupContainer__title 新規投稿商品
     = render @products
-    -# .head
-    -# ピックアップカテゴリー
-    -# .productBox
-    -#   .productHead
-    -#     .title
-    -#       新規投稿商品
-    -#   .productLists
-    -#     .productList
-    -#       = image_tag product.images[0].src.url, class: "productList--img"
-    -#       .productList--body
-    -#         %p.name= product.title
-    -#         %p.details= product.price
-    -#         円（税抜）
 
 .app-banner
   .app-banner__inner
     .inner__title だれでもかんたん、人生を変えるフリマアプリ
     .inner__text 今すぐ無料ダウンロード！
     .inner__icon
+      = link_to "/", class: "a-icon__link" do
+        =image_tag('https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg', class: "a-icon__image")
+      = link_to "/", class: "g-icon__link" do
+        =image_tag('google-play-badge.png', class: "g-icon__image")
 
 .fotter
   .fotter__contents
+    .contents__content1
+      .content1__head FURIMAについて
+      %ul.content1__detail
+        %li.detail__list1
+          %a.list1__link 会社概要（運営会社）
+        %li.detail__list2
+          %a.list2__link プライバシーポリシー
+        %li.detail__list3
+          %a.list3__link FURIMA利用規約
+        %li.detail__list4
+          %a.list4__link ポイントに関する特約
+    .contents__content2
+      .cotent2__head FURIMAを見る
+      %ul.content2__detail
+        %li.detail__list5
+          %a.list5__link カテゴリー一覧
+        %li.detail__list6
+          %a.list6__link ブランド一覧
+    .contents__content3
+      .cotent3__head ヘルプ＆ガイド
+      %ul.content3__detail
+        %li.detail__list7
+          %a.list7__link FURIMAガイド
+        %li.detail__list8
+          %a.list8__link FURIMAロゴ利用ガイドライン
+        %li.detail__list9
+          %a.list9__link お知らせ
   .fotter__logo
+    = link_to "/" do
+      =image_tag('logo-white.png', class: "logo__image")
   .fotter__c-mark © FURIMA
 
 - if user_signed_in?
-  %h2 ログインしています
-  = link_to "ログアウト", destroy_user_session_path, method: :delete
-  %p= link_to "マイページを見る", user_path(current_user.id)
-  %p= link_to '出品', new_product_path
-- else
-  %h2 ログインしていません
-  = link_to "新規登録", new_user_registration_path
-  = link_to "ログイン", new_user_session_path
+  = link_to '出品する', new_product_path, class: "purchase-btn"
+  .purchase-btn__text
