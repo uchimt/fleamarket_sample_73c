@@ -33,6 +33,13 @@ $(function() {
   }
   //
 
+  // file_fieldのnameに動的なindexをつける為の配列
+  let fileIndex = [1,2,3,4,5,6,7,8,9,10];
+  // 既に使われているindexを除外
+  lastIndex = $('.js-file_group:last').data('index');
+  fileIndex.splice(0, lastIndex);
+  $('.hidden-destroy').hide();
+
   //投稿編集時
   //products/:i/editページへリンクした際のwidth操作
   if (window.location.href.match(/\/products\/\d+\/edit/)) {
@@ -57,19 +64,19 @@ $(function() {
     $('.image_input_btn').css('width', labelWidth);
     //プレビューの要素数を取得
     var count = $('.preview_image_box').length;
+    // inputボックスの追加
+    $('.hidden_post_form').append(buildFileField(fileIndex[0]));
+    // image_input_btnのidとforを更新
+    $('.image_input_btn').attr({id: `image_input_btn--${fileIndex[0]}`, for: `product_images_attributes_${fileIndex[0]}_src`});
+    fileIndex.shift();
+    // 末尾の数に1足した数を追加する
+    fileIndex.push(fileIndex[fileIndex.length - 1] + 1)
     //プレビューが５つあるときは、投稿ボックスを消しておく
     if (count == 5) {
       $('.image_input_btn').hide();
     }
   }
   //
-
-  // file_fieldのnameに動的なindexをつける為の配列
-  let fileIndex = [1,2,3,4,5,6,7,8,9,10];
-  // 既に使われているindexを除外
-  lastIndex = $('.js-file_group:last').data('index');
-  fileIndex.splice(0, lastIndex);
-  $('.hidden-destroy').hide();
  
   //画像投稿
   $('#image-box').on('change', '.js-file', function(e) {
@@ -111,9 +118,14 @@ $(function() {
     var id = $(this).attr('id').replace(/[^0-9]/g, '');
     // 取得したidの該当するプレビューを削除
     $(`#preview_image_box__${id}`).remove();
-    // フォームを削除
-    $(`#product_images_attributes_${id}__destroy`).prop('checked',true);
-    $(`#product_images_attributes_${id}_src`).parent().remove();
+    // 該当indexを振られているチェックボックスを取得する
+    const hiddenCheck = $(`input[data-index="${id}"].hidden-destroy`);
+    // もしチェックボックスが存在すればチェックを入れる
+    if (hiddenCheck) hiddenCheck.prop('checked', true);
+    // フォーム削除
+    $(`#product_images_attributes_${id}_src`).remove();
+    // cache削除
+    $(`#product_images_attributes_${id}_src_cache`).remove();
     // 画像入力欄が0個にならないようにしておく
     if ($('.js-file').length == 0) $('.hidden_post_form').append(buildFileField(fileIndex[0]));
     // 削除時のラベル操作

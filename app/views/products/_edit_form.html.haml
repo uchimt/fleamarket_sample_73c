@@ -30,7 +30,6 @@
               %div{ data: {index: "#{ image.index }" }, class: "js-file_group" }
                 = image.file_field :src, class: "js-file"
                 = image.check_box :_destroy, data:{ index: image.index }, class: "hidden-destroy"
-                = image.hidden_field :src_cache
             -# 投稿用のfile_fieldを設置
             %div{ data: {index: "#{ @product.images.count }" }, class: "js-file_group" }
               = file_field_tag :src, name: "product[images_attributes][#{@product.images.count}][src]", id:"product_images_attributes_#{@product.images.count}_src", class: 'js-file'
