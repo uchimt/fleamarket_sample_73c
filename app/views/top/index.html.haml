@@ -1,39 +1,5 @@
-.header
-  .header__inner
-    .inner__main
-      .main__icon
-        = link_to "/" do
-          =image_tag('logo.png', class: "icon__image")
-      .main__search
-        = form_with(url: search_products_path, local: true, method: :get, class: "search-form") do |form| 
-          = form.text_field :keyword, placeholder: "投稿を検索する", class: "search-input" 
-          = form.submit "検索", class: "search-btn"
-    .inner__nav
-      .nav__left
-        .left__category
-          .category__btn
-          カテゴリー
-        .left__brand
-          .brand__btn
-          ブランド
-      .nav__right
-        - if user_signed_in?
-          .right__logout
-            = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "logout__btn"
-          .right__mypage
-            = link_to "マイページを見る", user_path(current_user.id), class: "mypage__btn"
-        - else
-          .right__login
-          = link_to "ログイン", new_user_session_path, class: "login__btn"
-          .right__new
-          = link_to "新規登録", new_user_registration_path, class: "new__btn"
-          
-        -# .right__login
-        -#   .login__btn
-        -#   ログイン
-        -# .right__new
-        -#   .new__btn
-        -#   新規会員登録
+= render partial: 'header'
+
 .main
   .main__visual
     .visual__content
@@ -44,11 +10,6 @@
           =image_tag('https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg', class: "a-btn__image")
         = link_to "/", class: "g-btn__link" do
           =image_tag('google-play-badge.png', class: "g-btn__image")
-        -# .a-btn
-        -#   .a-btn__image
-        -#   =image_tag('https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg')
-        -# .g-btn
-        -#   =image_tag('google-play-badge.png', class: "g-btn__image")
     .visual__picture
   .main__introduction
     .introduction__subtitle FURIMAが選ばれる3つの理由
@@ -118,39 +79,7 @@
       = link_to "/", class: "g-icon__link" do
         =image_tag('google-play-badge.png', class: "g-icon__image")
 
-.fotter
-  .fotter__contents
-    .contents__content1
-      .content1__head FURIMAについて
-      %ul.content1__detail
-        %li.detail__list1
-          %a.list1__link 会社概要（運営会社）
-        %li.detail__list2
-          %a.list2__link プライバシーポリシー
-        %li.detail__list3
-          %a.list3__link FURIMA利用規約
-        %li.detail__list4
-          %a.list4__link ポイントに関する特約
-    .contents__content2
-      .cotent2__head FURIMAを見る
-      %ul.content2__detail
-        %li.detail__list5
-          %a.list5__link カテゴリー一覧
-        %li.detail__list6
-          %a.list6__link ブランド一覧
-    .contents__content3
-      .cotent3__head ヘルプ＆ガイド
-      %ul.content3__detail
-        %li.detail__list7
-          %a.list7__link FURIMAガイド
-        %li.detail__list8
-          %a.list8__link FURIMAロゴ利用ガイドライン
-        %li.detail__list9
-          %a.list9__link お知らせ
-  .fotter__logo
-    = link_to "/" do
-      =image_tag('logo-white.png', class: "logo__image")
-  .fotter__c-mark © FURIMA
+= render partial: 'footer'
 
 - if user_signed_in?
   = link_to '出品する', new_product_path, class: "purchase-btn"
