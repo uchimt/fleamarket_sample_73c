@@ -6,7 +6,7 @@ $(function(){
                   ${comment.comment}
                   </div>
                   <div class="commentList__content--delete">
-                    <a data-confirm="本当に削除しますか？" rel="nofollow" data-method="delete" href="/products/:product_id/comments/2">
+                    <a data-confirm="本当に削除しますか？" rel="nofollow" data-method="delete" href="/products/:product_id/comments/${comment.id}">
                       <i class="fa fa-trash"></i>
                       削除する
                     </a>
