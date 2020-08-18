@@ -1,8 +1,8 @@
-.header
+= render partial: 'top/header'
 .log-out_body
   .log-out_box
     .log-out_btn
       =link_to "ログアウト", destroy_user_session_path, method: :delete
   .log-out_side_bar
     = render partial: 'side_bar'  
-.footer
+= render partial: 'top/footer'
