@@ -1,0 +1,15 @@
+
+.category_parents_box
+  %ul.category_parents__list
+    - @parents.each do |parent|
+      %li.category_parents__name
+        =parent.name
+
+- @parents.each do |parent|
+  .category_box
+    %h2.category_parent_title=parent.name
+    %ul.category_child_list
+      - parent.children.each do |child|
+        %h3.category_child_tilte=child.name
+        - child.children.each do |grandchild|
+          %li=link_to "#{grandchild.name}",category_path(grandchild.id), class:"category_grandchild_list"

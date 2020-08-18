@@ -1,0 +1,5 @@
+.category_products
+  .category_products__category_name
+    = @category.name
+  .category_product__box
+    = render partial: 'products/product', collection: @category_products, as: :product 
