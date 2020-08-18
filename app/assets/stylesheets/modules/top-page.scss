@@ -54,7 +54,6 @@
     .inner__nav{
       font-size: 14px;
       display: flex;
-      // margin-bottom: 10px;
       .nav__left{
         position: relative;
         display: flex;
@@ -62,6 +61,12 @@
           text-decoration: none;
           line-height: 38px;
           padding: 0;
+          .category__btn {
+            a {
+              color: #333;
+              text-decoration: none;
+            }
+          }
         }
         .left__brand{
           display: flex;
