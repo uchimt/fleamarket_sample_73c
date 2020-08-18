@@ -4,7 +4,7 @@
     %h2.category_parents_box__title カテゴリー一覧
     %ul.category_parents_box__list
       - @parents.each_with_index do |parent, i|
-        %li.category_parents_name{id:"category_parents_name-#{i}"}=link_to "#{parent.name}", anchor: "category_box__parent_title-#{i}"
+        %li.category_parents_name{id:"category_parents_name-#{i}"}=link_to parent.name, anchor: "category_box__parent_title-#{i}"
   - @parents.each_with_index do |parent, i|
     .category_box
       %h2.category_box__parent_title{id: "category_box__parent_title-#{i}"}=parent.name
@@ -16,5 +16,5 @@
             .category_grandchild_list
               =link_to "すべて",category_path(child.id),class:"category_child_link"
               - child.children.each do |grandchild|
-                %li=link_to "#{grandchild.name}",category_path(grandchild.id), class:"category_grandchild_link"
+                %li=link_to grandchild.name, category_path(grandchild.id), class:"category_grandchild_link"
 = render partial: 'top/footer'
