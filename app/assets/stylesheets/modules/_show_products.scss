@@ -128,6 +128,22 @@
       border: solid;
     }
   }
+  &__login {
+    text-align: center;
+    line-height: 48px;
+    background: #3CCACE;
+    border: 1px solid #3CCACE;
+    color: #fff;
+    width: 60%;
+    font-size: 18px;
+    border-radius: 100px;
+    margin: 0 auto;
+    text-decoration: none;
+  }
+  &__login a {
+    color: #fff;
+  }
+
   &__toBuy {
     text-align: center;
     line-height: 48px;
@@ -221,8 +237,6 @@ ul {
   background-color: #fff;
   margin: 10px auto;
   text-align: center;
-  min-height: 457px;
-  height: auto !important;
   width: 700px;
   &__area {
     display: inline-block;
