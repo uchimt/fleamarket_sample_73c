@@ -3,11 +3,11 @@
   .category_parents_box
     %h2.category_parents_box__title カテゴリー一覧
     %ul.category_parents_box__list
-      - @parents.each do |parent|
-        %li=link_to "#{parent.name}",category_path(parent.id), class: "category_parents_name"
-  - @parents.each do |parent|
+      - @parents.each_with_index do |parent, i|
+        %li.category_parents_name{id:"category_parents_name-#{i}"}=link_to "#{parent.name}", anchor: "category_box__parent_title-#{i}"
+  - @parents.each_with_index do |parent, i|
     .category_box
-      %h2.category_box__parent_title=parent.name
+      %h2.category_box__parent_title{id: "category_box__parent_title-#{i}"}=parent.name
       .category_box__category_list
         =link_to "すべて",category_path(parent.id),class:"category_parent_link"
         %ul.category_child_list
