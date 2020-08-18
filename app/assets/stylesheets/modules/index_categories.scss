@@ -32,6 +32,9 @@
         border-radius: 4px;
         padding: 0 30px;
       }
+      a.category_parents_name:hover {
+        background-color: #3CCACE;
+      }
     }
   }
   .category_box {
@@ -54,6 +57,9 @@
         margin: 8px 0;
         color: #0095ee;
       }
+      a:hover {
+        text-decoration: underline;
+      }
       .category_child_list {
         padding: 0;
         .category_child_tilte {
@@ -67,7 +73,6 @@
           content: "";
           display: table;
           .category_child_link {
-            display: block;
             width: 50%;
             margin: 8px 0;
             color: #0095ee;
@@ -75,7 +80,6 @@
             float: left;
           }
           .category_grandchild_link {
-            display: block;
             width: 50%;
             margin: 8px 0;
             color: #0095ee;
