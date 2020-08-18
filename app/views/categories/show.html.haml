@@ -1,13 +1,16 @@
 = render partial: 'top/header'
-.category_wrapper
-  .category_links
-    - @category_links.each do |category|
-      = link_to category.name, category_path(category)
 .category_products
   %h2.category_products__category_name
     = "#{@category.name}の商品一覧"
-  .category_product__box
-    -if @category_products
+  .category_products__box
+    -if @category_products.present?
       %ul.category_product_link
-        = render partial: 'products/product', collection: @category_products, as: :product 
+        = render partial: 'products/product', collection: @category_products, as: :product
+      .category_products_pagenate
+        = paginate @category_products
+    -else
+      .non_category_product
+        .non_category_product_box
+          =image_tag('logo.png', class: "icon_image")
+          %p.text 商品がありません
 = render partial: 'top/footer'
