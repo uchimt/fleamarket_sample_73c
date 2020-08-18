@@ -1,0 +1,89 @@
+.category_index {
+  width: 700px;
+  margin: 0 auto;
+  padding: 40px 0;
+  .category_parents_box {
+    margin-bottom: 36px;
+    &__title {
+      margin: 0 0 16px 0;
+      font-size: 20px;
+    }
+    &__list {
+      padding: 0;
+      width: 100%;
+      color: #333333;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      .category_parents_name {
+        display: inline-block;
+        height: 40px;
+        margin: 10px 10px 0 0;
+      }
+      a.category_parents_name  {
+        display: block;
+        text-decoration: none;
+        font-size: 15px;
+        line-height: 40px;
+        color: rgb(34, 34, 34);
+        cursor: pointer;
+        background-color: rgb(255, 255, 255);
+        box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+        border-radius: 4px;
+        padding: 0 30px;
+      }
+    }
+  }
+  .category_box {
+    margin-bottom: 40px;
+    &__parent_title {
+      height: 40px;
+      line-height: 40px;
+      font-size: 20px;
+      color: #ffffff;
+      background-color: #3CCACE;
+      border-radius: 4px;
+      padding-left: 30px;
+      margin: 0;
+    }
+    &__category_list {
+      padding: 24px 30px 0 30px;
+      background-color: white;
+      a.category_parent_link{
+        display: block;
+        margin: 8px 0;
+        color: #0095ee;
+      }
+      .category_child_list {
+        padding: 0;
+        .category_child_tilte {
+          font-size: 15px;
+          margin: 5px 0;
+        }
+        .category_grandchild_list {
+          padding: 0 20px 10px 20px;
+          width: 100%;
+          clear: both;
+          content: "";
+          display: table;
+          .category_child_link {
+            display: block;
+            width: 50%;
+            margin: 8px 0;
+            color: #0095ee;
+            font-size: 15px;
+            float: left;
+          }
+          .category_grandchild_link {
+            display: block;
+            width: 50%;
+            margin: 8px 0;
+            color: #0095ee;
+            font-size: 15px;
+            float: left;
+          }
+        }
+      }
+    }
+  }
+}

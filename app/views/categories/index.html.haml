@@ -1,15 +1,20 @@
-
-.category_parents_box
-  %ul.category_parents__list
-    - @parents.each do |parent|
-      %li.category_parents__name
-        =parent.name
-
-- @parents.each do |parent|
-  .category_box
-    %h2.category_parent_title=parent.name
-    %ul.category_child_list
-      - parent.children.each do |child|
-        %h3.category_child_tilte=child.name
-        - child.children.each do |grandchild|
-          %li=link_to "#{grandchild.name}",category_path(grandchild.id), class:"category_grandchild_list"
+= render partial: 'top/header'
+.category_index
+  .category_parents_box
+    %h2.category_parents_box__title カテゴリー一覧
+    %ul.category_parents_box__list
+      - @parents.each do |parent|
+        %li=link_to "#{parent.name}",category_path(parent.id), class: "category_parents_name"
+  - @parents.each do |parent|
+    .category_box
+      %h2.category_box__parent_title=parent.name
+      .category_box__category_list
+        =link_to "すべて",category_path(parent.id),class:"category_parent_link"
+        %ul.category_child_list
+          - parent.children.each do |child|
+            %h3.category_child_tilte=child.name  
+            .category_grandchild_list
+              =link_to "すべて",category_path(child.id),class:"category_child_link"
+              - child.children.each do |grandchild|
+                %li=link_to "#{grandchild.name}",category_path(grandchild.id), class:"category_grandchild_link"
+= render partial: 'top/footer'
