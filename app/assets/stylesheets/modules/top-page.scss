@@ -1,5 +1,6 @@
 .header{
   padding: 0 60px;
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
   .header__inner{
     max-width: 1040px;
     width: 100%;
@@ -53,7 +54,6 @@
     .inner__nav{
       font-size: 14px;
       display: flex;
-      margin-bottom: 10px;
       .nav__left{
         position: relative;
         display: flex;
@@ -61,6 +61,12 @@
           text-decoration: none;
           line-height: 38px;
           padding: 0;
+          .category__btn {
+            a {
+              color: #333;
+              text-decoration: none;
+            }
+          }
         }
         .left__brand{
           display: flex;
