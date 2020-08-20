@@ -1,9 +1,15 @@
 class CommentsController < ApplicationController
   def create
-    @comment = Comment.create(comment_params)
+    @comment = Comment.new(comment_params)
     respond_to do |format|
-      format.html { redirect_to product_path(@comment.product.id) }  # 商品詳細画面へ遷移
-      format.json
+      if @comment.save
+        format.html { redirect_to product_path(@comment.product.id) }  # 商品詳細画面へ遷移
+        format.json
+      else
+        format.html { render :show } 
+        format.json { render :show } 
+    end
+    
     end
   end
 
