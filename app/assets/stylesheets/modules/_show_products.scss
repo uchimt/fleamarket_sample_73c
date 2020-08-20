@@ -1,3 +1,7 @@
+.content {
+  margin: 0;
+}
+
 .showProduct {
   padding: 40px;
   margin: 0 auto;
@@ -124,8 +128,23 @@
       width: 100%;
       border: solid;
     }
-
   }
+  &__login {
+    text-align: center;
+    line-height: 48px;
+    background: #3CCACE;
+    border: 1px solid #3CCACE;
+    color: #fff;
+    width: 60%;
+    font-size: 18px;
+    border-radius: 100px;
+    margin: 0 auto;
+    text-decoration: none;
+  }
+  &__login a {
+    color: #fff;
+  }
+
   &__toBuy {
     text-align: center;
     line-height: 48px;
@@ -146,6 +165,12 @@
       font-size: 18px;
       border-radius: 100px;
       margin: 0 auto;
+      text-decoration: none;
+    }
+  }
+  &__edit{
+    &--btn {
+      color: black;
       text-decoration: none;
     }
   }
@@ -236,6 +261,82 @@ ul {
     width: 60%;
     font-size: 18px;
     border-radius: 100px;
+  }
+}
+
+.commentList {
+  padding: 0px 24px 24px 24px;
+  &__comment {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    border-bottom: 1px solid lightgray;
+  }
+
+  &__content {
+    &--comment {
+      text-align: left;
+      padding-bottom: 10px;
+    }
+
+    &--delete {
+      text-align: left;
+      padding-top: 10px;
+      font-size: 5px;
+    }
+
+    &--delete a {
+      text-decoration: none;
+      color: black;
+    }
+
+    &--time {
+      font-size: 5px;
+      text-align: left;
+    }
+  }
+  &__userName {
+    height: 50px;
+    line-height: 50px;
+
+    &--master {
+      font-size: 12px;
+      padding-left: 6px;
+      height: 10px;
+      line-height: 0px;
+    }
+  }
+
+  &__otherComment {
+    display: flex;
+    padding-top: 20px;
+    border-bottom: 1px solid lightgray;
+  }
+
+  &__otherUserName{
+    width: 70px;
+    text-align: left;
+    line-height: 50px;
+    
+    &--master {
+      font-size: 12px;
+      padding-left: 6px;
+      height: 10px;
+      line-height: 0px;
+    }
+  }
+
+  &__otherContent {
+    &--comment {
+      padding-bottom: 10px;
+      text-align: left;
+    }
+
+    &--time {
+      font-size: 5px;
+      text-align: left;
+      margin-top: 10px;
+    }
   }
 }
 
