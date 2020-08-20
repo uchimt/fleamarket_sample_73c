@@ -111,7 +111,7 @@
                   .commentList__content--comment
                     = comment.comment
                   .commentList__content--delete
-                    = link_to "/products/:product_id/comments/#{comment.id}", method: :delete, data: { confirm: "本当に削除しますか？" } do
+                    = link_to product_comment_path(@product.id, comment.id), method: :delete, data: { confirm: "本当に削除しますか？" } do
                       %i.fa.fa-trash
                       削除する
                   .commentList__content--time
