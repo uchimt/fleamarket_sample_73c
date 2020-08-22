@@ -103,11 +103,12 @@ a{
   margin: 0 auto;
   justify-content: space-between;
   width: 1000px;
+  padding-bottom: 50px;
   &__sorts{
     width: 280px;
     display: block;
     margin: 60px auto 0 auto;
-    & select, button,
+    & select,
      .search-form__input__add,
      .price-range__min,
      .price-range__max {
@@ -115,8 +116,9 @@ a{
       outline:none;
       border:1px solid #ccc;
       border-radius: 4px;
+      cursor: pointer;
     }
-    & select:focus , button:focus ,
+    & select:focus ,
     .search-form__input__add:focus ,
     .price-range__min:focus ,
     .price-range__max:focus  {
@@ -131,6 +133,7 @@ a{
       line-height: 40px;
       display: block;
       margin: 0 auto;
+      cursor: pointer;
     }
   }
 }
@@ -308,7 +311,6 @@ a{
       border-radius: 4px;
       color: #fff;
       background-color: #3ccace;
-
     }
   }
 }
