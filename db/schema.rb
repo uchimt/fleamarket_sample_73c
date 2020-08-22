@@ -17,8 +17,6 @@ ActiveRecord::Schema.define(version: 2020_08_09_041453) do
     t.string "japanese_brand_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["brand_name"], name: "index_brands_on_brand_name"
-    t.index ["japanese_brand_name"], name: "index_brands_on_japanese_brand_name"
   end
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -36,6 +34,16 @@ ActiveRecord::Schema.define(version: 2020_08_09_041453) do
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_category_sizes_on_category_id"
     t.index ["size_id"], name: "index_category_sizes_on_size_id"
+  end
+
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "product_id", null: false
+    t.text "comment", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_comments_on_product_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "credit_cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -131,6 +139,8 @@ ActiveRecord::Schema.define(version: 2020_08_09_041453) do
 
   add_foreign_key "category_sizes", "categories"
   add_foreign_key "category_sizes", "sizes"
+  add_foreign_key "comments", "products"
+  add_foreign_key "comments", "users"
   add_foreign_key "credit_cards", "users"
   add_foreign_key "destinations", "users"
   add_foreign_key "images", "products"

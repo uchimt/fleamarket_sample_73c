@@ -118,6 +118,8 @@ class ProductsController < ApplicationController
 
   def show
     @images = @product.images
+    @comment = Comment.new
+    @comments = @product.comments.includes(:user)
   end
 
   def set_search
