@@ -125,12 +125,9 @@ class ProductsController < ApplicationController
   def set_search
     if params[:q] != nil
       params[:q]['title_or_description_cont_any'] = params[:q]['title_or_description_cont_any'].try { |prm| prm.split(/[[:blank:]]/) }
-      @search = Product.ransack(params[:q])
-      @search_products = @search.result.page(params[:page]).order('status ASC').order('created_at DESC').page(params[:page]).per(12)
-    else
-      @search = Product.ransack(params[:q])
-      @search_products = @search.result.page(params[:page]).order('status ASC').order('created_at DESC').page(params[:page]).per(12)
     end
+      @search = Product.ransack(params[:q])
+      @search_products = @search.result.page(params[:page]).order('status ASC').order('created_at DESC').page(params[:page]).per(12)
   end
 
   def search
