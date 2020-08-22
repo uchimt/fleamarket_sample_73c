@@ -1,13 +1,18 @@
 .search-header
-  .search-header-content
-    = link_to image_tag('logo.png', class: "search-header-content__image"), root_path
-    = render partial: "search_form"
-  .search-header__login-information
-    - if user_signed_in?
-      %span ログインしています
-      = link_to "マイページ", user_path(current_user.id)
-      = link_to "ログアウト", destroy_user_session_path, method: :delete
-    - else
-      %span ログインしていません
-      = link_to "新規登録", new_user_registration_path
-      = link_to "ログイン", new_user_session_path
+  = search_form_for @search, url: search_products_path do |f|
+    .search-header-content
+      = link_to image_tag('logo.png', class: "search-header-content__image"), root_path
+      -# gemなしでの検索
+      -# = render partial: "search_form"
+      -# ransackでの検索
+      = f.text_field :title_or_description_cont_any ,placeholder: '商品を検索する', class: "search-form__input"
+      = f.button "", class: "search-form__btn"  
+    .search-header__login-information
+      - if user_signed_in?
+        %span ログインしています
+        = link_to "マイページ", user_path(current_user.id)
+        = link_to "ログアウト", destroy_user_session_path, method: :delete
+      - else
+        %span ログインしていません
+        = link_to "新規登録", new_user_registration_path
+        = link_to "ログイン", new_user_session_path
