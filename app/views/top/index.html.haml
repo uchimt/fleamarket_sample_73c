@@ -67,7 +67,8 @@
         .item3__detail お支払いは、クレジットカードだけでなく、ポイントや売上金など多彩な方法があります。
   .main__pickupContainer
     %h1.pickupContainer__title 新規投稿商品
-    = render @products
+    .pickupContainer__products
+      = render @search_products
 
 .app-banner
   .app-banner__inner

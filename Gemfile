@@ -80,6 +80,8 @@ gem 'devise'
 
 gem 'pry-rails'
 
+gem 'ransack'
+
 # モデル関連
 gem 'active_hash'
 gem 'ancestry'

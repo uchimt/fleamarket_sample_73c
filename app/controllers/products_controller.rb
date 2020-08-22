@@ -4,6 +4,7 @@ class ProductsController < ApplicationController
   before_action :move_to_root, except: [:show, :search]
   before_action :set_product, only: [:edit, :update, :show, :destroy, :buy, :purchase, :set_sizes]
   before_action :not_buy_product, only: :buy
+  before_action :set_search
 
   def index
     @products = Product.includes(:images).order('created_at DESC')
@@ -121,8 +122,25 @@ class ProductsController < ApplicationController
     @comments = @product.comments.includes(:user)
   end
 
+  def set_search
+    if params[:q] != nil
+      params[:q]['title_or_description_cont_any'] = params[:q]['title_or_description_cont_any'].try { |prm| prm.split(/[[:blank:]]/) }
+    end
+      @search = Product.ransack(params[:q])
+      @search_products = @search.result.page(params[:page]).order('status ASC').order('created_at DESC').page(params[:page]).per(12)
+  end
+
   def search
-    @products = Product.search(params[:keyword]).order('created_at DESC').page(params[:page]).per(10)
+    if params[:q].present?
+    # 検索フォームからアクセスした時の処理
+      @search = Product.ransack(search_params)
+      @products = @search.result
+    else
+    # 検索フォーム以外からアクセスした時の処理
+      params[:q] = { sorts: 'id desc' }
+      @search = Product.ransack()
+      @products = Product.all
+    end
   end
 
   def destroy
@@ -199,6 +217,21 @@ class ProductsController < ApplicationController
                            images_attributes: [:src, :_destroy, :id, :src_cache])
                            .merge(user_id: current_user.id)
   end
+  def search_params
+    params.require(:q).permit(:sorts,
+                              :title, 
+                              :description, 
+                              :category_id,
+                              :size_id,
+                              :condition, 
+                              :brand_id,
+                              :postage, 
+                              :prefecture_id, 
+                              :shipping_day_id, 
+                              :price, 
+                              images_attributes: [:src, :_destroy, :id, :src_cache])
+                              .merge(user_id: current_user.id)
+end
 
   #データベースから、親カテゴリーのみ抽出し、配列化
   def set_category  
