@@ -7,7 +7,7 @@
       .content__text FURIMAはだれでもかんたんに出品・購入できるフリマアプリです
       .content__btn
         = link_to "/", class: "a-btn__link" do
-          =image_tag('https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg', class: "a-btn__image")
+          =image_tag('app-store-logo.png', class: "a-btn__image")
         = link_to "/", class: "g-btn__link" do
           =image_tag('google-play-badge.png', class: "g-btn__image")
     .visual__picture
@@ -44,7 +44,7 @@
         ほしかったあの商品に出会えるかもしれません。
       .inner__btn
         = link_to "/", class: "abtn__link" do
-          =image_tag('https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg', class: "abtn__image")
+          =image_tag('app-store-logo.png', class: "abtn__image")
         = link_to "/", class: "gbtn__link" do
           =image_tag('google-play-badge.png', class: "gbtn__image")
   .main__features
@@ -74,13 +74,13 @@
     .inner__title だれでもかんたん、人生を変えるフリマアプリ
     .inner__text 今すぐ無料ダウンロード！
     .inner__icon
-      = link_to "/", class: "a-icon__link" do
-        =image_tag('https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg', class: "a-icon__image")
-      = link_to "/", class: "g-icon__link" do
+      = link_to root_path, class: "a-icon__link" do
+        =image_tag('app-store-logo.png', class: "a-icon__image")
+      = link_to root_path, class: "g-icon__link" do
         =image_tag('google-play-badge.png', class: "g-icon__image")
 
 = render partial: 'footer'
 
 - if user_signed_in?
-  = link_to '出品する', new_product_path, class: "purchase-btn"
+  = link_to 'icon_camera.png', new_product_path, class: "purchase-btn"
   .purchase-btn__text
