@@ -1,9 +1,61 @@
-= render partial: "search_header"
-.search_main
-  %h2 検索結果
-  .entries-info
-    = page_entries_info(@products)
-  =render @products
-  .search-paginate
-    = paginate @products
-= render partial: "search_footer"
+.search-header
+  = search_form_for @search, url: search_products_path do |f|
+    .search-header-content
+      = link_to image_tag('logo.png', class: "search-header-content__image"), root_path
+      = f.text_field :title_or_description_cont_any ,placeholder: '商品を検索する', class: "search-form__input"
+      = f.button "", class: "search-form__btn"
+    .search-header-nav
+      .search-header-nav-left
+        =link_to "カテゴリー", categories_path
+        =link_to "ブランド", root_path
+
+      .search-header-nav-right
+        - if user_signed_in?
+          = link_to "マイページ", user_path(current_user.id)
+          = link_to "ログアウト", destroy_user_session_path, method: :delete
+        - else
+          = link_to "新規登録", new_user_registration_path
+          = link_to "ログイン", new_user_session_path
+    .search-main
+      .search-main__sorts
+        = f.select( :sorts, { '並び替え': 'id desc', '価格の安い順': 'price asc', '価格の高い順': 'price desc', '出品の古い順': 'updated_at asc', '出品の新しい順': 'updated_at desc' } , { selected: params[:q][:sorts] }, { onchange: 'this.form.submit()'} )
+        .search__detail
+          .search__detail__add
+            %span キーワード
+            = f.text_field :title_or_description_cont, placeholder: '入力してください', class: "search-form__input__add"
+          .search__detail__price
+            %span 価格
+            %select.price-range
+              %option{value: "none"}選択してください
+              %option{value: "price1"}¥300〜¥1,000
+              %option{value: "price2"}¥1,000〜¥5,000
+              %option{value: "price3"}¥5,000〜¥10,000
+              %option{value: "price4"}¥10,000〜¥30,000
+              %option{value: "price5"}¥30,000〜¥50,000
+              %option{value: "price6"}¥50,000〜¥100,000
+            .price-range-input
+              = f.number_field :price_gteq, placeholder: "￥ Min", class: 'price-range__min'
+              %span ~
+              = f.number_field :price_lteq, placeholder: "￥ Max", class: 'price-range__max'
+          .search__detail__condition
+            %span 商品の状態
+            = f.select :condition_eq, {'新品・未使用': 1, '未使用に近い': 2,'目立った傷や汚れなし': 3,'やや傷や汚れあり': 4,'傷や汚れあり': 5,'全体的に状態が悪い': 6}, { include_blank: '選択してください'}, { class: 'search__detail__condition__select'}
+          .search__detail__postage
+            %span 配送料の負担
+            = f.select :postage_eq, {'送料込み（出品者負担）': 1, '着払い（購入者負担）': 2}, { include_blank: 'すべて'}, {class: "search__detail__postage__select"}
+          .search__detail__status
+            %span 販売状況
+            = f.select :status_eq, {'出品中': 0, '売り切れ': 1}, { include_blank: 'すべて'}, {class: "search__detail__status__select"}
+          .search__detail__button
+            = link_to "クリア", search_products_path, class: "search__detail__button__reset"
+            = f.button "完了", class: "search__detail__button__submit" 
+      .search-right
+        %h2 検索結果
+        .entries-info
+          .searchbox
+          = page_entries_info(@search_products)
+        .search-result
+          = render @search_products
+        .search-paginate
+          = paginate @search_products
+    = render partial: 'top/footer'

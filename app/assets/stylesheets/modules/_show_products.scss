@@ -1,9 +1,13 @@
+.content {
+  margin: 0;
+}
+
 .showProduct {
-  padding: 40px;
+  padding-top: 40px;
   margin: 0 auto;
   background-color: #f8f8f8;
   width: 100vw;
-  height: 350vh;
+  height: 100%;
 }
 
 //productBox
@@ -39,7 +43,7 @@
   }
   &__table--content {
     text-decoration: none;
-    color: #3ccace;
+    color: #0095ee;
   }
   &__table table {
     width: 100%;
@@ -124,8 +128,23 @@
       width: 100%;
       border: solid;
     }
-
   }
+  &__login {
+    text-align: center;
+    line-height: 48px;
+    background: #3CCACE;
+    border: 1px solid #3CCACE;
+    color: #fff;
+    width: 60%;
+    font-size: 18px;
+    border-radius: 100px;
+    margin: 0 auto;
+    text-decoration: none;
+  }
+  &__login a {
+    color: #fff;
+  }
+
   &__toBuy {
     text-align: center;
     line-height: 48px;
@@ -146,6 +165,12 @@
       font-size: 18px;
       border-radius: 100px;
       margin: 0 auto;
+      text-decoration: none;
+    }
+  }
+  &__edit{
+    &--btn {
+      color: #0095ee;
       text-decoration: none;
     }
   }
@@ -239,6 +264,82 @@ ul {
   }
 }
 
+.commentList {
+  padding: 0px 24px 24px 24px;
+  &__comment {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    border-bottom: 1px solid lightgray;
+  }
+
+  &__content {
+    &--comment {
+      text-align: left;
+      padding-bottom: 10px;
+    }
+
+    &--delete {
+      text-align: left;
+      padding-top: 10px;
+      font-size: 5px;
+    }
+
+    &--delete a {
+      text-decoration: none;
+      color: black;
+    }
+
+    &--time {
+      font-size: 5px;
+      text-align: left;
+    }
+  }
+  &__userName {
+    height: 50px;
+    line-height: 50px;
+
+    &--master {
+      font-size: 12px;
+      padding-left: 6px;
+      height: 10px;
+      line-height: 0px;
+    }
+  }
+
+  &__otherComment {
+    display: flex;
+    padding-top: 20px;
+    border-bottom: 1px solid lightgray;
+  }
+
+  &__otherUserName{
+    width: 70px;
+    text-align: left;
+    line-height: 50px;
+    
+    &--master {
+      font-size: 12px;
+      padding-left: 6px;
+      height: 10px;
+      line-height: 0px;
+    }
+  }
+
+  &__otherContent {
+    &--comment {
+      padding-bottom: 10px;
+      text-align: left;
+    }
+
+    &--time {
+      font-size: 5px;
+      text-align: left;
+      margin-top: 10px;
+    }
+  }
+}
+
 // 前の賞品、後ろの商品
 .sameContent {
   width: 700px;
@@ -249,11 +350,11 @@ ul {
     padding-left: 0px;
     &--left {
       text-decoration: none;
-      color: #3ccace;
+      color: #0095ee;
     }
     &--right {
       text-decoration: none;
-      color: #3ccace;
+      color: #0095ee;
     }
   }
 }
@@ -272,6 +373,7 @@ ul {
 .relatedProbucts {
   margin: 0 auto;
   width: 700px;
+  height: 330px;
   &__lists {
     margin: 0 0 10px;
     float: left;
@@ -316,6 +418,10 @@ ul {
   }
 }
 
+.headerContent{
+  width: 100%;
+  height: 370px;
+}
 .name {
   margin-top: 150px;
 }

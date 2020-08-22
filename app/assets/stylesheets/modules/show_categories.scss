@@ -2,7 +2,10 @@
   width: 700px;
   margin: 0 auto;
   padding: 40px 0;
-  
+  .items-box_photo__sold__inner{
+    left: 3px;
+    top: 15px;
+  }
   &__category_name {
     height: 40px;
     line-height: 40px;

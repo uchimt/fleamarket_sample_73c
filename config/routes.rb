@@ -24,6 +24,13 @@ Rails.application.routes.draw do
       get 'purchased'
       get 'buy'
     end
+    resources :comments, only: [:create, :destroy]
+  end
+
+  resources :products do
+    collection do
+      match 'search' => 'products#search', via: [:get, :post]
+    end
   end
 
   resources :categories, only: [:index, :show]

@@ -12,7 +12,6 @@
       display: flex;
       align-items: center;
       .main__icon{
-        padding-bottom: 10px;
         margin-right: 30px;
         border-radius: 4px;
         .icon__image{
@@ -25,9 +24,10 @@
         margin-left: auto;
         width: 100%;
         .search-form{
+          box-sizing: border-box;
           .search-input{
-            width: 480px;
-            height: 36px;
+            width: 90%;
+            height: 40px;
             right: 40px;
             padding: 0 10px;
             font-size: 16px;
@@ -37,16 +37,31 @@
             border: none;
             outline: none;
             width: 36px;
-            height: 30px;
+            height: 34px;
             padding: 0;
             position: relative;
-            right: 44px;
+            right: 43px;
             bottom: 3px;
             border-radius: 2px;
             background-color: #3ccace;
             cursor: pointer;
             background-image: linear-gradient(#5eecef 0%, #3ccace 100%);
             border-bottom: 2px solid #1aa8ac;
+          }
+          .search-btn:after{
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-image: image-url('icon-search.png');
+            background-size: contain;
+            vertical-align: middle;
+          }
+          .search-btn:active{
+            height: 34px;
+            border: none;
+            bottom: 2px;
+            background-image: linear-gradient(#4ddbdf 0%, #3ccace 100%);
           }
         }
       }
@@ -62,9 +77,12 @@
           line-height: 38px;
           padding: 0;
           .category__btn {
-            a {
+            a{
               color: #333;
               text-decoration: none;
+            }
+            a:hover{
+              color: #3ccace;
             }
           }
         }
@@ -72,11 +90,19 @@
           display: flex;
           line-height: 38px;
           padding: 0 0 0 16px;
+          a{
+            color: #333;
+            text-decoration: none;
+          }
+          a:hover{
+            color: #3ccace;
+          }
         }
       }
       .nav__right{
         margin-left: auto;
         display: flex;
+        padding-right: 8%;
         .right__logout{
           color: #333;
           line-height: 38px;
@@ -86,7 +112,10 @@
             align-items: center;
             color: #333;
             text-decoration: none;
-            line-height: 32px;
+            line-height: 38px;
+          }
+          a:hover{
+            color: #3ccace;
           }
         }
         .right__mypage{
@@ -98,7 +127,10 @@
             align-items: center;
             color: #333;
             text-decoration: none;
-            line-height: 32px;
+            line-height: 38px;
+          }
+          a:hover{
+            color: #3ccace;
           }
         }
         .right__login{
@@ -110,7 +142,10 @@
             align-items: center;
             color: #333;
             text-decoration: none;
-            line-height: 32px;
+            line-height: 38px;
+          }
+          a:hover{
+            color: #3ccace;
           }
         }
         .right__new{
@@ -122,7 +157,10 @@
             align-items: center;
             color: #333;
             text-decoration: none;
-            line-height: 32px;
+            line-height: 38px;
+          }
+          a:hover{
+            color: #3ccace;
           }
         }
       }
@@ -468,8 +506,20 @@
     padding: 80px 0 0;
     background-color: #f8f8f8;
     height: 100%;
+    width: 1050px;
+    margin: 0 auto;
     .pickupContainer__title{
+      width:100%;
+      display: block;
       text-align: center;
+    }
+    .pickupContainer__products{
+      display: flex;
+      justify-content: center;
+    }
+    .items-box_photo__sold__inner{
+      left: 3px;
+      top: 15px;
     }
   }
 }
@@ -533,6 +583,7 @@
       }
       .content1__detail{
         list-style: none;
+        padding-left: 0;
         .detail__list1{
           margin: 0;
           padding: 0;
@@ -587,6 +638,7 @@
       }
       .content2__detail{
         list-style: none;
+        padding: 0;
         .detail__list5{
           margin: 0;
           padding: 0;
@@ -621,6 +673,7 @@
       }
       .content3__detail{
         list-style: none;
+        padding: 0;
         .detail__list7{
           margin: 0;
           padding: 0;
