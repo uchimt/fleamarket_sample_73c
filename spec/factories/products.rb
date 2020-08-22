@@ -10,8 +10,13 @@ FactoryBot.define do
     price          { "555" }
     user_id        { "1" }
 
+    after(:build) do |product|
+      product.images << FactoryBot.build(:image, product: product)
+    end
+  end
+
   factory :image do
       src {Rack::Test::UploadedFile.new(File.join(Rails.root, "spec/fixtures/sample.png"), 'image/png') }
   end
-  end
+
 end
