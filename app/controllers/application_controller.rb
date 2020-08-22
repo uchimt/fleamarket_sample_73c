@@ -4,11 +4,23 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+
+  def set_search
+    if params[:q] != nil
+      params[:q]['title_or_description_cont_any'] = params[:q]['title_or_description_cont_any'].try { |prm| prm.split(/[[:blank:]]/) }
+      @search = Product.ransack(params[:q])
+      @search_products = @search.result.page(params[:page]).order('status ASC').order('created_at DESC').page(params[:page]).per(12)
+    else
+      @search = Product.ransack(params[:q])
+      @search_products = @search.result.page(params[:page]).order('status ASC').order('created_at DESC').page(params[:page]).per(12)
+    end
+  end
   protected
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname])
   end
+  
 
   private
 #本番環境かどうか確認するメソッド 本番環境ならtrueを返す

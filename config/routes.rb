@@ -27,6 +27,12 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
   end
 
+  resources :products do
+    collection do
+      match 'search' => 'products#search', via: [:get, :post]
+    end
+  end
+
   resources :categories, only: [:index, :show]
 
   resources :cards, only: [:index, :new, :create, :destroy]

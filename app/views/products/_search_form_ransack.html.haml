@@ -1,0 +1,4 @@
+.search-form.search-form__ransack
+  = search_form_for @search, url: search_products_path do |f|
+    = f.text_field :title_or_description_cont_any ,placeholder: '商品を検索する', class: "search-form__input" 
+    = f.button "", class: "search-form__btn" 
