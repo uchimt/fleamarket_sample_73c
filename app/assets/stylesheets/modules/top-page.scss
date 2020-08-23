@@ -6,7 +6,7 @@
     width: 100%;
     min-height: 82px;
     margin: 0 auto;
-    padding: 15px 0 0;
+    padding: 15px 0 0 50px;
     .inner__main{
       position: relative;
       display: flex;
@@ -26,12 +26,20 @@
         .search-form{
           box-sizing: border-box;
           .search-input{
+            border:none;
+            outline:none;
+            border-radius: 3px;
+            border: 1px solid #333;
+            color: #333;
             width: 90%;
             height: 40px;
             right: 40px;
             padding: 0 10px;
             font-size: 16px;
             line-height: 40px;
+          }
+          .search-input:focus{
+            border: 1px solid #0095ee;
           }
           .search-btn{
             border: none;
@@ -200,17 +208,18 @@
       }
       .content__btn{
         display: flex;
-        margin: 24px 0 0 0;
         .a-btn__link{
           margin-right: 10px;
+          margin-top: 24px;
           .a-btn__image{
             width: 180px;
           }
         }
         .g-btn__link{
           margin-right: 10px;
+          margin-top: 12px;
           .g-btn__image{
-            width: 180px;
+            width: 205px;
           }
         }
       }
@@ -388,14 +397,16 @@
         display: flex;
         .abtn__link{
           margin-right: 10px;
+          margin-top: 24px;
           .abtn__image{
             width: 180px;
           }
         }
         .gbtn__link{
           margin-right: 10px;
+          margin-top: 12px;
           .gbtn__image{
-            width: 180px;
+            width: 205px;
           }
         }
       }
@@ -547,16 +558,17 @@
       width: 100%;
       display: flex;
       justify-content: center;
-      margin: 20px auto 0;
+      // margin: 20px auto 0;
       .a-icon__link{
-        margin-right: 10px;
+        margin-top: 20px;
         .a-icon__image{
           width: 180px;
         }
       }
       .g-icon__link{
+        margin-top: 7px;
         .g-icon__image{
-          width: 180px;
+          width: 205px;
         }
       }
     }
@@ -730,4 +742,15 @@
     right: 32px;
     position: fixed;
     padding: 15px;
+    z-index: 11;
+    .purchase-btn__text{
+      color: #fff;
+      display: block;
+      font-size: 18px;
+      text-decoration: none;
+      margin-bottom: 5px;
+    }
+    .purchase-btn__icon{
+      width: 60%;
+    }
   }

@@ -1,3 +1,4 @@
+= render partial: 'top/header'
 .form__head
   %h2 支払い方法
 .credit_card__content
@@ -15,11 +16,11 @@
           =@exp_month + " / " + @exp_year
         = button_to "削除する", card_path(@card), method: :delete, class:"creditcard_delete"
     .settings-not-regist
-      %span.regist 支払い方法について
+      %span.regist 
   - else
     .new-card
       = link_to new_card_path, class:"new-card-btn" do
         クレジットカードを追加する
-                
+= render partial: 'top/footer'                
      
        

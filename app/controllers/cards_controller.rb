@@ -46,7 +46,7 @@ class CardsController < ApplicationController
     if params['payjp-token'].blank? # トークンがなければもう一度newで登録画面へ
       redirect_to action: "new"
     else
-      # PAY.JPのメソッドを用いてc顧客idを生成、取得している
+      # PAY.JPのメソッドを用いて顧客idを生成、取得している
       customer = Payjp::Customer.create( 
       email: current_user.email,# ログイン中のユーザーのemailをキーにセット
       card: params['payjp-token'], # 直前のnewアクションで発行され送られてくるトークンをcardにセット
