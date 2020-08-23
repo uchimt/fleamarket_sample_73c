@@ -1,4 +1,4 @@
-require 'rails _helper'
+require 'rails_helper'
 describe Product do
   describe '#create' do
 
@@ -11,6 +11,6 @@ describe Product do
       product.valid?
       expect(product).to be_valid
     end
-    
+
   end
 end
