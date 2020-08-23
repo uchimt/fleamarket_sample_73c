@@ -514,8 +514,9 @@
     }
   }
   .main__pickupContainer{
-    padding: 80px 0 0;
+    padding: 50px 0 80px 0;
     background-color: #f8f8f8;
+    font-size: 14px;
     height: 100%;
     width: 1050px;
     margin: 0 auto;
@@ -525,8 +526,8 @@
       text-align: center;
     }
     .pickupContainer__products{
-      display: flex;
-      justify-content: center;
+      width:100%;
+      margin: 0 auto;
     }
     .items-box_photo__sold__inner{
       left: 3px;
