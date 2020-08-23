@@ -200,17 +200,18 @@
       }
       .content__btn{
         display: flex;
-        margin: 24px 0 0 0;
         .a-btn__link{
           margin-right: 10px;
+          margin-top: 24px;
           .a-btn__image{
             width: 180px;
           }
         }
         .g-btn__link{
           margin-right: 10px;
+          margin-top: 12px;
           .g-btn__image{
-            width: 180px;
+            width: 205px;
           }
         }
       }
@@ -388,14 +389,16 @@
         display: flex;
         .abtn__link{
           margin-right: 10px;
+          margin-top: 24px;
           .abtn__image{
             width: 180px;
           }
         }
         .gbtn__link{
           margin-right: 10px;
+          margin-top: 12px;
           .gbtn__image{
-            width: 180px;
+            width: 205px;
           }
         }
       }
@@ -547,16 +550,17 @@
       width: 100%;
       display: flex;
       justify-content: center;
-      margin: 20px auto 0;
+      // margin: 20px auto 0;
       .a-icon__link{
-        margin-right: 10px;
+        margin-top: 20px;
         .a-icon__image{
           width: 180px;
         }
       }
       .g-icon__link{
+        margin-top: 7px;
         .g-icon__image{
-          width: 180px;
+          width: 205px;
         }
       }
     }
@@ -730,4 +734,15 @@
     right: 32px;
     position: fixed;
     padding: 15px;
+    z-index: 11;
+    .purchase-btn__text{
+      color: #fff;
+      display: block;
+      font-size: 18px;
+      text-decoration: none;
+      margin-bottom: 5px;
+    }
+    .purchase-btn__icon{
+      width: 60%;
+    }
   }
