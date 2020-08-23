@@ -230,7 +230,6 @@ class ProductsController < ApplicationController
                               :shipping_day_id, 
                               :price, 
                               images_attributes: [:src, :_destroy, :id, :src_cache])
-                              .merge(user_id: current_user.id)
 end
 
   #データベースから、親カテゴリーのみ抽出し、配列化

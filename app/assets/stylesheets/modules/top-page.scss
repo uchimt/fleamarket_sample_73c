@@ -6,7 +6,7 @@
     width: 100%;
     min-height: 82px;
     margin: 0 auto;
-    padding: 15px 0 0;
+    padding: 15px 0 0 50px;
     .inner__main{
       position: relative;
       display: flex;
@@ -26,12 +26,20 @@
         .search-form{
           box-sizing: border-box;
           .search-input{
+            border:none;
+            outline:none;
+            border-radius: 3px;
+            border: 1px solid #333;
+            color: #333;
             width: 90%;
             height: 40px;
             right: 40px;
             padding: 0 10px;
             font-size: 16px;
             line-height: 40px;
+          }
+          .search-input:focus{
+            border: 1px solid #0095ee;
           }
           .search-btn{
             border: none;
