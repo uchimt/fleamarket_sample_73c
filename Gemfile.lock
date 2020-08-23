@@ -400,8 +400,8 @@ DEPENDENCIES
   rails (~> 5.2.4, >= 5.2.4.3)
   rails-controller-testing
   rails-i18n (~> 5.1)
-  rspec-rails
   ransack
+  rspec-rails
   sass-rails (~> 5.0)
   select2-rails
   selenium-webdriver
