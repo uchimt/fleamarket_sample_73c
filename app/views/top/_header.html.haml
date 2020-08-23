@@ -20,7 +20,7 @@
           .right__logout
             = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "logout__btn"
           .right__mypage
-            = link_to "マイページを見る", user_path(current_user.id), class: "mypage__btn"
+            = link_to "マイページ", user_path(current_user.id), class: "mypage__btn"
         - else
           .right__login
             = link_to "ログイン", new_user_session_path, class: "login__btn"
