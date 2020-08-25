@@ -1,7 +1,9 @@
 require 'rails_helper'
-describe Product do
-  describe '#create' do
 
+describe Product do
+  describe 'POST #create' do
+  let!(:user) { create(:user) }
+  
     before do
       @user = FactoryBot.create(:user)
     end
