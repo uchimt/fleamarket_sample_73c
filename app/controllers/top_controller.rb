@@ -3,7 +3,7 @@ class TopController < ApplicationController
   def index
     @products = Product.includes(:images).where(status: 0).order('created_at DESC')
     @search = Product.ransack(params[:q])
-    @search_products = @search.result.page(params[:page]).order('status ASC').order('created_at DESC').page(params[:page]).per(12)
+    @search_products = @search.result.page(params[:page]).where(status: 0).order('created_at DESC').page(params[:page]).per(24)
   end
 end
 
