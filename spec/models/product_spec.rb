@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 describe Product do
+  before do
+    user = FactoryBot.create(:user, id: 1)
+  end
   describe 'POST #create' do
     let!(:user) { create(:user) }
 
@@ -8,8 +11,20 @@ describe Product do
       @user = FactoryBot.create(:user)
     end
 
-    it "images,title,description,category_id,condition,postage,prefecture_id,shipping_id と priceがある場合は登録できること" do
+    it "すべて入力されている場合は登録できること" do
       product = build(:product)
+      product.valid?
+      expect(product).to be_valid
+    end
+
+    it "サイズの概念がないカテゴリーの場合size_idがなくても登録できること" do
+      product = build(:product, category_id: 88, size_id: nil)
+      product.valid?
+      expect(product).to be_valid
+    end
+
+    it "brand_idがない場合でも登録できること" do
+      product = build(:product, brand_id: nil)
       product.valid?
       expect(product).to be_valid
     end
@@ -27,9 +42,15 @@ describe Product do
     end
 
     it "category_idがない場合は登録できないこと" do
-        product = build(:product, category_id: nil)
-        product.valid?
-        expect(product.errors[:category_id]).to include("を入力してください")
+      product = build(:product, category_id: nil)
+      product.valid?
+      expect(product.errors[:category_id]).to include("を入力してください")
+    end
+
+    it "サイズの概念があるカテゴリーの際size_idがない場合は登録できないこと" do
+      product = build(:product, size_id: nil)
+      product.valid?
+      expect(product.errors[:size_id]).to include("を入力してください")
     end
 
     it "conditionがない場合は登録できないこと" do

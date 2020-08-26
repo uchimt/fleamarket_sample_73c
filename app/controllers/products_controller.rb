@@ -50,9 +50,6 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to new_product_create_product_path(@product.id)
     else
-      if @product.category_id.present?
-        set_sizes
-      end
       render action: :new, locals: { product: @product }
     end
   end
@@ -109,9 +106,6 @@ class ProductsController < ApplicationController
     if @product.update(product_params)
       redirect_to product_path(@product.id)
     else
-      if @product.category_id.present?
-        set_sizes
-      end
       render :edit
     end
   end
