@@ -67,8 +67,8 @@ $(function(){
         var html = buildOtherComment(comment);
       }
       $('.commentList').append(html);
-        $('#comment_comment').val('');
-        $('.commentBox__btn').prop('disabled',false);
+      $('#comment_comment').val('');
+      $('.commentBox__btn').prop('disabled',false);
     })
     .fail(function(){
       alert('エラー');
