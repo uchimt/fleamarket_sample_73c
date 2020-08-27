@@ -63,11 +63,10 @@ $(function(){
     .done(function(comment){
       if (comment.user_id  == comment.seller_id) {
         var html = buildMyComment(comment);
-        $('.commentList').append(html);
       } else {
         var html = buildOtherComment(comment);
-        $('.commentList').append(html);
       }
+      $('.commentList').append(html);
         $('#comment_comment').val('');
         $('.commentBox__btn').prop('disabled',false);
     })
