@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
+    @sellerId = @comment.product.user_id
     respond_to do |format|
       if @comment.save
         format.html { redirect_to product_path(@comment.product.id) }  # 商品詳細画面へ遷移
